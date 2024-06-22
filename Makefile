@@ -9,18 +9,18 @@ TESTDIR = test
 BINDIR = bin
 
 # Source files and object files
-SOURCES = $(SRCDIR)/matrix.c
-OBJECTS = $(SOURCES:.c=.o)
-TESTS = $(TESTDIR)/test_matrix.c
+SOURCES = $(wildcard $(SRCDIR)/*.c)
+OBJECTS = $(patsubst $(SRCDIR)/%.c, $(SRCDIR)/%.o, $(SOURCES))
+TEST_SOURCES = $(wildcard $(TESTDIR)/*.c)
 
 # Executable names
 LIB = libmatrix.a
-TEST_EXE = test_matrix
+TEST_EXES = $(patsubst $(TESTDIR)/%.c, $(TESTDIR)/%, $(TEST_SOURCES))
 
 # Targets
 .PHONY: all clean test
 
-all: $(BINDIR)/$(LIB)
+all: $(BINDIR)/$(LIB) $(TEST_EXES)
 
 # Create the static library
 $(BINDIR)/$(LIB): $(OBJECTS)
@@ -32,13 +32,15 @@ $(SRCDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Run tests
-test: $(TESTDIR)/$(TEST_EXE)
-	./$(TESTDIR)/$(TEST_EXE)
+test: $(TEST_EXES)
+	for test_exe in $(TEST_EXES); do \
+		echo "Running $$test_exe"; \
+		./$$test_exe; \
+	done
 
-# Build test executable
-$(TESTDIR)/$(TEST_EXE): $(TESTS) $(BINDIR)/$(LIB)
-	$(CC) $(CFLAGS) -o $@ $(TESTS) -L$(BINDIR) -lmatrix -lm
+# Build test executables
+$(TESTDIR)/%: $(TESTDIR)/%.c $(BINDIR)/$(LIB)
+	$(CC) $(CFLAGS) -o $@ $< -L$(BINDIR) -lmatrix -lm
 
 clean:
-	rm -f $(SRCDIR)/*.o $(BINDIR)/* $(TESTDIR)/$(TEST_EXE)
-
+	rm -f $(SRCDIR)/*.o $(BINDIR)/* $(TEST_EXES)
