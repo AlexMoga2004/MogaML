@@ -1,48 +1,44 @@
-# Makefile for my_project
-
-# Compiler
+# Compiler and flags
 CC = gcc
-
-# Compiler flags
 CFLAGS = -Wall -Werror -Iinclude
 
-# Linker flags
-LDFLAGS = 
+# Directories
+SRCDIR = src
+INCDIR = include
+TESTDIR = test
+BINDIR = bin
 
-# Source and object files
-SRC = $(wildcard src/*.c)
-OBJ = $(SRC:.c=.o)
+# Source files and object files
+SOURCES = $(SRCDIR)/matrix.c
+OBJECTS = $(SOURCES:.c=.o)
+TESTS = $(TESTDIR)/test_matrix.c
 
-# Static library for Matrix
-LIB_MATRIX = lib/libmatrix.a
+# Executable names
+LIB = libmatrix.a
+TEST_EXE = test_matrix
 
-# Target executable
-TARGET = my_project
+# Targets
+.PHONY: all clean test
 
-# Build target
-all: $(TARGET)
+all: $(BINDIR)/$(LIB)
 
-# Link objects to create executable
-$(TARGET): $(OBJ) $(LIB_MATRIX)
-	$(CC) -o $@ $^ $(LDFLAGS)
-
-# Compile source files to object files
-src/%.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Build static library for Matrix
-$(LIB_MATRIX): src/matrix.o
+# Create the static library
+$(BINDIR)/$(LIB): $(OBJECTS)
+	@mkdir -p $(BINDIR)
 	ar rcs $@ $^
 
-# Clean project
+# Compile object files
+$(SRCDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Run tests
+test: $(TESTDIR)/$(TEST_EXE)
+	./$(TESTDIR)/$(TEST_EXE)
+
+# Build test executable
+$(TESTDIR)/$(TEST_EXE): $(TESTS) $(BINDIR)/$(LIB)
+	$(CC) $(CFLAGS) -o $@ $(TESTS) -L$(BINDIR) -lmatrix -lm
+
 clean:
-	rm -f $(OBJ) $(TARGET) $(LIB_MATRIX)
-
-# Test target
-test: $(TARGET)
-	@echo "Running tests..."
-	@./$(TARGET)
-
-# Phony targets
-.PHONY: all clean test
+	rm -f $(SRCDIR)/*.o $(BINDIR)/* $(TESTDIR)/$(TEST_EXE)
 
