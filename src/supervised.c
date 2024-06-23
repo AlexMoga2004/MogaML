@@ -90,11 +90,11 @@ LossFunction LassoRegression_default_loss() {
     return loss_function;
 }
 
-void Supervised_set_loss(LinearRegressionModel *model, LossFunction loss_function) {
+void LinearRegression_set_loss(LinearRegressionModel *model, LossFunction loss_function) {
     model->loss_function = loss_function;
 }
 
-void Supervised_train(LinearRegressionModel *model) {
+void LinearRegression_train(LinearRegressionModel *model) {
     if (model->mode == ALGEBRAIC) {
         // May throw exception if loss_function has no closed form exact solution
         model->params = model->loss_function.exact_optimum(&model->data.X, &model->data.y, &model->hyper_params);
@@ -176,18 +176,52 @@ void Supervised_train(LinearRegressionModel *model) {
             }
         }
     } else {
-        fprintf(stderr, "Error in Supervised_train, undefined computation mode!\n");
+        fprintf(stderr, "Error in LinearRegression_train, undefined computation mode!\n");
         exit(EXIT_FAILURE);
     }
 
     model->trained = true;
 }
 
-void Supervised_set_mode(LinearRegressionModel *model, enum ComputationMode mode){
+void LinearRegression_append_data(LinearRegressionModel *model, const Matrix X_new, const Matrix y_new) {
+    // Ensure the number of rows in X_new and y_new match
+    if (X_new.rows != y_new.rows) {
+        fprintf(stderr, "Error: Mismatched rows in X_new and y_new.\n");
+        return;
+    }
+
+    // New sizes
+    int new_row_count = model->data.X.rows + X_new.rows;
+    int new_X_size = new_row_count * model->data.X.cols * sizeof(double);
+    int new_y_size = new_row_count * sizeof(double);
+
+    // Reallocate memory for the feature matrix X
+    model->data.X.data = (double *)realloc(model->data.X.data, new_X_size);
+    if (model->data.X.data == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed for X.\n");
+        return;
+    }
+
+    // Reallocate memory for the target vector y
+    model->data.y.data = (double *)realloc(model->data.y.data, new_y_size);
+    if (model->data.y.data == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed for y.\n");
+        return;
+    }
+
+    // Copy the new data into the expanded matrices
+    memcpy(model->data.X.data + model->data.X.rows * model->data.X.cols, X_new.data, X_new.rows * model->data.X.cols * sizeof(double));
+    memcpy(model->data.y.data + model->data.y.rows, y_new.data, y_new.rows * sizeof(double));
+
+    // Update row counts
+    model->data.X.rows = new_row_count;
+    model->data.y.rows = new_row_count;
+}
+void LinearRegression_set_mode(LinearRegressionModel *model, enum ComputationMode mode){
     model->mode = mode;
 }
 
-void Supervised_free(LinearRegressionModel model) {
+void LinearRegression_free(LinearRegressionModel model) {
     Matrix_free(model.data.X);
     Matrix_free(model.data.y);
     Matrix_free(model.params);
@@ -403,22 +437,18 @@ Matrix RidgeRegression_compute_gradient(const Matrix *X, const Matrix *y, const 
 
     double lambda = hyper_params->data[0][0];
 
-    // Compute predictions and errors
     Matrix predictions = Matrix_multiply(X, params);
     Matrix errors = Matrix_sub(&predictions, y);
 
-    // Compute gradient without regularization
     Matrix XT = Matrix_transpose(X);
     Matrix gradient = Matrix_multiply(&XT, &errors);
     gradient = Matrix_scale(1.0 / y->rows, &gradient);
 
-    // Add regularization term
     int num_params = params->rows * params->cols;
     for (int i = 0; i < num_params; ++i) {
         gradient.data[i][0] += lambda * params->data[i][0] / y->rows;
     }
 
-    // Free memory
     Matrix_free(predictions);
     Matrix_free(errors);
     Matrix_free(XT);
@@ -434,26 +464,213 @@ Matrix LassoRegression_compute_gradient(const Matrix *X, const Matrix *y, const 
 
     double lambda = hyper_params->data[0][0];
 
-    // Compute predictions and errors
     Matrix predictions = Matrix_multiply(X, params);
     Matrix errors = Matrix_sub(&predictions, y);
 
-    // Compute gradient without regularization
     Matrix XT = Matrix_transpose(X);
     Matrix gradient = Matrix_multiply(&XT, &errors);
     gradient = Matrix_scale(1.0 / y->rows, &gradient);
 
-    // Add regularization term using subgradients
     int num_params = params->rows * params->cols;
     for (int i = 0; i < num_params; ++i) {
         double sign = (params->data[i][0] > 0) ? 1.0 : (params->data[i][0] < 0) ? -1.0 : 0.0;  // subgradient
         gradient.data[i][0] += lambda * sign / y->rows;
     }
 
-    // Free memory
     Matrix_free(predictions);
     Matrix_free(errors);
     Matrix_free(XT);
 
     return gradient;
+}
+
+// Helper function to calculate Euclidean distance between two vectors
+double euclidean_distance(const double *vec1, const double *vec2, int length) {
+    double sum = 0.0;
+    for (int i = 0; i < length; ++i) {
+        double diff = vec1[i] - vec2[i];
+        sum += diff * diff;
+    }
+    return sqrt(sum);
+}
+
+// Comparator for qsort to sort distances
+int compare_distances(const void *a, const void *b) {
+    double diff = ((double *)a)[0] - ((double *)b)[0];
+    return (diff > 0) - (diff < 0);
+}
+
+// Function to find the mode of an array (for classification)
+double find_mode(const double *array, int size) {
+    int *counts = calloc(size, sizeof(int));
+    if (counts == NULL) {
+        fprintf(stderr, "Memory allocation error in find_mode.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    double mode = array[0];
+    int max_count = 1;
+
+    for (int i = 0; i < size; ++i) {
+        counts[i] = 1;
+        for (int j = i + 1; j < size; ++j) {
+            if (array[i] == array[j]) {
+                counts[i]++;
+            }
+        }
+        if (counts[i] > max_count) {
+            max_count = counts[i];
+            mode = array[i];
+        }
+    }
+
+    free(counts);
+    return mode;
+}
+
+// Function to calculate the mean of an array (for regression)
+double calculate_mean(const double *array, int size) {
+    double sum = 0.0;
+    for (int i = 0; i < size; ++i) {
+        sum += array[i];
+    }
+    return sum / size;
+}
+
+KNNModel KNNClassifier(const Matrix *X, const Matrix *y, int k) {
+    if (X->rows != y->rows) {
+        fprintf(stderr, "Error in KNN, dimension mismatch!");
+        exit(EXIT_FAILURE);
+    }
+
+    if (k <= 0) {
+        fprintf(stderr, "Error in KNN, k must be positive!");
+        exit(EXIT_FAILURE);
+    }
+
+    KNNModel model;
+
+    model.data.X = Matrix_clone(X);
+    model.data.y = Matrix_clone(y);
+    model.k = k;
+
+    model.is_classification = true;
+
+    return model;
+}
+
+KNNModel KNNRegressor(const Matrix *X, const Matrix *y, int k) {
+    if (X->rows != y->rows) {
+        fprintf(stderr, "Error in KNN, dimension mismatch!");
+        exit(EXIT_FAILURE);
+    }
+
+    if (k <= 0) {
+        fprintf(stderr, "Error in KNN, k must be positive!");
+        exit(EXIT_FAILURE);
+    }
+
+    KNNModel model;
+
+    model.data.X = Matrix_clone(X);
+    model.data.y = Matrix_clone(y);
+    model.k = k;
+
+    model.is_classification = false;
+
+    return model;
+}
+
+void KNN_free(KNNModel model) {
+    Matrix_free(model.data.X);
+    Matrix_free(model.data.y);
+}
+
+void KNN_append_data(KNNModel *model, const Matrix *X_new, const Matrix *y_new) {
+    if (X_new->rows != y_new->rows) {
+        fprintf(stderr, "Error: Mismatched rows in X_new and y_new.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (X_new->cols != model->data.X.cols) {
+        fprintf(stderr, "Error: Column mismatch. X_new should have the same number of columns as the existing X.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    int new_num_samples = model->data.X.rows + X_new->rows;
+    Matrix new_X = Matrix_zeros(new_num_samples, model->data.X.cols);
+    Matrix new_y = Matrix_zeros(new_num_samples, 1);
+
+    for (int i = 0; i < model->data.X.rows; ++i) {
+        for (int j = 0; j < model->data.X.cols; ++j) {
+            new_X.data[i][j] = model->data.X.data[i][j];
+        }
+        new_y.data[i][0] = model->data.y.data[i][0];
+    }
+
+    for (int i = 0; i < X_new->rows; ++i) {
+        for (int j = 0; j < X_new->cols; ++j) {
+            new_X.data[model->data.X.rows + i][j] = X_new->data[i][j];
+        }
+        new_y.data[model->data.X.rows + i][0] = y_new->data[i][0];
+    }
+
+    Matrix_free(model->data.X);
+    Matrix_free(model->data.y);
+
+    model->data.X = new_X;
+    model->data.y = new_y;
+}
+
+Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
+    int num_new_samples = x_new->rows;
+    int num_features = x_new->cols;
+    int num_existing_samples = model->data.X.rows;
+    int k = model->k;
+
+    // Allocate result matrix
+    Matrix predictions = Matrix_zeros(num_new_samples, 1);
+
+    for (int i = 0; i < num_new_samples; ++i) {
+        // Allocate array for distances and indices
+        double (*distances)[2] = malloc(num_existing_samples * sizeof(*distances));
+        if (distances == NULL) {
+            fprintf(stderr, "Memory allocation error in KNN_predict.\n");
+            exit(EXIT_FAILURE);
+        }
+
+        // Calculate distances from x_new[i] to all points in model->data.X
+        for (int j = 0; j < num_existing_samples; ++j) {
+            distances[j][0] = euclidean_distance(x_new->data[i], model->data.X.data[j], num_features);
+            distances[j][1] = j;  // store the index of the point
+        }
+
+        // Sort distances
+        qsort(distances, num_existing_samples, sizeof(*distances), compare_distances);
+
+        // Get labels of k nearest neighbors
+        double *neighbor_labels = malloc(k * sizeof(double));
+        if (neighbor_labels == NULL) {
+            fprintf(stderr, "Memory allocation error in KNN_predict.\n");
+            free(distances);
+            exit(EXIT_FAILURE);
+        }
+        for (int j = 0; j < k; ++j) {
+            int neighbor_index = (int)distances[j][1];
+            neighbor_labels[j] = model->data.y.data[neighbor_index][0];
+        }
+
+        // For classification, take the mode; for regression, take the mean
+        if (model->is_classification) {
+            predictions.data[i][0] = find_mode(neighbor_labels, k);
+        } else {
+            predictions.data[i][0] = calculate_mean(neighbor_labels, k);
+        }
+
+        // Free allocated memory
+        free(distances);
+        free(neighbor_labels);
+    }
+
+    return predictions;
 }

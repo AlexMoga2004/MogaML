@@ -19,6 +19,8 @@ typedef struct {
     Matrix y;
 } LabelledData;
 
+/*                      LINEAR REGRESSION w/ arbitrary loss                  */
+
 typedef struct {
     Matrix (*exact_optimum) (const Matrix *X, const Matrix *y, const Matrix *hyper_params); // May throw exception when no exact solution exists
     double (*loss) (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
@@ -40,26 +42,45 @@ LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y);
 LinearRegressionModel RidgeRegression(const Matrix *X, const Matrix *y, double lambda);
 LinearRegressionModel LassoRegression(const Matrix *X, const Matrix *y, double lambda);
 
-void Supervised_train(LinearRegressionModel *model);
-void Supervised_set_mode(LinearRegressionModel *model, enum ComputationMode mode);
-void Supervised_free(LinearRegressionModel model);
-void Supervised_set_loss(LinearRegressionModel *model, LossFunction loss_function);
+void LinearRegression_train(LinearRegressionModel *model);
+void LinearRegression_append_data(LinearRegressionModel *model, const Matrix X_new, const Matrix y_new);
+void LinearRegression_set_mode(LinearRegressionModel *model, enum ComputationMode mode);
+void LinearRegression_free(LinearRegressionModel model);
+void LinearRegression_set_loss(LinearRegressionModel *model, LossFunction loss_function);
 
 LossFunction LinearRegression_default_loss();
 LossFunction RidgeRegression_default_loss();
 LossFunction LassoRegression_default_loss();
 
-double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
-double RidgeRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
-double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
-
 LabelledData Supervised_read_csv(const char* filename);
 
 Matrix Supervised_predict(const LinearRegressionModel *model, const Matrix *x_new);
 
-Matrix LinearRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_parameters);
-Matrix LinearRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
-Matrix RidgeRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_parameters);
-Matrix RidgeRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
+// Default functions provided
+double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
+double RidgeRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
+double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
+
+Matrix LinearRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params);
+Matrix RidgeRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params);
 Matrix LassoRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params);
+
+Matrix LinearRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
+Matrix RidgeRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
 Matrix LassoRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
+
+/*              KNN             */
+typedef struct {
+    int k;
+    bool is_classification;
+
+    LabelledData data;
+} KNNModel;
+
+KNNModel KNNClassifier(const Matrix *X, const Matrix *y, int k);
+KNNModel KNNRegressor(const Matrix *X, const Matrix *y, int k);
+
+void KNN_free(KNNModel model);
+void KNN_append_data(KNNModel *model, const Matrix *X, const Matrix *y);
+
+Matrix KNN_predict(const KNNModel *model, const Matrix *x_new);

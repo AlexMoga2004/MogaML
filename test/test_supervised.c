@@ -12,20 +12,20 @@ void test_linear_regression() {
     LabelledData data = Supervised_read_csv("test/test_data/data.csv");
 
     LinearRegressionModel model = LinearRegression(&data.X, &data.y);
-    Supervised_set_mode(&model, ALGEBRAIC);
-    Supervised_train(&model);
+    LinearRegression_set_mode(&model, ALGEBRAIC);
+    LinearRegression_train(&model);
     Matrix y_pred1 = Supervised_predict(&model, &data.X);
 
-    Supervised_set_mode(&model, BATCH);
-    Supervised_train(&model);
+    LinearRegression_set_mode(&model, BATCH);
+    LinearRegression_train(&model);
     Matrix y_pred2 = Supervised_predict(&model, &data.X);
 
-    Supervised_set_mode(&model, MINIBATCH);
-    Supervised_train(&model);
+    LinearRegression_set_mode(&model, MINIBATCH);
+    LinearRegression_train(&model);
     Matrix y_pred3 = Supervised_predict(&model, &data.X);
 
-    Supervised_set_mode(&model, STOCHASTIC);
-    Supervised_train(&model);
+    LinearRegression_set_mode(&model, STOCHASTIC);
+    LinearRegression_train(&model);
     Matrix y_pred4 = Supervised_predict(&model, &data.X);
 
     //TODO: think of a better way to test this (especially stochastic which may fail due to random nature)
