@@ -44,6 +44,34 @@ void Matrix_display(const Matrix *mat) {
 	printf("\n");
 }
 
+int Matrix_equal(const Matrix *mat1, const Matrix *mat2) {
+    if (mat1->rows != mat2->rows || mat1->cols != mat2->cols) {
+        return 0;
+    }
+    for (int i = 0; i < mat1->rows; i++) {
+        for (int j = 0; j < mat1->cols; j++) {
+            if (fabs(mat1->data[i][j] - mat2->data[i][j]) > MATRIX_TOLERANCE) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int Matrix_approx_equal(const Matrix *mat1, const Matrix *mat2, double tolerance) {
+    if (mat1->rows != mat2->rows || mat1->cols != mat2->cols) {
+        return 0;
+    }
+    for (int i = 0; i < mat1->rows; i++) {
+        for (int j = 0; j < mat1->cols; j++) {
+            if (fabs(mat1->data[i][j] - mat2->data[i][j]) > tolerance) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
 double Matrix_det(const Matrix *mat) { 
 	if (mat->rows != mat->cols) {
 		fprintf(stderr, "Error in Matrix_det, dimension mismatch!\n");
@@ -75,6 +103,16 @@ double Matrix_trace(const Matrix *mat) {
 	}
 
 	return result;
+}
+
+double Matrix_norm(const Matrix *mat) {
+    double norm = 0.0;
+    for (int i = 0; i < mat->rows; ++i) {
+        for (int j = 0; j < mat->cols; ++j) {
+            norm += mat->data[i][j] * mat->data[i][j];
+        }
+    }
+    return sqrt(norm);
 }
 
 double Matrix_frobenius_norm(const Matrix *mat) {
@@ -226,6 +264,43 @@ Matrix Matrix_minor(const Matrix *mat, int row, int col) {
 	return result;
 }
 
+Matrix Matrix_row(const Matrix *mat, int row_index) {
+    if (row_index < 0 || row_index >= mat->rows) {
+        fprintf(stderr, "Error in Matrix_row: row index out of bounds\n");
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix row = Matrix_zeros(1, mat->cols);
+    for (int j = 0; j < mat->cols; ++j) {
+        row.data[0][j] = mat->data[row_index][j];
+    }
+    return row;
+}
+
+Matrix Matrix_col(const Matrix *mat, int col_index) {
+    if (col_index < 0 || col_index >= mat->cols) {
+        fprintf(stderr, "Error in Matrix_row: row index out of bounds\n");
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix col = Matrix_zeros(1, mat->cols);
+    for (int j = 0; j < mat->rows; ++j) {
+        col.data[j][0] = mat->data[j][col_index];
+    }
+    return col;
+}
+
+Matrix Matrix_slice_rows(const Matrix *mat, int start, int end) {
+    int num_rows = end - start;
+    Matrix slice = Matrix_zeros(num_rows, mat->cols);
+    for (int i = start; i < end; ++i) {
+        for (int j = 0; j < mat->cols; ++j) {
+            slice.data[i - start][j] = mat->data[i][j];
+        }
+    }
+    return slice;
+}
+
 Matrix Matrix_transpose(const Matrix *mat) {
 	Matrix result = Matrix_zeros(mat->cols, mat->rows);
 	for (int i = 0; i < mat->rows; ++i){
@@ -239,19 +314,16 @@ Matrix Matrix_transpose(const Matrix *mat) {
 
 Matrix Matrix_clone(const Matrix *mat) {
 	Matrix result = Matrix_zeros(mat->rows, mat->cols);
-
 	for (int i = 0; i < mat->rows; ++i) {
 		for (int j = 0; j < mat->cols; ++j) {
 			result.data[i][j] = mat->data[i][j];
 		}
 	}
-
 	return result;
 }
 
 Matrix Matrix_inverse(const Matrix *mat) {
 	if (fabs(Matrix_det(mat)) < MATRIX_TOLERANCE) {
-		Matrix_display(mat);
 		fprintf(stderr, "Error in Matrix_inverse, singular matrix!\n");
 		exit(EXIT_FAILURE);
 	}

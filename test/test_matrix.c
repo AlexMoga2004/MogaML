@@ -5,20 +5,6 @@
 
 const double tolerance = 1e-4;
 
-// Helper function to compare two matrices for equality
-int matrix_equal(const Matrix *mat1, const Matrix *mat2) {
-    if (mat1->rows != mat2->rows || mat1->cols != mat2->cols) {
-        return 0;
-    }
-    for (int i = 0; i < mat1->rows; i++) {
-        for (int j = 0; j < mat1->cols; j++) {
-            if (fabs(mat1->data[i][j] - mat2->data[i][j]) > tolerance) {
-                return 0;
-            }
-        }
-    }
-    return 1;
-}
 
 void test_matrix_zeros() {
     printf("Testing Matrix_zeros...\n");
@@ -183,7 +169,7 @@ void test_matrix_inverse() {
     Matrix AI = Matrix_inverse(&A);
     Matrix AAI = Matrix_multiply(&A, &AI);
 
-    assert(matrix_equal(&AAI, &I));
+    assert(Matrix_equal(&AAI, &I));
 
     Matrix_free(A);
     Matrix_free(I);
@@ -226,17 +212,17 @@ void test_matrix_svd() {
     Matrix A_reconstructed = Matrix_multiply(&USigma, &VT);
 
     // Check if A is approximately equal to U Sigma V^T
-    assert(matrix_equal(&A, &A_reconstructed));
+    assert(Matrix_equal(&A, &A_reconstructed));
 
     // Check orthogonality of U & V
     Matrix UT = Matrix_transpose(&U);
     Matrix UTU = Matrix_multiply(&UT, &U);
     Matrix I = Matrix_identity(UTU.rows);
 
-    assert(matrix_equal(&I, &UTU));
+    assert(Matrix_equal(&I, &UTU));
 
     Matrix VTV = Matrix_multiply(&VT, &V);
-    assert(matrix_equal(&I, &VTV));
+    assert(Matrix_equal(&I, &VTV));
 
     // Clean up
     Matrix_free(A);
@@ -268,7 +254,7 @@ void test_matrix_solve() {
     Matrix x = Matrix_solve(&A, &b);
     Matrix Ax = Matrix_multiply(&A, &x);
 
-    assert(matrix_equal(&Ax, &b) && "Ax != b");
+    assert(Matrix_equal(&Ax, &b) && "Ax != b");
 
 
     // Free allocated matrices
