@@ -28,11 +28,70 @@ LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y) {
     model.params = Matrix_zeros(XPadded.cols, 1);
     model.hyper_params = Matrix_zeros(1, 1);
 
-    model.loss_function.exact_optimum = LinearRegression_exact_optimum;
-    model.loss_function.loss = LinearRegression_compute_mse;
-    model.loss_function.grad = LinearRegression_compute_gradient;
+    model.loss_function = LinearRegression_default_loss();
 
     return model;
+}
+
+LinearRegressionModel RidgeRegression(const Matrix *X, const Matrix *y, double lambda) {
+    if (lambda <= 0) {
+        fprintf(stderr, "Error in RidgeRegression, λ ≤ 0!");
+        exit(EXIT_FAILURE);
+    }
+
+    LinearRegressionModel model = LinearRegression(X, y);
+    model.loss_function = RidgeRegression_default_loss();
+
+    model.hyper_params = Matrix_zeros(1,1);
+    model.hyper_params.data[0][0] = lambda;
+
+    return model;
+}
+
+LinearRegressionModel LassoRegression(const Matrix *X, const Matrix *y, double lambda) {
+    if (lambda <= 0) {
+        fprintf(stderr, "Error in RidgeRegression, λ ≤ 0!");
+        exit(EXIT_FAILURE);
+    }
+
+    LinearRegressionModel model = LinearRegression(X, y);
+    model.loss_function = LassoRegression_default_loss();
+
+    model.hyper_params = Matrix_zeros(1,1);
+    model.hyper_params.data[0][0] = lambda;
+
+    return model;
+}
+
+LossFunction LinearRegression_default_loss() {
+    LossFunction loss_function; 
+    loss_function.exact_optimum = LinearRegression_exact_optimum;
+    loss_function.loss = LinearRegression_compute_mse;
+    loss_function.grad = LinearRegression_compute_gradient;
+
+    return loss_function;
+}
+
+LossFunction RidgeRegression_default_loss() {
+    LossFunction loss_function; 
+    loss_function.exact_optimum = LinearRegression_exact_optimum;
+    loss_function.loss = LinearRegression_compute_mse;
+    loss_function.grad = LinearRegression_compute_gradient;
+
+    return loss_function;
+}
+
+LossFunction LassoRegression_default_loss() {
+    LossFunction loss_function;
+    loss_function.exact_optimum = LassoRegression_exact_optimum;
+    loss_function.loss = LassoRegression_compute_mse;
+    loss_function.grad = LassoRegression_compute_gradient;
+
+    return loss_function;
+}
+
+void Supervised_set_loss(LinearRegressionModel *model, LossFunction loss_function) {
+    model->loss_function = loss_function;
 }
 
 void Supervised_train(LinearRegressionModel *model) {
@@ -156,18 +215,52 @@ int count_columns(const char *filename) {
     return count;
 }
 
-Matrix LinearRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_parameters) {
-        Matrix XT = Matrix_transpose(X);
-        Matrix XTX = Matrix_multiply(&XT, X);
-        Matrix XTXI = Matrix_inverse(&XTX);
-        Matrix hat = Matrix_multiply(&XTXI, &XT);
-        Matrix result = Matrix_multiply(&hat, y);
+Matrix LinearRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params) {
+    Matrix XT = Matrix_transpose(X);
+    Matrix XTX = Matrix_multiply(&XT, X);
+    Matrix XTXI = Matrix_inverse(&XTX);
+    Matrix hat = Matrix_multiply(&XTXI, &XT);
+    Matrix result = Matrix_multiply(&hat, y);
 
-        Matrix_free(XT);
-        Matrix_free(XTX);
-        Matrix_free(XTXI);
-        Matrix_free(hat);
-        return result;
+    Matrix_free(XT);
+    Matrix_free(XTX);
+    Matrix_free(XTXI);
+    Matrix_free(hat);
+    return result;
+}
+
+Matrix RidgeRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params) {
+    if (hyper_params->rows != 1 && hyper_params->cols != 1) {
+        fprintf(stderr, "Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
+        exit(EXIT_FAILURE);
+    }
+
+    if (hyper_params->data[0][0] <= 0) {
+        fprintf(stderr, "Error in RidgeRegression_compute_gradient, lambda must be positive");
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix XT = Matrix_transpose(X);
+    Matrix XTX = Matrix_multiply(&XT, X);
+
+    Matrix I = Matrix_identity(XTX.rows);
+    I = Matrix_scale(hyper_params->data[0][0], &I);
+    XTX = Matrix_add(&XTX, &I);
+
+    Matrix XTXI = Matrix_inverse(&XTX);
+    Matrix hat = Matrix_multiply(&XTXI, &XT);
+    Matrix result = Matrix_multiply(&hat, y);
+
+    Matrix_free(XT);
+    Matrix_free(XTX);
+    Matrix_free(XTXI);
+    Matrix_free(hat);
+    return result;
+}
+
+Matrix LassoRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params) {
+    fprintf(stderr, "Error in LassoRegression_exact_optimum, closed form solution does not exist! (HINT: don't use ALGEBRAIC computation mode with Lasso)");
+    exit(EXIT_FAILURE);
 }
 
 double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
@@ -184,6 +277,40 @@ double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matr
 
     Matrix_free(predictions);
     return mse / (double) y->rows;
+}
+
+double RidgeRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
+    if (hyper_params->rows != 1 && hyper_params->cols != 1) {
+        fprintf(stderr, "Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
+        exit(EXIT_FAILURE);
+    }
+
+    if (hyper_params->data[0][0] <= 0) {
+        fprintf(stderr, "Error in RidgeRegression_compute_gradient, lambda must be positive");
+        exit(EXIT_FAILURE);
+    }
+
+    double mse = LinearRegression_compute_mse(X, y, params, hyper_params);
+    mse += (hyper_params->data[0][0] * Vector_norm(params, 2)) / (double) y->rows;
+
+    return mse;
+}
+
+double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
+    if (hyper_params->rows != 1 && hyper_params->cols != 1) {
+        fprintf(stderr, "Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
+        exit(EXIT_FAILURE);
+    }
+
+    if (hyper_params->data[0][0] <= 0) {
+        fprintf(stderr, "Error in RidgeRegression_compute_gradient, lambda must be positive");
+        exit(EXIT_FAILURE);
+    }
+
+    double mse = LinearRegression_compute_mse(X, y, params, hyper_params);
+    mse += (hyper_params->data[0][0] * Vector_norm(params, 1)) / (double) y->rows;
+
+    return mse;
 }
 
 // Function to read CSV and create matrices
@@ -261,6 +388,69 @@ Matrix LinearRegression_compute_gradient(const Matrix *X, const Matrix *y, const
     Matrix gradient = Matrix_multiply(&XT, &errors);
     gradient = Matrix_scale(1.0 / y->rows, &gradient);
 
+    Matrix_free(predictions);
+    Matrix_free(errors);
+    Matrix_free(XT);
+
+    return gradient;
+}
+
+Matrix RidgeRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
+    if (hyper_params->rows != 1 || hyper_params->cols != 1) {
+        fprintf(stderr, "Error in RidgeRegression_compute_gradient: hyper_params must contain a single value (lambda)!");
+        exit(EXIT_FAILURE);
+    }
+
+    double lambda = hyper_params->data[0][0];
+
+    // Compute predictions and errors
+    Matrix predictions = Matrix_multiply(X, params);
+    Matrix errors = Matrix_sub(&predictions, y);
+
+    // Compute gradient without regularization
+    Matrix XT = Matrix_transpose(X);
+    Matrix gradient = Matrix_multiply(&XT, &errors);
+    gradient = Matrix_scale(1.0 / y->rows, &gradient);
+
+    // Add regularization term
+    int num_params = params->rows * params->cols;
+    for (int i = 0; i < num_params; ++i) {
+        gradient.data[i][0] += lambda * params->data[i][0] / y->rows;
+    }
+
+    // Free memory
+    Matrix_free(predictions);
+    Matrix_free(errors);
+    Matrix_free(XT);
+
+    return gradient;
+}
+
+Matrix LassoRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
+    if (hyper_params->rows != 1 || hyper_params->cols != 1) {
+        fprintf(stderr, "Error in LassoRegression_compute_gradient: hyper_params must contain a single value (lambda)!");
+        exit(EXIT_FAILURE);
+    }
+
+    double lambda = hyper_params->data[0][0];
+
+    // Compute predictions and errors
+    Matrix predictions = Matrix_multiply(X, params);
+    Matrix errors = Matrix_sub(&predictions, y);
+
+    // Compute gradient without regularization
+    Matrix XT = Matrix_transpose(X);
+    Matrix gradient = Matrix_multiply(&XT, &errors);
+    gradient = Matrix_scale(1.0 / y->rows, &gradient);
+
+    // Add regularization term using subgradients
+    int num_params = params->rows * params->cols;
+    for (int i = 0; i < num_params; ++i) {
+        double sign = (params->data[i][0] > 0) ? 1.0 : (params->data[i][0] < 0) ? -1.0 : 0.0;  // subgradient
+        gradient.data[i][0] += lambda * sign / y->rows;
+    }
+
+    // Free memory
     Matrix_free(predictions);
     Matrix_free(errors);
     Matrix_free(XT);

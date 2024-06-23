@@ -131,7 +131,7 @@ double Vector_norm(const Matrix *mat, double l) {
 
 	double sum = 0.0;
 	for (int i = 0; i < mat->rows; ++i) {
-		sum += pow(mat->data[i][0], l);
+		sum += fabs(pow(mat->data[i][0], l));
 	}
 
 	return pow(sum, 1/l);
