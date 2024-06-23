@@ -19,10 +19,10 @@ typedef struct {
     Matrix y;
 } LabelledData;
 
-// Arbitrary loss function w/ derivative
 typedef struct {
-    double (*loss) (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyperParams);
-    Matrix (*grad) (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyperParams);
+    Matrix (*exact_optimum) (const Matrix *X, const Matrix *y, const Matrix *hyper_params); // May throw exception when no exact solution exists
+    double (*loss) (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
+    Matrix (*grad) (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
 } LossFunction;
 
 typedef struct {
@@ -30,10 +30,10 @@ typedef struct {
 
     LabelledData data;
     Matrix params;
-    Matrix hyperParams;
+    Matrix hyper_params;
     enum ComputationMode mode;
 
-    LossFunction lossFunction;
+    LossFunction loss_function;
 } LinearRegressionModel;
 
 LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y);
@@ -42,10 +42,10 @@ void Supervised_train(LinearRegressionModel *model);
 void Supervised_set_mode(LinearRegressionModel *model, enum ComputationMode mode);
 void Supervised_free(LinearRegressionModel model);
 
-double Supervised_compute_mse(const LinearRegressionModel *model);
+double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
 
 LabelledData Supervised_read_csv(const char* filename);
 
+Matrix LinearRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_parameters);
 Matrix Supervised_predict(const LinearRegressionModel *model, const Matrix *x_new);
-Matrix Supervised_compute_gradient(const LinearRegressionModel *model);
-
+Matrix LinearRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);

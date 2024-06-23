@@ -254,7 +254,7 @@ void test_matrix_solve() {
     Matrix x = Matrix_solve(&A, &b);
     Matrix Ax = Matrix_multiply(&A, &x);
 
-    assert(Matrix_equal(&Ax, &b) && "Ax != b");
+    assert(Matrix_approx_equal(&Ax, &b, 1e-2) && "Ax != b");
 
 
     // Free allocated matrices

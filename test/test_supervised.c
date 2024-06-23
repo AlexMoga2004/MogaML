@@ -28,11 +28,7 @@ void test_linear_regression() {
     Supervised_train(&model);
     Matrix y_pred4 = Supervised_predict(&model, &data.X);
 
-    Matrix_display(&y_pred3);
-    Matrix_display(&y_pred4);
-
     //TODO: think of a better way to test this (especially stochastic which may fail due to random nature)
-
     assert(Matrix_approx_equal(&y_pred1, &y_pred2, 1.0) && "ALGEBRAIC and BATCH computations provided different results!");
     assert(Matrix_approx_equal(&y_pred2, &y_pred3, 2.0) && "BATCH and MINIBATCH computations provided different results!");
     // assert(Matrix_approx_equal(&y_pred3, &y_pred4, 1.0) && "MINIBATCH and STOCHASTIC computations provided different results!");

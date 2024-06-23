@@ -26,26 +26,22 @@ LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y) {
     model.data.y = Matrix_clone(y);
     model.mode = ALGEBRAIC;
     model.params = Matrix_zeros(XPadded.cols, 1);
+    model.hyper_params = Matrix_zeros(1, 1);
+
+    model.loss_function.exact_optimum = LinearRegression_exact_optimum;
+    model.loss_function.loss = LinearRegression_compute_mse;
+    model.loss_function.grad = LinearRegression_compute_gradient;
 
     return model;
 }
 
 void Supervised_train(LinearRegressionModel *model) {
     if (model->mode == ALGEBRAIC) {
-        Matrix XT = Matrix_transpose(&model->data.X);
-        Matrix XTX = Matrix_multiply(&XT, &model->data.X);
-        Matrix XTXI = Matrix_inverse(&XTX);
-        Matrix hat = Matrix_multiply(&XTXI, &XT);
-        Matrix result = Matrix_multiply(&hat, &model->data.y);
-
-        Matrix_free(XT);
-        Matrix_free(XTX);
-        Matrix_free(XTXI);
-        Matrix_free(hat);
-        model->params = result;
+        // May throw exception if loss_function has no closed form exact solution
+        model->params = model->loss_function.exact_optimum(&model->data.X, &model->data.y, &model->hyper_params);
     } else if (model->mode == BATCH) {
         for (int epoch = 0; epoch < EPOCHS; ++epoch) {
-            Matrix gradients = Supervised_compute_gradient(model);
+            Matrix gradients = model->loss_function.grad(&model->data.X, &model->data.y, &model->params, &model->hyper_params);
             Matrix update = Matrix_scale(-LEARNING_RATE, &gradients);
             Matrix new_params = Matrix_add(&model->params, &update);
 
@@ -75,7 +71,7 @@ void Supervised_train(LinearRegressionModel *model) {
                 LinearRegressionModel mini_model = *model;
                 mini_model.data.X = X_batch;
                 mini_model.data.y = y_batch;
-                Matrix gradients = Supervised_compute_gradient(&mini_model);
+                Matrix gradients = model->loss_function.grad(&mini_model.data.X, &mini_model.data.y, &mini_model.params, &mini_model.hyper_params);
 
                 // Update parameters
                 Matrix update = Matrix_scale(-LEARNING_RATE, &gradients);
@@ -160,20 +156,34 @@ int count_columns(const char *filename) {
     return count;
 }
 
-double Supervised_compute_mse(const LinearRegressionModel *model) {
-    Matrix predictions = Matrix_multiply(&model->data.X, &model->params);
-    if (predictions.rows != model->data.y.rows || predictions.cols != model->data.y.cols) {
+Matrix LinearRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_parameters) {
+        Matrix XT = Matrix_transpose(X);
+        Matrix XTX = Matrix_multiply(&XT, X);
+        Matrix XTXI = Matrix_inverse(&XTX);
+        Matrix hat = Matrix_multiply(&XTXI, &XT);
+        Matrix result = Matrix_multiply(&hat, y);
+
+        Matrix_free(XT);
+        Matrix_free(XTX);
+        Matrix_free(XTXI);
+        Matrix_free(hat);
+        return result;
+}
+
+double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
+    Matrix predictions = Matrix_multiply(X, params);
+    if (predictions.rows != y->rows || predictions.cols != y->cols) {
         fprintf(stderr, "Error in Supervised_compute_mse, dimension mismatch!");
         exit(EXIT_FAILURE);
     }
     double mse = 0.0;
 
     for (int i = 0; i < predictions.rows; ++i) {
-        mse += pow((predictions.data[i][0] - model->data.y.data[i][0]), 2);
+        mse += pow((predictions.data[i][0] - y->data[i][0]), 2);
     }
 
     Matrix_free(predictions);
-    return mse / (double) model->data.y.rows;
+    return mse / (double) y->rows;
 }
 
 // Function to read CSV and create matrices
@@ -244,12 +254,12 @@ Matrix Supervised_predict(const LinearRegressionModel *model, const Matrix *x_ne
     return Matrix_multiply(&XPadded, &model->params);
 }
 
-Matrix Supervised_compute_gradient(const LinearRegressionModel *model) {
-    Matrix predictions = Matrix_multiply(&model->data.X, &model->params);
-    Matrix errors = Matrix_sub(&predictions, &model->data.y);
-    Matrix XT = Matrix_transpose(&model->data.X);
+Matrix LinearRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
+    Matrix predictions = Matrix_multiply(X, params);
+    Matrix errors = Matrix_sub(&predictions, y);
+    Matrix XT = Matrix_transpose(X);
     Matrix gradient = Matrix_multiply(&XT, &errors);
-    gradient = Matrix_scale(1.0 / model->data.y.rows, &gradient);
+    gradient = Matrix_scale(1.0 / y->rows, &gradient);
 
     Matrix_free(predictions);
     Matrix_free(errors);
