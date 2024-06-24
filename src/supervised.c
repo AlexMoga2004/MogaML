@@ -633,3 +633,100 @@ Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
 
     return predictions;
 }
+
+double sigmoid(double z) {
+    return 1 / (1 + pow(EULER_NUMBER, -z));
+}
+
+LogisticRegressionModel LogisticRegression(const Matrix *X, const Matrix *y) {
+    if (X->rows != y->rows || y->cols != 1) {
+        fprintf(stderr, "Error in LinearRegression, dimension mismatch!");
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix XPadded = Matrix_zeros(X->rows, X->cols+1);
+    for (int i = 0; i < X->rows; ++i) {
+        XPadded.data[i][0] = 1;
+    }
+
+    for (int i = 0; i < X->rows; ++i) {
+        for (int j = 0; j < X->cols; ++j) {
+            XPadded.data[i][j+1] = X->data[i][j];
+        }
+    }
+
+    LogisticRegressionModel model;
+
+    model.data.X = XPadded;
+    model.data.y = Matrix_clone(y);
+    model.trained = false;
+
+    model.params = Matrix_zeros(XPadded.cols, 1);
+
+    return model;
+}
+
+void LogisticRegression_train(LogisticRegressionModel *model) {
+    int m = model->data.X.rows;
+    int n = model->data.X.cols;
+    double **X = model->data.X.data;
+    double **y = model->data.y.data;
+
+    for (int epoch = 0; epoch < EPOCHS; ++epoch) {
+        double *predictions = (double *)malloc(m * sizeof(double));
+        double *errors = (double *)malloc(m * sizeof(double));
+
+        for (int i = 0; i < m; ++i) {
+            double z = 0.0;
+            for (int j = 0; j < n; ++j) {
+                z += X[i][j] * model->params.data[j][0];
+            }
+            predictions[i] = sigmoid(z);
+            errors[i] = predictions[i] - y[i][0];
+        }
+
+        double *grad = (double *)calloc(n, sizeof(double));
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                grad[j] += errors[i] * X[i][j];
+            }
+        }
+
+        for (int j = 0; j < n; ++j) {
+            model->params.data[j][0] -= LEARNING_RATE * grad[j] / m;
+        }
+
+        free(predictions);
+        free(errors);
+        free(grad);
+    }
+
+    model->trained = true;
+}
+
+Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Matrix *X_new) {
+    if (!model->trained) {
+        fprintf(stderr, "Error in LogisticRegression_predict: model not trained!\n");
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix XPadded = Matrix_zeros(X_new->rows, X_new->cols);
+    for (int i = 0; i < X_new->rows; ++i) {
+        XPadded.data[i][0] = 1.0;  
+        for (int j = 0; j < X_new->cols+1; ++j) {
+            XPadded.data[i][j + 1] = X_new->data[i][j];
+        }
+    }
+
+    Matrix probabilities = Matrix_zeros(X_new->rows, 1);
+    for (int i = 0; i < X_new->rows; ++i) {
+        double z = 0.0;
+        for (int j = 0; j < X_new->cols+1; ++j) {
+            z += XPadded.data[i][j] * model->params.data[j][0];
+        }
+        probabilities.data[i][0] = sigmoid(z);
+    }
+
+    Matrix_free(XPadded);
+    return probabilities;
+}

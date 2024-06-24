@@ -68,7 +68,7 @@ Matrix LinearRegression_compute_gradient(const Matrix *X, const Matrix *y, const
 Matrix RidgeRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
 Matrix LassoRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
 
-/*              KNN             */
+/*                  KNN                 */
 typedef struct {
     int k;
     bool is_classification;
@@ -83,3 +83,19 @@ void KNN_free(KNNModel model);
 void KNN_append_data(KNNModel *model, const Matrix *X, const Matrix *y);
 
 Matrix KNN_predict(const KNNModel *model, const Matrix *x_new);
+
+/*                  LOGISTIC REGRESSION                 */
+#define EULER_NUMBER 2.71828182845904523536
+
+typedef struct {
+    bool trained;
+
+    LabelledData data;
+    Matrix params;
+} LogisticRegressionModel;
+
+LogisticRegressionModel LogisticRegression(const Matrix *X, const Matrix *y);
+
+void LogisticRegression_train(LogisticRegressionModel *model);
+
+Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Matrix *X_new);
