@@ -1,11 +1,25 @@
 #include "../include/matrix.h"
-#include "../include/supervised.h" // Include your linear regression header file
+#include "../include/supervised.h" 
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <math.h>
 
-const double TEST_TOLERANCE = 1e-4; // Tolerance for floating-point comparisons
+const double TEST_TOLERANCE = 1e-4; 
+
+void generate_synthetic_data(Matrix *X, Matrix *y, int num_samples, int num_features) {
+    *X = Matrix_zeros(num_samples, num_features);
+    for (int i = 0; i < num_samples; ++i) {
+        for (int j = 0; j < num_features; ++j) {
+            X->data[i][j] = (double) rand() / RAND_MAX;
+        }
+    }
+
+    *y = Matrix_zeros(num_samples, 1);
+    for (int i = 0; i < num_samples; ++i) {
+        y->data[i][0] = rand() % 2;  
+    }
+}
 
 void test_linear_regression() {
     printf("Testing LinearRegressionModel...\n");
@@ -85,8 +99,8 @@ void test_knn_regression() {
 
     Matrix predictions = KNN_predict(&model, &x_new);
 
-    printf("Regression predictions:\n");
-    Matrix_display(&predictions);
+    // printf("Regression predictions:\n");
+    // Matrix_display(&predictions);
 
     Matrix_free(X);
     Matrix_free(y);
@@ -94,6 +108,38 @@ void test_knn_regression() {
     Matrix_free(predictions);
     KNN_free(model);
     printf("KNNModel regression test passed\n");
+}
+
+void test_logistic_regression() {
+    printf("Testing LogisticRegression...\n");
+    int num_samples = 100;
+    int num_features = 5;
+
+    Matrix X, y;
+    generate_synthetic_data(&X, &y, num_samples, num_features);
+
+    LogisticRegressionModel model = LogisticRegression(&X, &y);
+
+    LogisticRegression_train(&model);
+
+    Matrix X_new;
+    generate_synthetic_data(&X_new, &y, 10, num_features);  
+
+    Matrix y_pred = LogisticRegression_predict(&model, &X_new);
+
+    printf("Predictions:\n");
+    for (int i = 0; i < y_pred.rows; ++i) {
+        printf("%f\n", y_pred.data[i][0]);
+    }
+
+    Matrix_free(X);
+    Matrix_free(y);
+    Matrix_free(X_new);
+    Matrix_free(y_pred);
+    Matrix_free(model.params);
+    Matrix_free(model.data.X);
+    Matrix_free(model.data.y);
+    printf("LogisticRegression Test Passed!...\n");
 }
 
 int main() {
