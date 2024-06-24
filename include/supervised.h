@@ -43,7 +43,6 @@ LinearRegressionModel RidgeRegression(const Matrix *X, const Matrix *y, double l
 LinearRegressionModel LassoRegression(const Matrix *X, const Matrix *y, double lambda);
 
 void LinearRegression_train(LinearRegressionModel *model);
-void LinearRegression_append_data(LinearRegressionModel *model, const Matrix X_new, const Matrix y_new);
 void LinearRegression_set_mode(LinearRegressionModel *model, enum ComputationMode mode);
 void LinearRegression_free(LinearRegressionModel model);
 void LinearRegression_set_loss(LinearRegressionModel *model, LossFunction loss_function);

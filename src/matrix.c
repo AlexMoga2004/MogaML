@@ -164,6 +164,18 @@ Matrix Matrix_identity(int size) {
 	return mat;
 }
 
+Matrix Matrix_from_array(int rows, int cols, double *data) {
+    Matrix matrix = Matrix_zeros(rows, cols);
+    
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            matrix.data[i][j] = data[i * cols + j];
+        }
+    }
+    
+    return matrix;
+}
+
 Matrix Matrix_scale(double c, const Matrix *mat) {
 	Matrix result = Matrix_zeros(mat->rows, mat->cols);
 	for (int i = 0; i < mat->rows; ++i){

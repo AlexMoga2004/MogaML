@@ -26,6 +26,7 @@ double Vector_norm(const Matrix *mat, double l);
 
 Matrix Matrix_zeros(int rows, int cols);
 Matrix Matrix_identity(int size);
+Matrix Matrix_from_array(int rows, int cols, double *data);
 Matrix Matrix_scale(double c, const Matrix *mat);
 Matrix Matrix_add(const Matrix *mat1, const Matrix *mat2);
 Matrix Matrix_sub(const Matrix *mat1, const Matrix *mat2);

@@ -50,7 +50,7 @@ LinearRegressionModel RidgeRegression(const Matrix *X, const Matrix *y, double l
 
 LinearRegressionModel LassoRegression(const Matrix *X, const Matrix *y, double lambda) {
     if (lambda <= 0) {
-        fprintf(stderr, "Error in RidgeRegression, λ ≤ 0!");
+        fprintf(stderr, "Error in LassoRegression, λ ≤ 0!");
         exit(EXIT_FAILURE);
     }
 
@@ -183,40 +183,6 @@ void LinearRegression_train(LinearRegressionModel *model) {
     model->trained = true;
 }
 
-void LinearRegression_append_data(LinearRegressionModel *model, const Matrix X_new, const Matrix y_new) {
-    // Ensure the number of rows in X_new and y_new match
-    if (X_new.rows != y_new.rows) {
-        fprintf(stderr, "Error: Mismatched rows in X_new and y_new.\n");
-        return;
-    }
-
-    // New sizes
-    int new_row_count = model->data.X.rows + X_new.rows;
-    int new_X_size = new_row_count * model->data.X.cols * sizeof(double);
-    int new_y_size = new_row_count * sizeof(double);
-
-    // Reallocate memory for the feature matrix X
-    model->data.X.data = (double *)realloc(model->data.X.data, new_X_size);
-    if (model->data.X.data == NULL) {
-        fprintf(stderr, "Error: Memory allocation failed for X.\n");
-        return;
-    }
-
-    // Reallocate memory for the target vector y
-    model->data.y.data = (double *)realloc(model->data.y.data, new_y_size);
-    if (model->data.y.data == NULL) {
-        fprintf(stderr, "Error: Memory allocation failed for y.\n");
-        return;
-    }
-
-    // Copy the new data into the expanded matrices
-    memcpy(model->data.X.data + model->data.X.rows * model->data.X.cols, X_new.data, X_new.rows * model->data.X.cols * sizeof(double));
-    memcpy(model->data.y.data + model->data.y.rows, y_new.data, y_new.rows * sizeof(double));
-
-    // Update row counts
-    model->data.X.rows = new_row_count;
-    model->data.y.rows = new_row_count;
-}
 void LinearRegression_set_mode(LinearRegressionModel *model, enum ComputationMode mode){
     model->mode = mode;
 }
@@ -628,27 +594,22 @@ Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
     int num_existing_samples = model->data.X.rows;
     int k = model->k;
 
-    // Allocate result matrix
     Matrix predictions = Matrix_zeros(num_new_samples, 1);
 
     for (int i = 0; i < num_new_samples; ++i) {
-        // Allocate array for distances and indices
         double (*distances)[2] = malloc(num_existing_samples * sizeof(*distances));
         if (distances == NULL) {
             fprintf(stderr, "Memory allocation error in KNN_predict.\n");
             exit(EXIT_FAILURE);
         }
 
-        // Calculate distances from x_new[i] to all points in model->data.X
         for (int j = 0; j < num_existing_samples; ++j) {
             distances[j][0] = euclidean_distance(x_new->data[i], model->data.X.data[j], num_features);
-            distances[j][1] = j;  // store the index of the point
+            distances[j][1] = j;  
         }
 
-        // Sort distances
         qsort(distances, num_existing_samples, sizeof(*distances), compare_distances);
 
-        // Get labels of k nearest neighbors
         double *neighbor_labels = malloc(k * sizeof(double));
         if (neighbor_labels == NULL) {
             fprintf(stderr, "Memory allocation error in KNN_predict.\n");
@@ -660,14 +621,12 @@ Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
             neighbor_labels[j] = model->data.y.data[neighbor_index][0];
         }
 
-        // For classification, take the mode; for regression, take the mean
         if (model->is_classification) {
             predictions.data[i][0] = find_mode(neighbor_labels, k);
         } else {
             predictions.data[i][0] = calculate_mean(neighbor_labels, k);
         }
 
-        // Free allocated memory
         free(distances);
         free(neighbor_labels);
     }
