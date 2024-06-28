@@ -28,7 +28,6 @@ static int find_nearest_centroid(const double *point, const Matrix *centroids) {
 }
 
 static int count_columns(const char *filename) {
-    printf("Counting columns\n");
     FILE *file = fopen(filename, "r");
     if (!file) {
         fprintf(stderr, "Error opening file: %s\n", filename);
@@ -47,11 +46,9 @@ static int count_columns(const char *filename) {
     }
 
     return count;
-    printf("Done counting columns\n");
 }
 
 Matrix Unsupervised_read_csv(const char *filename) {
-    printf("Is this shit even being executed????\n");
 
     FILE *file = fopen(filename, "r");
     if (!file) {

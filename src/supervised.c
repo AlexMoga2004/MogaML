@@ -1,5 +1,29 @@
 #include "supervised.h"
 
+// Helper function
+
+static double euclidean_distance(const double *vec1, const double *vec2, int length) {
+    double sum = 0.0;
+    for (int i = 0; i < length; ++i) {
+        double diff = vec1[i] - vec2[i];
+        sum += diff * diff;
+    }
+    return sqrt(sum);
+}
+
+int Supervised_find_nearest_centroid(const double *point, const Matrix *centroids) {
+    int nearest = 0;
+    double min_dist = DBL_MAX;
+    for (int i = 0; i < centroids->rows; ++i) {
+        double dist = euclidean_distance(point, centroids->data[i], centroids->cols);
+        if (dist < min_dist) {
+            min_dist = dist;
+            nearest = i;
+        }
+    }
+    return nearest;
+}
+
 LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows || y->cols != 1) {
         fprintf(stderr, "Error in LinearRegression, dimension mismatch!");
@@ -70,9 +94,9 @@ LossFunction LinearRegression_default_loss() {
 
 LossFunction RidgeRegression_default_loss() {
     LossFunction loss_function; 
-    loss_function.exact_optimum = LinearRegression_exact_optimum;
-    loss_function.loss = LinearRegression_compute_mse;
-    loss_function.grad = LinearRegression_compute_gradient;
+    loss_function.exact_optimum = RidgeRegression_exact_optimum;
+    loss_function.loss = RidgeRegression_compute_mse;
+    loss_function.grad = RidgeRegression_compute_gradient;
 
     return loss_function;
 }
@@ -240,6 +264,7 @@ Matrix RidgeRegression_exact_optimum(const Matrix *X, const Matrix *y, const Mat
     Matrix XTX = Matrix_multiply(&XT, X);
 
     Matrix I = Matrix_identity(XTX.rows);
+    printf("%f\n", hyper_params->data[0][0]);
     I = Matrix_scale(hyper_params->data[0][0], &I);
     XTX = Matrix_add(&XTX, &I);
 
@@ -494,15 +519,6 @@ Matrix LassoRegression_compute_gradient(const Matrix *X, const Matrix *y, const 
     return gradient;
 }
 
-static double euclidean_distance(const double *vec1, const double *vec2, int length) {
-    double sum = 0.0;
-    for (int i = 0; i < length; ++i) {
-        double diff = vec1[i] - vec2[i];
-        sum += diff * diff;
-    }
-    return sqrt(sum);
-}
-
 static int compare_distances(const void *a, const void *b) {
     double diff = ((double *)a)[0] - ((double *)b)[0];
     return (diff > 0) - (diff < 0);
@@ -645,7 +661,7 @@ Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
 
         for (int j = 0; j < num_existing_samples; ++j) {
             distances[j][0] = euclidean_distance(x_new->data[i], model->data.X.data[j], num_features);
-            distances[j][1] = j;  
+            distances[j][1] = j; // Store the index of the current sample
         }
 
         qsort(distances, num_existing_samples, sizeof(*distances), compare_distances);
@@ -656,6 +672,7 @@ Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
             free(distances);
             exit(EXIT_FAILURE);
         }
+
         for (int j = 0; j < k; ++j) {
             int neighbor_index = (int)distances[j][1];
             neighbor_labels[j] = model->data.y.data[neighbor_index][0];
@@ -750,24 +767,30 @@ Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Ma
         exit(EXIT_FAILURE);
     }
 
-    Matrix XPadded = Matrix_zeros(X_new->rows, X_new->cols);
+    // Create a copy of X_new with an added column of ones for bias term
+    Matrix XPadded = Matrix_zeros(X_new->rows, X_new->cols + 1);
     for (int i = 0; i < X_new->rows; ++i) {
-        XPadded.data[i][0] = 1.0;  
-        for (int j = 0; j < X_new->cols+1; ++j) {
+        XPadded.data[i][0] = 1.0; // Set the bias term
+        for (int j = 0; j < X_new->cols; ++j) {
             XPadded.data[i][j + 1] = X_new->data[i][j];
         }
     }
 
+    // Allocate matrix for storing predicted probabilities
     Matrix probabilities = Matrix_zeros(X_new->rows, 1);
+
+    // Compute predicted probabilities using the trained model parameters
     for (int i = 0; i < X_new->rows; ++i) {
         double z = 0.0;
-        for (int j = 0; j < X_new->cols+1; ++j) {
+        for (int j = 0; j < XPadded.cols; ++j) {
             z += XPadded.data[i][j] * model->params.data[j][0];
         }
         probabilities.data[i][0] = sigmoid(z);
     }
 
+    // Free the padded matrix as it's no longer needed
     Matrix_free(XPadded);
+
     return probabilities;
 }
 

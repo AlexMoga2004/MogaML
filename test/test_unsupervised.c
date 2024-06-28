@@ -11,7 +11,7 @@ void plot_clusters(const Matrix *X, const Matrix *labels) {
         return;
     }
 
-    fprintf(gnuplot, "set title 'KMeans Clustering'\n");
+    fprintf(gnuplot, "set title 'K-Means Clustering'\n");
     fprintf(gnuplot, "set xlabel 'Feature 1'\n");
     fprintf(gnuplot, "set ylabel 'Feature 2'\n");
     fprintf(gnuplot, "set style data points\n");

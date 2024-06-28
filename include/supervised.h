@@ -24,6 +24,8 @@ typedef struct {
     Matrix y;
 } LabelledData;
 
+
+int Supervised_find_nearest_centroid(const double *point, const Matrix *centroids);
 LabelledData Supervised_read_csv(const char* filename);
 
 /*                      LINEAR REGRESSION w/ arbitrary loss                  */
