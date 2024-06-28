@@ -66,7 +66,7 @@ void test_knn_classification() {
     Matrix X = Matrix_from_array(6, 2, &X_data[0][0]);
     Matrix y = Matrix_from_array(6, 1, &y_data[0][0]);
 
-    KNNModel model = KNNClassifier(&X, &y, 3);
+    KNNModel model = KNNClassifier(3, &X, &y);
 
     double x_new_data[2][2] = {{0.0, 0.0}, {3.0, 3.0}};
     Matrix x_new = Matrix_from_array(2, 2, &x_new_data[0][0]);
@@ -92,7 +92,7 @@ void test_knn_regression() {
     Matrix X = Matrix_from_array(5, 1, &X_data[0][0]);
     Matrix y = Matrix_from_array(5, 1, &y_data[0][0]);
 
-    KNNModel model = KNNRegressor(&X, &y, 2);
+    KNNModel model = KNNRegressor(2, &X, &y);
 
     double x_new_data[2][1] = {{2.5}, {3.5}};
     Matrix x_new = Matrix_from_array(2, 1, &x_new_data[0][0]);
@@ -119,7 +119,6 @@ void test_logistic_regression() {
     generate_synthetic_data(&X, &y, num_samples, num_features);
 
     LogisticRegressionModel model = LogisticRegression(&X, &y);
-
     LogisticRegression_train(&model);
 
     Matrix X_new;
@@ -127,10 +126,10 @@ void test_logistic_regression() {
 
     Matrix y_pred = LogisticRegression_predict(&model, &X_new);
 
-    printf("Predictions:\n");
-    for (int i = 0; i < y_pred.rows; ++i) {
-        printf("%f\n", y_pred.data[i][0]);
-    }
+    // printf("Predictions:\n");
+    // for (int i = 0; i < y_pred.rows; ++i) {
+    //     printf("%f\n", y_pred.data[i][0]);
+    // }
 
     Matrix_free(X);
     Matrix_free(y);

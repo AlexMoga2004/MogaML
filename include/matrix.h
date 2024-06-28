@@ -13,6 +13,7 @@ typedef struct {
 } SVDResult;
 
 void Matrix_free(Matrix mat);
+void Matrix_reset(Matrix *mat);
 void Matrix_display(const Matrix *mat);
 
 int Matrix_equal(const Matrix *mat1, const Matrix *mat2);

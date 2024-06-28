@@ -1,6 +1,11 @@
 #pragma once
 #include "matrix.h"
 #include <stdbool.h>
+#include <stdio.h>
+#include <float.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
 
 #define LEARNING_RATE 0.01
 #define EPOCHS 1000
@@ -19,8 +24,8 @@ typedef struct {
     Matrix y;
 } LabelledData;
 
-/*                      LINEAR REGRESSION w/ arbitrary loss                  */
 
+/*                      LINEAR REGRESSION w/ arbitrary loss                  */
 typedef struct {
     Matrix (*exact_optimum) (const Matrix *X, const Matrix *y, const Matrix *hyper_params); // May throw exception when no exact solution exists
     double (*loss) (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
@@ -55,7 +60,10 @@ LabelledData Supervised_read_csv(const char* filename);
 
 Matrix Supervised_predict(const LinearRegressionModel *model, const Matrix *x_new);
 
-// Default functions provided
+// static int Matrix_unique_count(const Matrix *y);
+// static int Matrix_unique_count_in_column(const Matrix *y, int col);
+
+// default helper functions
 double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
 double RidgeRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
 double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params);
@@ -76,8 +84,8 @@ typedef struct {
     LabelledData data;
 } KNNModel;
 
-KNNModel KNNClassifier(const Matrix *X, const Matrix *y, int k);
-KNNModel KNNRegressor(const Matrix *X, const Matrix *y, int k);
+KNNModel KNNClassifier(unsigned int k, const Matrix *X, const Matrix *y);
+KNNModel KNNRegressor(unsigned int k, const Matrix *X, const Matrix *y);
 
 void KNN_free(KNNModel model);
 void KNN_append_data(KNNModel *model, const Matrix *X, const Matrix *y);
@@ -99,3 +107,24 @@ LogisticRegressionModel LogisticRegression(const Matrix *X, const Matrix *y);
 void LogisticRegression_train(LogisticRegressionModel *model);
 
 Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Matrix *X_new);
+
+
+/*                  Naive Bayes                     */
+// typedef struct {
+//     bool trained;
+//     int num_classes;
+//     int num_features;
+//     bool *is_categorical;  
+//     LabelledData data;
+
+//     // For categorical features: [feature][class][value] - probability tables
+//     Matrix ***categorical_probs;
+
+//     double **means;
+//     double **variances;
+// } NaiveBayesModel;
+
+// NaiveBayesModel NaiveBayesClassifier(const Matrix *X, const Matrix *y);
+// void NaiveBayes_train(NaiveBayesModel *model);
+// Matrix NaiveBayes_predict(const NaiveBayesModel *model, const Matrix *X_new);
+// void NaiveBayes_free(NaiveBayesModel *model);

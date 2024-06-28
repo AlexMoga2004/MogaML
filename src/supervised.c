@@ -1,8 +1,4 @@
 #include "supervised.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <string.h>
 
 LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows || y->cols != 1) {
@@ -313,7 +309,58 @@ double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matri
     return mse;
 }
 
-// Function to read CSV and create matrices
+// static int Matrix_unique_count(const Matrix *y) {
+//     if (y->cols != 1) {
+//         fprintf(stderr, "Error: Matrix_unique_count expects a column vector.\n");
+//         exit(EXIT_FAILURE);
+//     }
+
+//     int count = 0;
+//     double *seen = (double *)malloc(y->rows * sizeof(double));
+
+//     for (int i = 0; i < y->rows; ++i) {
+//         bool found = false;
+//         for (int j = 0; j < count; ++j) {
+//             if (seen[j] == y->data[i][0]) {
+//                 found = true;
+//                 break;
+//             }
+//         }
+//         if (!found) {
+//             seen[count++] = y->data[i][0];
+//         }
+//     }
+
+//     free(seen);
+//     return count;
+// }
+
+// static int Matrix_unique_count_in_column(const Matrix *X, int col) {
+//     if (col >= X->cols || col < 0) {
+//         fprintf(stderr, "Error: Column index out of bounds in Matrix_unique_count_in_column.\n");
+//         exit(EXIT_FAILURE);
+//     }
+
+//     int count = 0;
+//     double *seen = (double *)malloc(X->rows * sizeof(double));
+
+//     for (int i = 0; i < X->rows; ++i) {
+//         bool found = false;
+//         for (int j = 0; j < count; ++j) {
+//             if (seen[j] == X->data[i][col]) {
+//                 found = true;
+//                 break;
+//             }
+//         }
+//         if (!found) {
+//             seen[count++] = X->data[i][col];
+//         }
+//     }
+
+//     free(seen);
+//     return count;
+// }
+
 LabelledData Supervised_read_csv(const char *filename) {
     LabelledData data;
 
@@ -323,7 +370,6 @@ LabelledData Supervised_read_csv(const char *filename) {
         exit(EXIT_FAILURE);
     }
 
-    // Count the number of lines and columns
     int num_lines = 0;
     char ch;
     while ((ch = fgetc(file)) != EOF) {
@@ -336,11 +382,9 @@ LabelledData Supervised_read_csv(const char *filename) {
     int num_columns = count_columns(filename);
     int num_features = num_columns - 1;
 
-    // Allocate matrices
     data.X = Matrix_zeros(num_lines, num_features);
     data.y = Matrix_zeros(num_lines, 1);
 
-    // Read the data
     int i = 0;
     char buffer[1024];
     while (fgets(buffer, sizeof(buffer), file)) {
@@ -450,8 +494,7 @@ Matrix LassoRegression_compute_gradient(const Matrix *X, const Matrix *y, const 
     return gradient;
 }
 
-// Helper function to calculate Euclidean distance between two vectors
-double euclidean_distance(const double *vec1, const double *vec2, int length) {
+static double euclidean_distance(const double *vec1, const double *vec2, int length) {
     double sum = 0.0;
     for (int i = 0; i < length; ++i) {
         double diff = vec1[i] - vec2[i];
@@ -460,14 +503,12 @@ double euclidean_distance(const double *vec1, const double *vec2, int length) {
     return sqrt(sum);
 }
 
-// Comparator for qsort to sort distances
-int compare_distances(const void *a, const void *b) {
+static int compare_distances(const void *a, const void *b) {
     double diff = ((double *)a)[0] - ((double *)b)[0];
     return (diff > 0) - (diff < 0);
 }
 
-// Function to find the mode of an array (for classification)
-double find_mode(const double *array, int size) {
+static double find_mode(const double *array, int size) {
     int *counts = calloc(size, sizeof(int));
     if (counts == NULL) {
         fprintf(stderr, "Memory allocation error in find_mode.\n");
@@ -494,8 +535,7 @@ double find_mode(const double *array, int size) {
     return mode;
 }
 
-// Function to calculate the mean of an array (for regression)
-double calculate_mean(const double *array, int size) {
+static double calculate_mean(const double *array, int size) {
     double sum = 0.0;
     for (int i = 0; i < size; ++i) {
         sum += array[i];
@@ -503,7 +543,7 @@ double calculate_mean(const double *array, int size) {
     return sum / size;
 }
 
-KNNModel KNNClassifier(const Matrix *X, const Matrix *y, int k) {
+KNNModel KNNClassifier(unsigned int k, const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows) {
         fprintf(stderr, "Error in KNN, dimension mismatch!");
         exit(EXIT_FAILURE);
@@ -525,7 +565,7 @@ KNNModel KNNClassifier(const Matrix *X, const Matrix *y, int k) {
     return model;
 }
 
-KNNModel KNNRegressor(const Matrix *X, const Matrix *y, int k) {
+KNNModel KNNRegressor(unsigned int k, const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows) {
         fprintf(stderr, "Error in KNN, dimension mismatch!");
         exit(EXIT_FAILURE);
@@ -634,7 +674,7 @@ Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
     return predictions;
 }
 
-double sigmoid(double z) {
+static double sigmoid(double z) {
     return 1 / (1 + pow(EULER_NUMBER, -z));
 }
 
@@ -730,3 +770,222 @@ Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Ma
     Matrix_free(XPadded);
     return probabilities;
 }
+
+// NaiveBayesModel NaiveBayesClassifier(const Matrix *X, const Matrix *y) {
+//     NaiveBayesModel model;
+//     model.trained = false;
+//     model.num_classes = Matrix_unique_count(y);
+//     model.num_features = X->cols;
+
+//     // Allocate and initialize is_categorical array
+//     model.is_categorical = (bool *)malloc(model.num_features * sizeof(bool));
+//     if (model.is_categorical == NULL) {
+//         fprintf(stderr, "Memory allocation failed for is_categorical.\n");
+//         exit(EXIT_FAILURE);
+//     }
+//     for (int i = 0; i < model.num_features; ++i) {
+//         model.is_categorical[i] = Matrix_is_column_categorical(X, i);
+//     }
+
+//     // Clone input data for internal use
+//     model.data.X = Matrix_clone(X);
+//     model.data.y = Matrix_clone(y);
+
+//     // Allocate memory for categorical probabilities
+//     model.categorical_probs = (Matrix ***)malloc(model.num_features * sizeof(Matrix **));
+//     if (model.categorical_probs == NULL) {
+//         fprintf(stderr, "Memory allocation failed for categorical_probs.\n");
+//         free(model.is_categorical);
+//         exit(EXIT_FAILURE);
+//     }
+//     for (int i = 0; i < model.num_features; ++i) {
+//         if (model.is_categorical[i]) {
+//             model.categorical_probs[i] = (Matrix **)malloc(model.num_classes * sizeof(Matrix *));
+//             if (model.categorical_probs[i] == NULL) {
+//                 fprintf(stderr, "Memory allocation failed for categorical_probs[%d].\n", i);
+//                 free(model.is_categorical);
+//                 for (int j = 0; j < i; ++j) {
+//                     if (model.is_categorical[j]) {
+//                         for (int k = 0; k < model.num_classes; ++k) {
+//                             free(model.categorical_probs[j][k]);
+//                         }
+//                         free(model.categorical_probs[j]);
+//                     }
+//                 }
+//                 free(model.categorical_probs);
+//                 exit(EXIT_FAILURE);
+//             }
+//             for (int j = 0; j < model.num_classes; ++j) {
+//                 int unique_vals = Matrix_unique_count_in_column(X, i);
+//                 model.categorical_probs[i][j] = (Matrix *)malloc(sizeof(Matrix));
+//                 if (model.categorical_probs[i][j] == NULL) {
+//                     fprintf(stderr, "Memory allocation failed for categorical_probs[%d][%d].\n", i, j);
+//                     free(model.is_categorical);
+//                     for (int k = 0; k < model.num_features; ++k) {
+//                         if (model.is_categorical[k]) {
+//                             for (int l = 0; l < model.num_classes; ++l) {
+//                                 free(model.categorical_probs[k][l]);
+//                             }
+//                             free(model.categorical_probs[k]);
+//                         }
+//                     }
+//                     free(model.categorical_probs);
+//                     exit(EXIT_FAILURE);
+//                 }
+//                 *(model.categorical_probs[i][j]) = Matrix_zeros(unique_vals, 1);
+//             }
+//         } else {
+//             model.categorical_probs[i] = NULL;
+//         }
+//     }
+
+//     // Allocate memory for means and variances
+//     model.means = (double **)malloc(model.num_features * sizeof(double *));
+//     model.variances = (double **)malloc(model.num_features * sizeof(double *));
+//     if (model.means == NULL || model.variances == NULL) {
+//         fprintf(stderr, "Memory allocation failed for means or variances.\n");
+//         free(model.is_categorical);
+//         for (int i = 0; i < model.num_features; ++i) {
+//             if (model.is_categorical[i]) {
+//                 for (int j = 0; j < model.num_classes; ++j) {
+//                     free(model.categorical_probs[i][j]);
+//                 }
+//                 free(model.categorical_probs[i]);
+//             }
+//         }
+//         free(model.categorical_probs);
+//         if (model.means) free(model.means);
+//         if (model.variances) free(model.variances);
+//         exit(EXIT_FAILURE);
+//     }
+//     for (int i = 0; i < model.num_features; ++i) {
+//         if (!model.is_categorical[i]) {
+//             model.means[i] = (double *)malloc(model.num_classes * sizeof(double));
+//             model.variances[i] = (double *)malloc(model.num_classes * sizeof(double));
+//             if (model.means[i] == NULL || model.variances[i] == NULL) {
+//                 fprintf(stderr, "Memory allocation failed for means[%d] or variances[%d].\n", i, i);
+//                 free(model.is_categorical);
+//                 for (int j = 0; j < model.num_features; ++j) {
+//                     if (model.is_categorical[j]) {
+//                         for (int k = 0; k < model.num_classes; ++k) {
+//                             free(model.categorical_probs[j][k]);
+//                         }
+//                         free(model.categorical_probs[j]);
+//                     }
+//                 }
+//                 free(model.categorical_probs);
+//                 for (int j = 0; j < model.num_features; ++j) {
+//                     if (model.means[j]) free(model.means[j]);
+//                     if (model.variances[j]) free(model.variances[j]);
+//                 }
+//                 free(model.means);
+//                 free(model.variances);
+//                 exit(EXIT_FAILURE);
+//             }
+//         } else {
+//             model.means[i] = NULL;
+//             model.variances[i] = NULL;
+//         }
+//     }
+
+//     // Allocate memory for class probabilities
+//     model.categorical_probs = (double *)malloc(model.num_classes * sizeof(double));
+//     if (model.categorical_probs == NULL) {
+//         fprintf(stderr, "Memory allocation failed for class_probs.\n");
+//         free(model.is_categorical);
+//         for (int i = 0; i < model.num_features; ++i) {
+//             if (model.is_categorical[i]) {
+//                 for (int j = 0; j < model.num_classes; ++j) {
+//                     free(model.categorical_probs[i][j]);
+//                 }
+//                 free(model.categorical_probs[i]);
+//             }
+//         }
+//         free(model.categorical_probs);
+//         for (int i = 0; i < model.num_features; ++i) {
+//             if (model.means[i]) free(model.means[i]);
+//             if (model.variances[i]) free(model.variances[i]);
+//         }
+//         free(model.means);
+//         free(model.variances);
+//         exit(EXIT_FAILURE);
+//     }
+
+//     return model;
+// }
+
+
+// void NaiveBayes_train(NaiveBayesModel *model) {
+//     int n_samples = model->data.X.rows;
+//     int n_features = model->data.X.cols;
+//     int n_classes = model->num_classes;
+
+//     int *class_counts = (int *)calloc(n_classes, sizeof(int));
+    
+
+//     for (int i = 0; i < n_samples; ++i) {
+//         int class_index = (int)model->data.y.data[i][0];
+//         class_counts[class_index]++;
+//     }
+
+//     for (int c = 0; c < n_classes; ++c) {
+//         *model->categorical_probs[c] = (double)class_counts[c] / n_samples;
+//     }
+
+//     for (int i = 0; i < n_features; ++i) {
+//         for (int c = 0; c < n_classes; ++c) {
+//             int unique_vals = Matrix_unique_count_in_column(&(model->data.X), i);
+//             *model->categorical_probs[i][c] = Matrix_zeros(unique_vals, 1);
+//         }
+//     }
+
+//     for (int i = 0; i < n_samples; ++i) {
+//         int class_index = (int)model->data.y.data[i][0];
+//         for (int j = 0; j < n_features; ++j) {
+//             double feature_value = model->data.X.data[i][j];
+//             int unique_val_index = -1;
+
+//             for (int k = 0; k < model->categorical_probs[j][class_index]->rows; ++k) {
+//                 if (model->categorical_probs[j][class_index]->data[k][0] == feature_value) {
+//                     unique_val_index = k;
+//                     break;
+//                 }
+//             }
+
+//             if (unique_val_index == -1) {
+//                 for (int k = 0; k < model->categorical_probs[j][class_index]->rows; ++k) {
+//                     if (model->categorical_probs[j][class_index]->data[k][0] == 0) {
+//                         model->categorical_probs[j][class_index]->data[k][0] = feature_value;
+//                         unique_val_index = k;
+//                         break;
+//                     }
+//                 }
+//             }
+
+//             model->categorical_probs[j][class_index]->data[unique_val_index][0]++;
+//         }
+//     }
+
+//     for (int j = 0; j < n_features; ++j) {
+//         for (int c = 0; c < n_classes; ++c) {
+//             int sum_counts = 0;
+//             for (int k = 0; k < model->categorical_probs[j][c]->rows; ++k) {
+//                 sum_counts += model->categorical_probs[j][c]->data[k][0];
+//             }
+//             for (int k = 0; k < model->categorical_probs[j][c]->rows; ++k) {
+//                 if (sum_counts > 0) {
+//                     model->categorical_probs[j][c]->data[k][0] /= sum_counts;
+//                 }
+//             }
+//         }
+//     }
+
+//     free(class_counts);
+// }
+
+// void NaiveBayes_free(NaiveBayesModel *model) {
+//     Matrix_free(model->data.X);
+//     Matrix_free(model->data.y);
+
+//     // TODO: Free categorical_probs without causing a segfault 
+// }
