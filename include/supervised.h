@@ -24,6 +24,7 @@ typedef struct {
     Matrix y;
 } LabelledData;
 
+LabelledData Supervised_read_csv(const char* filename);
 
 /*                      LINEAR REGRESSION w/ arbitrary loss                  */
 typedef struct {
@@ -56,9 +57,7 @@ LossFunction LinearRegression_default_loss();
 LossFunction RidgeRegression_default_loss();
 LossFunction LassoRegression_default_loss();
 
-LabelledData Supervised_read_csv(const char* filename);
-
-Matrix Supervised_predict(const LinearRegressionModel *model, const Matrix *x_new);
+Matrix LinearRegression_predict(const LinearRegressionModel *model, const Matrix *x_new);
 
 // static int Matrix_unique_count(const Matrix *y);
 // static int Matrix_unique_count_in_column(const Matrix *y, int col);

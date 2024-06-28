@@ -145,6 +145,42 @@ double Vector_norm(const Matrix *mat, double l) {
 	return pow(sum, 1/l);
 }
 
+double Vector_max(const Matrix *mat) {
+	if (mat->cols != 1) {
+		fprintf(stderr, "Error in Vector_max_index, not a vector!");
+		exit(EXIT_FAILURE);
+	}
+
+	double max = mat->data[0][0];
+
+	for (int i = 0; i < mat->rows; ++i) {
+		if (mat->data[i][0] > max) {
+			max = mat->data[i][0];
+		}
+	}
+
+	return max;
+}
+
+double Vector_max_index(const Matrix *mat) {
+	if (mat->cols != 1) {
+		fprintf(stderr, "Error in Vector_max_index, not a vector!");
+		exit(EXIT_FAILURE);
+	}
+
+	double max = mat->data[0][0];
+	double index = 0;
+
+	for (int i = 0; i < mat->rows; ++i) {
+		if (mat->data[i][0] > max) {
+			index = i;
+			max = mat->data[i][0];
+		}
+	}
+
+	return index;
+}
+
 Matrix Matrix_zeros(int rows, int cols) { 
 	if (rows <= 0 || cols <= 0) { 
 		fprintf(stderr, "error in Matrix_zeros, non-positive dimension(s)!\n");

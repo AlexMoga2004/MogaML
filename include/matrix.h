@@ -23,6 +23,9 @@ double Matrix_det(const Matrix *mat);
 double Matrix_trace(const Matrix *mat);
 double Matrix_norm(const Matrix *mat);
 double Matrix_frobenius_norm(const Matrix *mat);
+
+double Vector_max(const Matrix *mat);
+double Vector_max_index(const Matrix *mat);
 double Vector_norm(const Matrix *mat, double l);
 
 Matrix Matrix_zeros(int rows, int cols);

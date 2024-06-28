@@ -190,7 +190,7 @@ void LinearRegression_free(LinearRegressionModel model) {
 }
 
 // Function to count the number of columns in the CSV file
-int count_columns(const char *filename) {
+static int count_columns(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
         fprintf(stderr, "Error opening file: %s\n", filename);
@@ -405,7 +405,7 @@ LabelledData Supervised_read_csv(const char *filename) {
     return data;
 }
 
-Matrix Supervised_predict(const LinearRegressionModel *model, const Matrix *x_new) {
+Matrix LinearRegression_predict(const LinearRegressionModel *model, const Matrix *x_new) {
     if (!model->trained) {
         fprintf(stderr, "Error in Supervised_predict, model not trained!");
         exit(EXIT_FAILURE);
