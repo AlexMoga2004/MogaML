@@ -296,7 +296,7 @@ void test_logistic_regression() {
     LogisticRegression_train(&model);
 
     Matrix X_new, y_new;
-    generate_synthetic_data(&X_new, &y_new, 10, data.X.cols);  // Adjust as per your needs
+    generate_synthetic_data(&X_new, &y_new, 10, data.X.cols);  
 
     Matrix y_pred = LogisticRegression_predict(&model, &X_new);
 

@@ -1,7 +1,6 @@
 #include "supervised.h"
 
-// Helper function
-
+// Helper functions
 static double euclidean_distance(const double *vec1, const double *vec2, int length) {
     double sum = 0.0;
     for (int i = 0; i < length; ++i) {
@@ -135,24 +134,20 @@ void LinearRegression_train(LinearRegressionModel *model) {
             Matrix_free(update);
         }
     } else if (model->mode == MINIBATCH) {
-        // Mini-batch Gradient Descent
         int num_batches = model->data.X.rows / MINIBATCH_SIZE;
         for (int epoch = 0; epoch < EPOCHS; ++epoch) {
             for (int batch = 0; batch < num_batches; ++batch) {
                 int start = batch * MINIBATCH_SIZE;
                 int end = start + MINIBATCH_SIZE;
 
-                // Create mini-batch
                 Matrix X_batch = Matrix_slice_rows(&model->data.X, start, end);
                 Matrix y_batch = Matrix_slice_rows(&model->data.y, start, end);
 
-                // Compute gradients for mini-batch
                 LinearRegressionModel mini_model = *model;
                 mini_model.data.X = X_batch;
                 mini_model.data.y = y_batch;
                 Matrix gradients = model->loss_function.grad(&mini_model.data.X, &mini_model.data.y, &mini_model.params, &mini_model.hyper_params);
 
-                // Update parameters
                 Matrix update = Matrix_scale(-LEARNING_RATE, &gradients);
                 Matrix new_params = Matrix_add(&model->params, &update);
 
@@ -166,7 +161,6 @@ void LinearRegression_train(LinearRegressionModel *model) {
             }
         }
     } else if (model->mode == STOCHASTIC) {
-        // Stochastic Gradient Descent
         for (int epoch = 0; epoch < EPOCHS; ++epoch) {
             for (int i = 0; i < model->data.X.rows; ++i) {
                 Matrix Xi = Matrix_row(&model->data.X, i);
@@ -661,7 +655,7 @@ Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
 
         for (int j = 0; j < num_existing_samples; ++j) {
             distances[j][0] = euclidean_distance(x_new->data[i], model->data.X.data[j], num_features);
-            distances[j][1] = j; // Store the index of the current sample
+            distances[j][1] = j; 
         }
 
         qsort(distances, num_existing_samples, sizeof(*distances), compare_distances);
@@ -767,19 +761,16 @@ Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Ma
         exit(EXIT_FAILURE);
     }
 
-    // Create a copy of X_new with an added column of ones for bias term
     Matrix XPadded = Matrix_zeros(X_new->rows, X_new->cols + 1);
     for (int i = 0; i < X_new->rows; ++i) {
-        XPadded.data[i][0] = 1.0; // Set the bias term
+        XPadded.data[i][0] = 1.0; // Bias
         for (int j = 0; j < X_new->cols; ++j) {
             XPadded.data[i][j + 1] = X_new->data[i][j];
         }
     }
 
-    // Allocate matrix for storing predicted probabilities
     Matrix probabilities = Matrix_zeros(X_new->rows, 1);
 
-    // Compute predicted probabilities using the trained model parameters
     for (int i = 0; i < X_new->rows; ++i) {
         double z = 0.0;
         for (int j = 0; j < XPadded.cols; ++j) {
@@ -788,7 +779,6 @@ Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Ma
         probabilities.data[i][0] = sigmoid(z);
     }
 
-    // Free the padded matrix as it's no longer needed
     Matrix_free(XPadded);
 
     return probabilities;
