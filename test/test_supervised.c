@@ -335,6 +335,32 @@ void test_logistic_regression() {
     printf("Logistic Regression Test Passed!\n");
 }
 
+void test_naive_bayes() {
+    printf("Testing Gaussian Naive Bayes...\n");
+
+    LabelledData data = Supervised_read_csv("test/test_data/naive_bayes_data.csv");
+
+    GaussianNBCModel model = GaussianNBC(&data.X, &data.y);
+
+    LabelledData new_data = Supervised_read_csv("test/test_data/naive_bayes_new_data.csv");
+
+    Matrix predictions = GaussianNBC_predict(&model, &new_data.X);
+
+    printf("Predictions:\n");
+    Matrix_display(&predictions);
+
+    Matrix_free(data.X);
+    Matrix_free(data.y);
+    Matrix_free(new_data.X);
+    Matrix_free(new_data.y);
+    Matrix_free(predictions);
+    Matrix_free(model.means);
+    Matrix_free(model.variances);
+    Matrix_free(model.priors);
+
+    printf("Gaussian Naive Bayes test passed!\n");
+}
+
 int main() {
     test_linear_regression();
     test_ridge_regression();

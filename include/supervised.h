@@ -111,21 +111,14 @@ Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Ma
 
 
 /*                  Naive Bayes                     */
-// typedef struct {
-//     bool trained;
-//     int num_classes;
-//     int num_features;
-//     bool *is_categorical;  
-//     LabelledData data;
+typedef struct {
+    int num_classes;
+    bool trained;
 
-//     // For categorical features: [feature][class][value] - probability tables
-//     Matrix ***categorical_probs;
+    Matrix means; 
+    Matrix variances; 
+    Matrix priors;
+} GaussianNBCModel;
 
-//     double **means;
-//     double **variances;
-// } NaiveBayesModel;
-
-// NaiveBayesModel NaiveBayesClassifier(const Matrix *X, const Matrix *y);
-// void NaiveBayes_train(NaiveBayesModel *model);
-// Matrix NaiveBayes_predict(const NaiveBayesModel *model, const Matrix *X_new);
-// void NaiveBayes_free(NaiveBayesModel *model);
+GaussianNBCModel GaussianNBC(const Matrix *X, const Matrix *y);
+Matrix GaussianNBC_predict(const GaussianNBCModel *model, const Matrix *X_new);
