@@ -39,6 +39,7 @@ Matrix Matrix_minor(const Matrix *mat, int row, int col);
 Matrix Matrix_row(const Matrix *mat, int row);
 Matrix Matrix_col(const Matrix *mat, int col);
 Matrix Matrix_slice_rows(const Matrix *mat, int start, int end);
+Matrix Matrix_submatrix(const Matrix *mat, int start_row, int end_row, int start_col, int end_col);
 Matrix Matrix_transpose(const Matrix *mat);
 Matrix Matrix_clone(const Matrix *mat);
 Matrix Matrix_inverse(const Matrix *mat);

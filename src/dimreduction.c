@@ -2,17 +2,28 @@
 
 Matrix PCA_Reduce(const Matrix *X, unsigned int target_rank) {
     Matrix result;
+
+    // Compute SVD of X
     SVDResult svd = Matrix_svd(X);
 
+    // Reduce Sigma matrix to target_rank by setting singular values beyond target_rank to zero
     for (int i = target_rank; i < svd.Sigma.rows; ++i) {
         svd.Sigma.data[i][i] = 0;
     }
 
-    Matrix VT = Matrix_transpose(&svd.V);
+    // Reconstruct the reduced matrix
+    Matrix U_reduced = Matrix_submatrix(&svd.U, 0, svd.U.rows, 0, target_rank);
+    Matrix Sigma_reduced = Matrix_submatrix(&svd.Sigma, 0, target_rank, 0, target_rank);
+    Matrix VT_reduced = Matrix_submatrix(&svd.V, 0, target_rank, 0, svd.V.cols);
 
-    result = Matrix_multiply(&svd.U, &svd.Sigma);
-    result = Matrix_multiply(&result, &VT);
+    // Compute the reduced matrix: result = U_reduced * Sigma_reduced * VT_reduced
+    result = Matrix_multiply(&U_reduced, &Sigma_reduced);
+    result = Matrix_multiply(&result, &VT_reduced);
 
+    // Free allocated memory
+    Matrix_free(U_reduced);
+    Matrix_free(Sigma_reduced);
+    Matrix_free(VT_reduced);
     Matrix_free(svd.U);
     Matrix_free(svd.Sigma);
     Matrix_free(svd.V);

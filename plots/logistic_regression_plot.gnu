@@ -2,6 +2,7 @@ set title 'Logistic Regression Model'
 set xlabel 'Feature 1'
 set ylabel 'Feature 2'
 set style data points
+set terminal qt
 set pointsize 1.5
 plot '-' using 1:2:($3 == 1 ? 1 : 2):($3 == 1 ? 2 : 1) with points pt variable lc variable title 'Original Data',\
      '-' using 1:2:($3 > 0.5 ? 2 : 1) with points pt 7 lc variable title 'Predicted Data'

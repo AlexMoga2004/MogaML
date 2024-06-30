@@ -362,6 +362,29 @@ Matrix Matrix_slice_rows(const Matrix *mat, int start, int end) {
     return slice;
 }
 
+Matrix Matrix_submatrix(const Matrix *mat, int start_row, int end_row, int start_col, int end_col) {
+    // Check validity of indices
+    if (start_row < 0 || start_row >= mat->rows || end_row <= start_row || end_row > mat->rows ||
+        start_col < 0 || start_col >= mat->cols || end_col <= start_col || end_col > mat->cols) {
+        ERROR("Error in Matrix_submatrix: invalid submatrix indices\n");
+        exit(EXIT_FAILURE);
+    }
+
+    int sub_rows = end_row - start_row;
+    int sub_cols = end_col - start_col;
+
+    Matrix submat = Matrix_zeros(sub_rows, sub_cols);
+
+    for (int i = 0; i < sub_rows; ++i) {
+        for (int j = 0; j < sub_cols; ++j) {
+            submat.data[i][j] = mat->data[start_row + i][start_col + j];
+        }
+    }
+
+    return submat;
+}
+
+
 Matrix Matrix_transpose(const Matrix *mat) {
 	Matrix result = Matrix_zeros(mat->cols, mat->rows);
 	for (int i = 0; i < mat->rows; ++i){

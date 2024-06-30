@@ -51,6 +51,7 @@ void test_linear_regression() {
 
     const char *gnuplot_commands[] = {
         "set title 'Linear Regression Model'\n",
+        "set terminal qt\n",
         "set xlabel 'Feature'\n",
         "set ylabel 'Target'\n",
         "set style data linespoints\n",
@@ -119,31 +120,32 @@ void test_linear_regression_loss_surface() {
         return;
     }
 
-    fprintf(gnuplot_file, "set title 'Linear Regression Loss Surface'\n");
-    fprintf(gnuplot_file, "set xlabel 'Weight (w)'\n");
-    fprintf(gnuplot_file, "set ylabel 'Bias (b)'\n");
-    fprintf(gnuplot_file, "set zlabel 'Loss'\n");
-    fprintf(gnuplot_file, "set dgrid3d 100,100\n");
-    fprintf(gnuplot_file, "set hidden3d\n");
+    GP_WRITE("set title 'Linear Regression Loss Surface'\n");
+    GP_WRITE("set xlabel 'Weight (w)'\n");
+    GP_WRITE("set ylabel 'Bias (b)'\n");
+    GP_WRITE("set zlabel 'Loss'\n");
+    GP_WRITE("set terminal qt\n");
+    GP_WRITE("set dgrid3d 100,100\n");
+    GP_WRITE("set hidden3d\n");
 
     double b_min = -100000, b_max = 100000;
     double w_min = -80000, w_max = 120000;
 
-    fprintf(gnuplot_file, "w_min = %f\n", w_min);
-    fprintf(gnuplot_file, "w_max = %f\n", w_max);
-    fprintf(gnuplot_file, "b_min = %f\n", b_min);
-    fprintf(gnuplot_file, "b_max = %f\n", b_max);
+    GP_WRITE("w_min = %f\n", w_min);
+    GP_WRITE("w_max = %f\n", w_max);
+    GP_WRITE("b_min = %f\n", b_min);
+    GP_WRITE("b_max = %f\n", b_max);
 
-    fprintf(gnuplot_file, "f(w, b) = ");
+    GP_WRITE("f(w, b) = ");
     for (int i = 0; i < data.X.rows; ++i) {
         double xi = data.X.data[i][0];
         double yi = data.y.data[i][0];
-        if (i > 0) fprintf(gnuplot_file, " + ");
-        fprintf(gnuplot_file, "(b + w * %f - %f)**2", xi, yi);
+        if (i > 0) GP_WRITE(" + ");
+        GP_WRITE("(b + w * %f - %f)**2", xi, yi);
     }
-    fprintf(gnuplot_file, " / %d\n", data.X.rows);
+    GP_WRITE(" / %d\n", data.X.rows);
 
-    fprintf(gnuplot_file, "splot [w_min:w_max] [b_min:b_max] f(x, y) with lines title 'Loss Surface'\n");
+    GP_WRITE("splot [w_min:w_max] [b_min:b_max] f(x, y) with lines title 'Loss Surface'\n");
 
     fclose(gnuplot_file);
 
@@ -180,6 +182,7 @@ void test_ridge_regression() {
         "set xlabel 'Feature'\n",
         "set ylabel 'Target'\n",
         "set style data linespoints\n",
+        "set terminal qt\n",
         "set key outside\n",
         "set xrange [*:*]\n",
         "set yrange [*:*]\n",
@@ -274,6 +277,7 @@ void test_knn_classification() {
     GP_WRITE("set xlabel 'Feature 1'\n");
     GP_WRITE("set ylabel 'Feature 2'\n");
     GP_WRITE("set style data points\n");
+    GP_WRITE("set terminal qt\n");
     GP_WRITE("set mouse\n");
     GP_WRITE("set pointsize 1.5\n");
     GP_WRITE("set palette defined (0 'red', 1 'green', 2 'blue', 3 'yellow')\n");
@@ -326,8 +330,8 @@ void test_logistic_regression() {
     GP_WRITE("set xlabel 'Feature 1'\n");
     GP_WRITE("set ylabel 'Feature 2'\n");
     GP_WRITE("set style data points\n");
+    GP_WRITE("set terminal qt\n");
     GP_WRITE("set pointsize 1.5\n");
-
     GP_WRITE("plot '-' using 1:2:($3 == 1 ? 1 : 2):($3 == 1 ? 2 : 1) with points pt variable lc variable title 'Original Data',\\\n");
     GP_WRITE("     '-' using 1:2:($3 > 0.5 ? 2 : 1) with points pt 7 lc variable title 'Predicted Data'\n");
     for (int i = 0; i < data.X.rows; ++i) {
@@ -407,6 +411,7 @@ void test_naive_bayes() {
     GP_WRITE("set xlabel 'Feature 1'\n");
     GP_WRITE("set ylabel 'Feature 2'\n");
     GP_WRITE("set style data points\n");
+    GP_WRITE("set terminal qt\n");
     GP_WRITE("set pointsize 1.5\n");
     GP_WRITE("set palette defined (0 'red', 1 'green', 2 'blue')\n");
     GP_WRITE("plot '-' using 1:2:3 with points pt 7 palette title 'Original Data',\\\n");

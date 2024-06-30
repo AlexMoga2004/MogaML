@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.cpp": "cpp",
-        "supervised.h": "c"
+        "supervised.h": "c",
+        "dimreduction.h": "c"
     }
 }

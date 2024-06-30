@@ -1,4 +1,5 @@
 set title 'Linear Regression Model'
+set terminal qt
 set xlabel 'Feature'
 set ylabel 'Target'
 set style data linespoints

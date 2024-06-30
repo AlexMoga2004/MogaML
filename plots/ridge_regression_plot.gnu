@@ -2,6 +2,7 @@ set title 'Ridge Regression Model'
 set xlabel 'Feature'
 set ylabel 'Target'
 set style data linespoints
+set terminal qt
 set key outside
 set xrange [*:*]
 set yrange [*:*]
