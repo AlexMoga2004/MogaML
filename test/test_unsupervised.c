@@ -11,7 +11,6 @@
         } while (0)
 
 void plot_clusters(const Matrix *X, const Matrix *labels) {
-
     FILE *gnuplot_file = popen("gnuplot -persist", "w");
     if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot\n");
