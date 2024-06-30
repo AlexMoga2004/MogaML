@@ -4,42 +4,47 @@
 #include "../include/matrix.h"
 #include "../include/unsupervised.h"
 
+#define GP_WRITE(fmt, ...) \
+        do { \
+            fprintf(gnuplot_file, fmt, ##__VA_ARGS__); \
+        } while (0)
+
 void plot_clusters(const Matrix *X, const Matrix *labels) {
-    FILE *gnuplot = popen("gnuplot -persist", "w");
-    if (!gnuplot) {
+    FILE *gnuplot_file = popen("gnuplot -persist", "w");
+    if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot\n");
         return;
     }
 
-    fprintf(gnuplot, "set title 'K-Means Clustering'\n");
-    fprintf(gnuplot, "set xlabel 'Feature 1'\n");
-    fprintf(gnuplot, "set ylabel 'Feature 2'\n");
-    fprintf(gnuplot, "set style data points\n");
-    fprintf(gnuplot, "set pointsize 1.5\n");
+    GP_WRITE("set title 'K-Means Clustering'\n");
+    GP_WRITE("set xlabel 'Feature 1'\n");
+    GP_WRITE("set ylabel 'Feature 2'\n");
+    GP_WRITE("set style data points\n");
+    GP_WRITE("set pointsize 1.5\n");
     
-    fprintf(gnuplot, "set palette maxcolors 10\n");
-    fprintf(gnuplot, "set palette defined ( 0 'red', 1 'green', 2 'blue', 3 'yellow', 4 'cyan', 5 'magenta', 6 'orange', 7 'brown', 8 'violet', 9 'gray' )\n");
+    GP_WRITE("set palette maxcolors 10\n");
+    GP_WRITE("set palette defined ( 0 'red', 1 'green', 2 'blue', 3 'yellow', 4 'cyan', 5 'magenta', 6 'orange', 7 'brown', 8 'violet', 9 'gray' )\n");
 
     int max_cluster = (int)Vector_max(labels);
 
-    fprintf(gnuplot, "plot ");
+    GP_WRITE("plot ");
     for (int c = 0; c <= max_cluster; ++c) {
-        if (c > 0) fprintf(gnuplot, ", ");
-        fprintf(gnuplot, "'-' using 1:2:3 with points palette title 'Cluster %d'", c + 1);
+        if (c > 0) GP_WRITE(", ");
+        GP_WRITE("'-' using 1:2:3 with points palette title 'Cluster %d'", c + 1);
     }
-    fprintf(gnuplot, "\n");
+    GP_WRITE("\n");
 
     for (int c = 0; c <= max_cluster; ++c) {
         for (int i = 0; i < X->rows; ++i) {
             if ((int)labels->data[i][0] == c) {
-                fprintf(gnuplot, "%f %f %d\n", X->data[i][0], X->data[i][1], c);
+                GP_WRITE("%f %f %d\n", X->data[i][0], X->data[i][1], c);
             }
         }
-        fprintf(gnuplot, "e\n");
+        GP_WRITE("e\n");
     }
 
-    fflush(gnuplot);
-    pclose(gnuplot);
+    fflush(gnuplot_file);
+    pclose(gnuplot_file);
 }
 
 

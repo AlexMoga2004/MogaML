@@ -1,5 +1,10 @@
 #include "supervised.h"
 
+#define ERROR(fmt, ...) \
+        do { \
+            fprintf(stderr, fmt, ##__VA_ARGS__); \
+        } while (0)
+
 // Helper functions
 static double euclidean_distance(const double *vec1, const double *vec2, int length) {
     double sum = 0.0;
@@ -25,7 +30,7 @@ int Supervised_find_nearest_centroid(const double *point, const Matrix *centroid
 
 LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows || y->cols != 1) {
-        fprintf(stderr, "Error in LinearRegression, dimension mismatch!");
+        ERROR("Error in LinearRegression, dimension mismatch!");
         exit(EXIT_FAILURE);
     }
 
@@ -54,7 +59,7 @@ LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y) {
 
 LinearRegressionModel RidgeRegression(const Matrix *X, const Matrix *y, double lambda) {
     if (lambda <= 0) {
-        fprintf(stderr, "Error in RidgeRegression, λ ≤ 0!");
+        ERROR("Error in RidgeRegression, λ ≤ 0!");
         exit(EXIT_FAILURE);
     }
 
@@ -69,7 +74,7 @@ LinearRegressionModel RidgeRegression(const Matrix *X, const Matrix *y, double l
 
 LinearRegressionModel LassoRegression(const Matrix *X, const Matrix *y, double lambda) {
     if (lambda <= 0) {
-        fprintf(stderr, "Error in LassoRegression, λ ≤ 0!");
+        ERROR("Error in LassoRegression, λ ≤ 0!");
         exit(EXIT_FAILURE);
     }
 
@@ -190,7 +195,7 @@ void LinearRegression_train(LinearRegressionModel *model) {
             }
         }
     } else {
-        fprintf(stderr, "Error in LinearRegression_train, undefined computation mode!\n");
+        ERROR("Error in LinearRegression_train, undefined computation mode!\n");
         exit(EXIT_FAILURE);
     }
 
@@ -211,7 +216,7 @@ void LinearRegression_free(LinearRegressionModel model) {
 static int count_columns(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Error opening file: %s\n", filename);
+        ERROR("Error opening file: %s\n", filename);
         exit(EXIT_FAILURE);
     }
 
@@ -245,12 +250,12 @@ Matrix LinearRegression_exact_optimum(const Matrix *X, const Matrix *y, const Ma
 
 Matrix RidgeRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params) {
     if (hyper_params->rows != 1 && hyper_params->cols != 1) {
-        fprintf(stderr, "Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
+        ERROR("Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
         exit(EXIT_FAILURE);
     }
 
     if (hyper_params->data[0][0] <= 0) {
-        fprintf(stderr, "Error in RidgeRegression_compute_gradient, lambda must be positive");
+        ERROR("Error in RidgeRegression_compute_gradient, lambda must be positive");
         exit(EXIT_FAILURE);
     }
 
@@ -274,14 +279,14 @@ Matrix RidgeRegression_exact_optimum(const Matrix *X, const Matrix *y, const Mat
 }
 
 Matrix LassoRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params) {
-    fprintf(stderr, "Error in LassoRegression_exact_optimum, closed form solution does not exist! (HINT: don't use ALGEBRAIC computation mode with Lasso)");
+    ERROR("Error in LassoRegression_exact_optimum, closed form solution does not exist! (HINT: don't use ALGEBRAIC computation mode with Lasso)");
     exit(EXIT_FAILURE);
 }
 
 double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
     Matrix predictions = Matrix_multiply(X, params);
     if (predictions.rows != y->rows || predictions.cols != y->cols) {
-        fprintf(stderr, "Error in Supervised_compute_mse, dimension mismatch!");
+        ERROR("Error in Supervised_compute_mse, dimension mismatch!");
         exit(EXIT_FAILURE);
     }
     double mse = 0.0;
@@ -296,12 +301,12 @@ double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matr
 
 double RidgeRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
     if (hyper_params->rows != 1 && hyper_params->cols != 1) {
-        fprintf(stderr, "Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
+        ERROR("Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
         exit(EXIT_FAILURE);
     }
 
     if (hyper_params->data[0][0] <= 0) {
-        fprintf(stderr, "Error in RidgeRegression_compute_gradient, lambda must be positive");
+        ERROR("Error in RidgeRegression_compute_gradient, lambda must be positive");
         exit(EXIT_FAILURE);
     }
 
@@ -313,12 +318,12 @@ double RidgeRegression_compute_mse(const Matrix *X, const Matrix *y, const Matri
 
 double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
     if (hyper_params->rows != 1 && hyper_params->cols != 1) {
-        fprintf(stderr, "Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
+        ERROR("Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
         exit(EXIT_FAILURE);
     }
 
     if (hyper_params->data[0][0] <= 0) {
-        fprintf(stderr, "Error in RidgeRegression_compute_gradient, lambda must be positive");
+        ERROR("Error in RidgeRegression_compute_gradient, lambda must be positive");
         exit(EXIT_FAILURE);
     }
 
@@ -330,7 +335,7 @@ double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matri
 
 // static int Matrix_unique_count(const Matrix *y) {
 //     if (y->cols != 1) {
-//         fprintf(stderr, "Error: Matrix_unique_count expects a column vector.\n");
+//         ERROR("Error: Matrix_unique_count expects a column vector.\n");
 //         exit(EXIT_FAILURE);
 //     }
 
@@ -356,7 +361,7 @@ double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matri
 
 // static int Matrix_unique_count_in_column(const Matrix *X, int col) {
 //     if (col >= X->cols || col < 0) {
-//         fprintf(stderr, "Error: Column index out of bounds in Matrix_unique_count_in_column.\n");
+//         ERROR("Error: Column index out of bounds in Matrix_unique_count_in_column.\n");
 //         exit(EXIT_FAILURE);
 //     }
 
@@ -385,7 +390,7 @@ LabelledData Supervised_read_csv(const char *filename) {
 
     FILE *file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Error opening file: %s\n", filename);
+        ERROR("Error opening file: %s\n", filename);
         exit(EXIT_FAILURE);
     }
 
@@ -426,7 +431,7 @@ LabelledData Supervised_read_csv(const char *filename) {
 
 Matrix LinearRegression_predict(const LinearRegressionModel *model, const Matrix *x_new) {
     if (!model->trained) {
-        fprintf(stderr, "Error in Supervised_predict, model not trained!");
+        ERROR("Error in Supervised_predict, model not trained!");
         exit(EXIT_FAILURE);
     }
 
@@ -460,7 +465,7 @@ Matrix LinearRegression_compute_gradient(const Matrix *X, const Matrix *y, const
 
 Matrix RidgeRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
     if (hyper_params->rows != 1 || hyper_params->cols != 1) {
-        fprintf(stderr, "Error in RidgeRegression_compute_gradient: hyper_params must contain a single value (lambda)!");
+        ERROR("Error in RidgeRegression_compute_gradient: hyper_params must contain a single value (lambda)!");
         exit(EXIT_FAILURE);
     }
 
@@ -487,7 +492,7 @@ Matrix RidgeRegression_compute_gradient(const Matrix *X, const Matrix *y, const 
 
 Matrix LassoRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
     if (hyper_params->rows != 1 || hyper_params->cols != 1) {
-        fprintf(stderr, "Error in LassoRegression_compute_gradient: hyper_params must contain a single value (lambda)!");
+        ERROR("Error in LassoRegression_compute_gradient: hyper_params must contain a single value (lambda)!");
         exit(EXIT_FAILURE);
     }
 
@@ -521,7 +526,7 @@ static int compare_distances(const void *a, const void *b) {
 static double find_mode(const double *array, int size) {
     int *counts = calloc(size, sizeof(int));
     if (counts == NULL) {
-        fprintf(stderr, "Memory allocation error in find_mode.\n");
+        ERROR("Memory allocation error in find_mode.\n");
         exit(EXIT_FAILURE);
     }
 
@@ -555,12 +560,12 @@ static double calculate_mean(const double *array, int size) {
 
 KNNModel KNNClassifier(unsigned int k, const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows) {
-        fprintf(stderr, "Error in KNN, dimension mismatch!");
+        ERROR("Error in KNN, dimension mismatch!");
         exit(EXIT_FAILURE);
     }
 
     if (k <= 0) {
-        fprintf(stderr, "Error in KNN, k must be positive!");
+        ERROR("Error in KNN, k must be positive!");
         exit(EXIT_FAILURE);
     }
 
@@ -577,12 +582,12 @@ KNNModel KNNClassifier(unsigned int k, const Matrix *X, const Matrix *y) {
 
 KNNModel KNNRegressor(unsigned int k, const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows) {
-        fprintf(stderr, "Error in KNN, dimension mismatch!");
+        ERROR("Error in KNN, dimension mismatch!");
         exit(EXIT_FAILURE);
     }
 
     if (k <= 0) {
-        fprintf(stderr, "Error in KNN, k must be positive!");
+        ERROR("Error in KNN, k must be positive!");
         exit(EXIT_FAILURE);
     }
 
@@ -604,12 +609,12 @@ void KNN_free(KNNModel model) {
 
 void KNN_append_data(KNNModel *model, const Matrix *X_new, const Matrix *y_new) {
     if (X_new->rows != y_new->rows) {
-        fprintf(stderr, "Error: Mismatched rows in X_new and y_new.\n");
+        ERROR("Error: Mismatched rows in X_new and y_new.\n");
         exit(EXIT_FAILURE);
     }
 
     if (X_new->cols != model->data.X.cols) {
-        fprintf(stderr, "Error: Column mismatch. X_new should have the same number of columns as the existing X.\n");
+        ERROR("Error: Column mismatch. X_new should have the same number of columns as the existing X.\n");
         exit(EXIT_FAILURE);
     }
 
@@ -649,7 +654,7 @@ Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
     for (int i = 0; i < num_new_samples; ++i) {
         double (*distances)[2] = malloc(num_existing_samples * sizeof(*distances));
         if (distances == NULL) {
-            fprintf(stderr, "Memory allocation error in KNN_predict.\n");
+            ERROR("Memory allocation error in KNN_predict.\n");
             exit(EXIT_FAILURE);
         }
 
@@ -662,7 +667,7 @@ Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
 
         double *neighbor_labels = malloc(k * sizeof(double));
         if (neighbor_labels == NULL) {
-            fprintf(stderr, "Memory allocation error in KNN_predict.\n");
+            ERROR("Memory allocation error in KNN_predict.\n");
             free(distances);
             exit(EXIT_FAILURE);
         }
@@ -691,7 +696,7 @@ static double sigmoid(double z) {
 
 LogisticRegressionModel LogisticRegression(const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows || y->cols != 1) {
-        fprintf(stderr, "Error in LinearRegression, dimension mismatch!");
+        ERROR("Error in LinearRegression, dimension mismatch!");
         exit(EXIT_FAILURE);
     }
 
@@ -757,7 +762,7 @@ void LogisticRegression_train(LogisticRegressionModel *model) {
 
 Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Matrix *X_new) {
     if (!model->trained) {
-        fprintf(stderr, "Error in LogisticRegression_predict: model not trained!\n");
+        ERROR("Error in LogisticRegression_predict: model not trained!\n");
         exit(EXIT_FAILURE);
     }
 
@@ -843,7 +848,7 @@ GaussianNBCModel GaussianNBC(const Matrix *X, const Matrix *y) {
 
 Matrix GaussianNBC_predict(const GaussianNBCModel *model, const Matrix *X_new) {
     if (!model->trained) {
-        fprintf(stderr, "Error in GaussianNaiveBayes_predict: model not trained!\n");
+        ERROR("Error in GaussianNaiveBayes_predict: model not trained!\n");
         exit(EXIT_FAILURE);
     }
 

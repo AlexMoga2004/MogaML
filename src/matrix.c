@@ -6,6 +6,11 @@
 const int MATRIX_MAX_ITER = 1000;
 const double MATRIX_TOLERANCE = 1e-6;
 
+#define ERROR(fmt, ...) \
+        do { \
+            fprintf(stderr, fmt, ##__VA_ARGS__); \
+        } while (0)
+
 // Sample from N(0,1) using Box-Muller transformation
 double standard_normal() {
     static int haveSpare = 0;
@@ -82,7 +87,7 @@ int Matrix_approx_equal(const Matrix *mat1, const Matrix *mat2, double tolerance
 
 double Matrix_det(const Matrix *mat) { 
 	if (mat->rows != mat->cols) {
-		fprintf(stderr, "Error in Matrix_det, dimension mismatch!\n");
+		ERROR("Error in Matrix_det, dimension mismatch!\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -100,7 +105,7 @@ double Matrix_det(const Matrix *mat) {
 
 double Matrix_trace(const Matrix *mat) {
 	if (mat->rows != mat->cols) {
-		fprintf(stderr, "error in Matrix_trace, non-square matrix!\n");
+		ERROR("error in Matrix_trace, non-square matrix!\n");
 		exit(EXIT_FAILURE);
 	} 
 
@@ -133,7 +138,7 @@ double Matrix_frobenius_norm(const Matrix *mat) {
 
 double Vector_norm(const Matrix *mat, double l) {
 	if (mat->cols != 1) {
-		fprintf(stderr, "Error in Vector_norm, not a vector!");
+		ERROR("Error in Vector_norm, not a vector!");
 		exit(EXIT_FAILURE);
 	}
 
@@ -147,7 +152,7 @@ double Vector_norm(const Matrix *mat, double l) {
 
 double Vector_max(const Matrix *mat) {
 	if (mat->cols != 1) {
-		fprintf(stderr, "Error in Vector_max_index, not a vector!");
+		ERROR("Error in Vector_max_index, not a vector!");
 		exit(EXIT_FAILURE);
 	}
 
@@ -164,7 +169,7 @@ double Vector_max(const Matrix *mat) {
 
 double Vector_max_index(const Matrix *mat) {
 	if (mat->cols != 1) {
-		fprintf(stderr, "Error in Vector_max_index, not a vector!");
+		ERROR("Error in Vector_max_index, not a vector!");
 		exit(EXIT_FAILURE);
 	}
 
@@ -183,7 +188,7 @@ double Vector_max_index(const Matrix *mat) {
 
 Matrix Matrix_zeros(int rows, int cols) { 
 	if (rows <= 0 || cols <= 0) { 
-		fprintf(stderr, "error in Matrix_zeros, non-positive dimension(s)!\n");
+		ERROR("error in Matrix_zeros, non-positive dimension(s)!\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -233,7 +238,7 @@ Matrix Matrix_scale(double c, const Matrix *mat) {
 
 Matrix Matrix_add(const Matrix *mat1, const Matrix *mat2) {
 	if (mat1->rows != mat2->rows || mat1->cols != mat2->cols) {
-		fprintf(stderr, "Error in Matrix_add, dimension mismatch!\n");
+		ERROR("Error in Matrix_add, dimension mismatch!\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -250,7 +255,7 @@ Matrix Matrix_add(const Matrix *mat1, const Matrix *mat2) {
 
 Matrix Matrix_sub(const Matrix *mat1, const Matrix *mat2) {
 	if (mat1->rows != mat2->rows || mat1->cols != mat2->cols) {
-		fprintf(stderr, "Error in Matrix_add, dimension mismatch!\n");
+		ERROR("Error in Matrix_add, dimension mismatch!\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -274,7 +279,7 @@ Matrix Matrix_multiply(const Matrix *mat1, const Matrix *mat2) {
 	}
 
 	if (mat1->cols != mat2->rows) { 
-		fprintf(stderr, "Error in Matrix_multiply, dimension mismatch\n");
+		ERROR("Error in Matrix_multiply, dimension mismatch\n");
 		exit(EXIT_FAILURE);
 	} 
 
@@ -293,7 +298,7 @@ Matrix Matrix_multiply(const Matrix *mat1, const Matrix *mat2) {
 
 Matrix Matrix_minor(const Matrix *mat, int row, int col) {
 	if (mat->rows <= 1 || mat->cols <= 1) {
-		fprintf(stderr, "Error in Matrix_minor, cannot take minor for dimension <= 1!\n");
+		ERROR("Error in Matrix_minor, cannot take minor for dimension <= 1!\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -322,7 +327,7 @@ Matrix Matrix_minor(const Matrix *mat, int row, int col) {
 
 Matrix Matrix_row(const Matrix *mat, int row_index) {
     if (row_index < 0 || row_index >= mat->rows) {
-        fprintf(stderr, "Error in Matrix_row: row index out of bounds\n");
+        ERROR("Error in Matrix_row: row index out of bounds\n");
         exit(EXIT_FAILURE);
     }
 
@@ -335,7 +340,7 @@ Matrix Matrix_row(const Matrix *mat, int row_index) {
 
 Matrix Matrix_col(const Matrix *mat, int col_index) {
     if (col_index < 0 || col_index >= mat->cols) {
-        fprintf(stderr, "Error in Matrix_row: row index out of bounds\n");
+        ERROR("Error in Matrix_row: row index out of bounds\n");
         exit(EXIT_FAILURE);
     }
 
@@ -380,7 +385,7 @@ Matrix Matrix_clone(const Matrix *mat) {
 
 Matrix Matrix_inverse(const Matrix *mat) {
 	if (fabs(Matrix_det(mat)) < MATRIX_TOLERANCE) {
-		fprintf(stderr, "Error in Matrix_inverse, singular matrix!\n");
+		ERROR("Error in Matrix_inverse, singular matrix!\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -399,17 +404,17 @@ Matrix Matrix_inverse(const Matrix *mat) {
 // Solve the system Ax=b, requires A square, x,b vectors
 Matrix Matrix_solve(const Matrix *A, const Matrix *b) {
 	if (A->rows != A->cols) {
-		fprintf(stderr, "Error in Matrix_solve, not a square matrix!\n");
+		ERROR("Error in Matrix_solve, not a square matrix!\n");
 		exit(EXIT_FAILURE);
 	}
 
 	if (b->cols != 1) {
-		fprintf(stderr, "Error in Matrix_solve, b must be a vector\n!");
+		ERROR("Error in Matrix_solve, b must be a vector\n!");
 		exit(EXIT_FAILURE);
 	}
 
 	if (fabs(Matrix_det(A)) < MATRIX_TOLERANCE) {
-		fprintf(stderr, "Error in Matrix_solve, A must be non-singular!\n");
+		ERROR("Error in Matrix_solve, A must be non-singular!\n");
 		exit(EXIT_FAILURE);
 	}
 

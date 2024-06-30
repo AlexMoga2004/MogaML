@@ -7,6 +7,12 @@
 
 const double TEST_TOLERANCE = 1e-4; 
 
+// Macro for writing to GNUplot
+#define GP_WRITE(fmt, ...) \
+        do { \
+            fprintf(gnuplot_file, fmt, ##__VA_ARGS__); \
+        } while (0)
+
 void generate_synthetic_data(Matrix *X, Matrix *y, int num_samples, int num_features) {
     *X = Matrix_zeros(num_samples, num_features);
     for (int i = 0; i < num_samples; ++i) {
@@ -28,10 +34,10 @@ void test_linear_regression() {
     
     LinearRegressionModel model = LinearRegression(&data.X, &data.y);
     
-    FILE *gnuplot = popen("gnuplot -persist", "w");
-    if (!gnuplot) {
+    FILE *gnuplot_file = popen("gnuplot -persist", "w");
+    if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot or gnuplot script file\n");
-        if (gnuplot) pclose(gnuplot);
+        if (gnuplot_file) pclose(gnuplot_file);
         return;
     }
 
@@ -47,7 +53,7 @@ void test_linear_regression() {
     };
 
     for (int i = 0; i < sizeof(gnuplot_commands) / sizeof(gnuplot_commands[0]); ++i) {
-        fprintf(gnuplot, "%s", gnuplot_commands[i]);
+        GP_WRITE("%s", gnuplot_commands[i]);
     }
 
     const char *modes[] = {"ALGEBRAIC", "BATCH", "MINIBATCH"};
@@ -57,24 +63,24 @@ void test_linear_regression() {
         LinearRegression_train(&model);
         y_preds[i] = LinearRegression_predict(&model, &data.X);
 
-        fprintf(gnuplot, "'-' using 1:2 title '%s Prediction' with lines lw 2 lc rgb '%s'%s", 
+        GP_WRITE("'-' using 1:2 title '%s Prediction' with lines lw 2 lc rgb '%s'%s", 
                 modes[i], (i == 0 ? "red" : (i == 1 ? "blue" : (i == 2 ? "green" : "magenta"))), (i < 3 ? ", \\\n" : "\n"));
     }
 
     for (int i = 0; i < data.X.rows; ++i) {
-        fprintf(gnuplot, "%f %f\n", data.X.data[i][0], data.y.data[i][0]);
+        GP_WRITE("%f %f\n", data.X.data[i][0], data.y.data[i][0]);
     }
-    fprintf(gnuplot, "e\n");
+    GP_WRITE("e\n");
 
     for (int mode = 0; mode < 3; ++mode) {
         for (int i = 0; i < data.X.rows; ++i) {
-            fprintf(gnuplot, "%f %f\n", data.X.data[i][0], y_preds[mode].data[i][0]);
+            GP_WRITE("%f %f\n", data.X.data[i][0], y_preds[mode].data[i][0]);
         }
-        fprintf(gnuplot, "e\n");
+        GP_WRITE("e\n");
     }
 
-    fflush(gnuplot);
-    pclose(gnuplot);
+    fflush(gnuplot_file);
+    pclose(gnuplot_file);
 
     for (int i = 0; i < 3; ++i) {
         Matrix_free(y_preds[i]);
@@ -93,10 +99,10 @@ void test_ridge_regression() {
     
     LinearRegressionModel model = RidgeRegression(&data.X, &data.y, 300);
     
-    FILE *gnuplot = popen("gnuplot -persist", "w");
-    if (!gnuplot) {
+    FILE *gnuplot_file = popen("gnuplot -persist", "w");
+    if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot or gnuplot script file\n");
-        if (gnuplot) pclose(gnuplot);
+        if (gnuplot_file) pclose(gnuplot_file);
         return;
     }
 
@@ -112,7 +118,7 @@ void test_ridge_regression() {
     };
 
     for (int i = 0; i < sizeof(gnuplot_commands) / sizeof(gnuplot_commands[0]); ++i) {
-        fprintf(gnuplot, "%s", gnuplot_commands[i]);
+        GP_WRITE("%s", gnuplot_commands[i]);
     }
 
     const char *modes[] = {"ALGEBRAIC", "BATCH", "MINIBATCH"};
@@ -122,24 +128,24 @@ void test_ridge_regression() {
         LinearRegression_train(&model);
         y_preds[i] = LinearRegression_predict(&model, &data.X);
 
-        fprintf(gnuplot, "'-' using 1:2 title '%s Prediction' with lines lw 2 lc rgb '%s'%s", 
+        GP_WRITE("'-' using 1:2 title '%s Prediction' with lines lw 2 lc rgb '%s'%s", 
                 modes[i], (i == 0 ? "red" : (i == 1 ? "blue" : (i == 2 ? "green" : "magenta"))), (i < 3 ? ", \\\n" : "\n"));
     }
 
     for (int i = 0; i < data.X.rows; ++i) {
-        fprintf(gnuplot, "%f %f\n", data.X.data[i][0], data.y.data[i][0]);
+        GP_WRITE("%f %f\n", data.X.data[i][0], data.y.data[i][0]);
     }
-    fprintf(gnuplot, "e\n");
+    GP_WRITE("e\n");
 
     for (int mode = 0; mode < 3; ++mode) {
         for (int i = 0; i < data.X.rows; ++i) {
-            fprintf(gnuplot, "%f %f\n", data.X.data[i][0], y_preds[mode].data[i][0]);
+            GP_WRITE("%f %f\n", data.X.data[i][0], y_preds[mode].data[i][0]);
         }
-        fprintf(gnuplot, "e\n");
+        GP_WRITE("e\n");
     }
 
-    fflush(gnuplot);
-    pclose(gnuplot);
+    fflush(gnuplot_file);
+    pclose(gnuplot_file);
 
     for (int i = 0; i < 3; ++i) {
         Matrix_free(y_preds[i]);
@@ -184,23 +190,23 @@ void test_knn_classification() {
     }
     fclose(new_data_file);
 
-    FILE *gnuplot = popen("gnuplot -persist", "w");
-    if (!gnuplot) {
+    FILE *gnuplot_file = popen("gnuplot -persist", "w");
+    if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot\n");
         return;
     }
 
-    fprintf(gnuplot, "set title 'KNN Classification'\n");
-    fprintf(gnuplot, "set xlabel 'Feature 1'\n");
-    fprintf(gnuplot, "set ylabel 'Feature 2'\n");
-    fprintf(gnuplot, "set style data points\n");
-    fprintf(gnuplot, "set pointsize 1.5\n");
-    fprintf(gnuplot, "set palette defined (0 'red', 1 'green', 2 'blue', 3 'yellow')\n");
-    fprintf(gnuplot, "plot 'train_data.tmp' using 1:2:3 with points palette title 'Training Data', \\\n");
-    fprintf(gnuplot, "     'new_data.tmp' using 1:2:($3) with points pt 7 ps 2 palette title 'New Points'\n");
+    GP_WRITE("set title 'KNN Classification'\n");
+    GP_WRITE("set xlabel 'Feature 1'\n");
+    GP_WRITE("set ylabel 'Feature 2'\n");
+    GP_WRITE("set style data points\n");
+    GP_WRITE("set pointsize 1.5\n");
+    GP_WRITE("set palette defined (0 'red', 1 'green', 2 'blue', 3 'yellow')\n");
+    GP_WRITE("plot 'train_data.tmp' using 1:2:3 with points palette title 'Training Data', \\\n");
+    GP_WRITE("     'new_data.tmp' using 1:2:($3) with points pt 7 ps 2 palette title 'New Points'\n");
 
-    fflush(gnuplot);
-    pclose(gnuplot);
+    fflush(gnuplot_file);
+    pclose(gnuplot_file);
 
     remove("train_data.tmp");
     remove("new_data.tmp");
@@ -240,43 +246,65 @@ void test_knn_regression() {
 void test_logistic_regression() {
     printf("Testing LogisticRegression...\n");
 
+    // Read data from CSV file
     LabelledData data = Supervised_read_csv("test/test_data/logistic_regression_data.csv");
 
+    // Initialize and train the logistic regression model
     LogisticRegressionModel model = LogisticRegression(&data.X, &data.y);
-
     LogisticRegression_train(&model);
 
+    // Generate synthetic data for testing
     Matrix X_new, y_new;
-    generate_synthetic_data(&X_new, &y_new, 10, data.X.cols);  
+    generate_synthetic_data(&X_new, &y_new, 10, data.X.cols);
 
+    // Predict using the trained model
     Matrix y_pred = LogisticRegression_predict(&model, &X_new);
 
-    FILE *gnuplot = popen("gnuplot -persist", "w");
-    if (!gnuplot) {
+    // Open a pipe to gnuplot
+    FILE *gnuplot_file = popen("gnuplot -persist", "w");
+    if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot\n");
+        fclose(gnuplot_file);
         return;
     }
 
-    fprintf(gnuplot, "set title 'Logistic Regression Model'\n");
-    fprintf(gnuplot, "set xlabel 'Feature 1'\n");
-    fprintf(gnuplot, "set ylabel 'Feature 2'\n");
-    fprintf(gnuplot, "set style data points\n");
-    fprintf(gnuplot, "set pointsize 1.5\n");
+    // Helper macro to write to both the file and gnuplot
+    
 
-    fprintf(gnuplot, "plot '-' using 1:2:(($3 == 0) ? 1 : 2) with points pt 7 ps 1 lc variable title 'Original Data'\n");
+    // Write gnuplot commands to the file and gnuplot
+    GP_WRITE("set title 'Logistic Regression Model'\n");
+    GP_WRITE("set xlabel 'Feature 1'\n");
+    GP_WRITE("set ylabel 'Feature 2'\n");
+    GP_WRITE("set style data points\n");
+    GP_WRITE("set pointsize 1.5\n");
+
+    // Plot the original data
+    GP_WRITE("plot '-' using 1:2:($3 == 1 ? 1 : 2):($3 == 1 ? 2 : 1) with points pt variable lc variable title 'Original Data',\\\n");
+    GP_WRITE("     '-' using 1:2:($3 > 0.5 ? 2 : 1) with points pt 7 lc variable title 'Predicted Data'\n");
     for (int i = 0; i < data.X.rows; ++i) {
-        fprintf(gnuplot, "%f %f %d\n", data.X.data[i][0], data.X.data[i][1], (int)data.y.data[i][0]);
+        int class = (int)data.y.data[i][0];
+        GP_WRITE("%f %f %d\n", data.X.data[i][0], data.X.data[i][1], class);
     }
-    fprintf(gnuplot, "e\n");
+    GP_WRITE("e\n");
 
-    fprintf(gnuplot, "plot '-' using 1:2:(($3 == 0) ? 1 : 2) with points pt 7 ps 1 lc variable title 'Predicted Data'\n");
     for (int i = 0; i < X_new.rows; ++i) {
-        fprintf(gnuplot, "%f %f %d\n", X_new.data[i][0], X_new.data[i][1], (int)y_pred.data[i][0]);
+        double prediction = y_pred.data[i][0];
+        GP_WRITE("%f %f %f\n", X_new.data[i][0], X_new.data[i][1], prediction);
     }
-    fprintf(gnuplot, "e\n");
+    GP_WRITE("e\n");
 
-    fflush(gnuplot);
-    pclose(gnuplot);
+    double b = model.params.data[0][0];
+    double w1 = model.params.data[1][0];
+    double w2 = model.params.data[2][0];
+
+    GP_WRITE("set xrange [-5:5]\n");
+    GP_WRITE("set yrange [-5:5]\n");
+    GP_WRITE("set samples 1000\n");
+    GP_WRITE("plot 1.0 / (1.0 + exp(-(%.10lf + %.10lf*x + %.10lf*y))) with lines title 'Decision Boundary'\n", b, w1, w2);
+
+    fclose(gnuplot_file);
+    fflush(gnuplot_file);
+    pclose(gnuplot_file);
 
     Matrix_free(data.X);
     Matrix_free(data.y);
@@ -285,6 +313,7 @@ void test_logistic_regression() {
 
     printf("Logistic Regression Test Passed!\n");
 }
+
 
 void test_naive_bayes() {
     printf("Testing Gaussian Naive Bayes...\n");

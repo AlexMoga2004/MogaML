@@ -5,6 +5,11 @@
 #define MINIBATCH_SIZE 32
 #define TOLERANCE 1e-6
 
+#define ERROR(fmt, ...) \
+        do { \
+            fprintf(stderr, fmt, ##__VA_ARGS__); \
+        } while (0)
+
 // Helper functions
 static double euclidean_distance(const double *a, const double *b, int length) {
     double sum = 0.0;
@@ -30,7 +35,7 @@ static int find_nearest_centroid(const double *point, const Matrix *centroids) {
 static int count_columns(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Error opening file: %s\n", filename);
+        ERROR("Error opening file: %s\n", filename);
         exit(EXIT_FAILURE);
     }
 
@@ -52,7 +57,7 @@ Matrix Unsupervised_read_csv(const char *filename) {
 
     FILE *file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Error opening file: %s\n", filename);
+        ERROR("Error opening file: %s\n", filename);
         exit(EXIT_FAILURE);
     }
 
@@ -206,7 +211,7 @@ void KMeans_train(KMeansModel *model) {
 
 Matrix KMeans_predict(const KMeansModel *model, const Matrix *X_new) {
     if (!model->trained) {
-        fprintf(stderr, "Error in X");
+        ERROR("Error in X");
         exit(EXIT_FAILURE);
     }
 
