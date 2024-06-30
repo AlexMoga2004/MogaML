@@ -30,7 +30,7 @@ void generate_synthetic_data(Matrix *X, Matrix *y, int num_samples, int num_feat
 void test_linear_regression() {
     printf("Testing LinearRegressionModel...\n");
     
-    LabelledData data = Supervised_read_csv("test/test_data/ridge_regression_data.csv");
+    LabelledData data = Supervised_read_csv("test/test_data/linear_regression_data.csv");
     
     LinearRegressionModel model = LinearRegression(&data.X, &data.y);
     
@@ -85,12 +85,66 @@ void test_linear_regression() {
     for (int i = 0; i < 3; ++i) {
         Matrix_free(y_preds[i]);
     }
+
     Matrix_free(data.X);
     Matrix_free(data.y);
     LinearRegression_free(model);
 
     printf("LinearRegressionModel test passed!\n");
 }
+
+void test_linear_regression_loss_surface() {
+    printf("Testing LinearRegressionModel Loss Surface...\n");
+
+    LabelledData data = Supervised_read_csv("test/test_data/linear_regression_data.csv");
+
+    // FILE *gnuplot_file = fopen("linear_regression_surface.gnu", "w");
+    FILE *gnuplot_file = popen("gnuplot -persist", "w");
+    if (!gnuplot_file) {
+        fprintf(stderr, "Error opening gnuplot script file\n");
+        return;
+    }
+
+    // Write Gnuplot commands to the file
+    fprintf(gnuplot_file, "set title 'Linear Regression Loss Surface'\n");
+    fprintf(gnuplot_file, "set xlabel 'Weight (w)'\n");
+    fprintf(gnuplot_file, "set ylabel 'Bias (b)'\n");
+    fprintf(gnuplot_file, "set zlabel 'Loss'\n");
+    fprintf(gnuplot_file, "set dgrid3d 100,100\n");
+    fprintf(gnuplot_file, "set hidden3d\n");
+
+    // Define ranges
+    double b_min = -100000, b_max = 100000;
+    double w_min = -80000, w_max = 120000;
+
+    fprintf(gnuplot_file, "w_min = %f\n", w_min);
+    fprintf(gnuplot_file, "w_max = %f\n", w_max);
+    fprintf(gnuplot_file, "b_min = %f\n", b_min);
+    fprintf(gnuplot_file, "b_max = %f\n", b_max);
+
+    // Build the MSE function for Gnuplot
+    fprintf(gnuplot_file, "f(w, b) = ");
+    for (int i = 0; i < data.X.rows; ++i) {
+        double xi = data.X.data[i][0];
+        double yi = data.y.data[i][0];
+        if (i > 0) fprintf(gnuplot_file, " + ");
+        fprintf(gnuplot_file, "(b + w * %f - %f)**2", xi, yi);
+    }
+    fprintf(gnuplot_file, " / %d\n", data.X.rows);
+
+    // Plot the function
+    fprintf(gnuplot_file, "splot [w_min:w_max] [b_min:b_max] f(x, y) with lines title 'Loss Surface'\n");
+
+    // Close the .gnu file
+    fclose(gnuplot_file);
+
+    // Free allocated memory
+    Matrix_free(data.X);
+    Matrix_free(data.y);
+
+    printf("LinearRegressionModel Loss Surface test completed!\n");
+}
+
 
 void test_ridge_regression() {
     printf("Testing RidgeRegressionModel...\n");
@@ -114,6 +168,7 @@ void test_ridge_regression() {
         "set key outside\n",
         "set xrange [*:*]\n",
         "set yrange [*:*]\n",
+        "set mouse\n",
         "plot '-' using 1:2 title 'Original Data' with points pt 7 ps 1.5 lc rgb 'black', \\\n"
     };
 
@@ -200,6 +255,7 @@ void test_knn_classification() {
     GP_WRITE("set xlabel 'Feature 1'\n");
     GP_WRITE("set ylabel 'Feature 2'\n");
     GP_WRITE("set style data points\n");
+    GP_WRITE("set mouse\n");
     GP_WRITE("set pointsize 1.5\n");
     GP_WRITE("set palette defined (0 'red', 1 'green', 2 'blue', 3 'yellow')\n");
     GP_WRITE("plot 'train_data.tmp' using 1:2:3 with points palette title 'Training Data', \\\n");
@@ -336,6 +392,7 @@ int main() {
     test_ridge_regression();
     test_knn_classification();
     test_logistic_regression();
+    test_linear_regression_loss_surface();
 
     printf("All tests passed successfully.\n\n");
     return 0;
