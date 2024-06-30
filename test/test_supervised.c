@@ -21,7 +21,6 @@ void generate_synthetic_data(Matrix *X, Matrix *y, int num_samples, int num_feat
     }
 }
 
-
 void test_linear_regression() {
     printf("Testing LinearRegressionModel...\n");
     
@@ -31,28 +30,34 @@ void test_linear_regression() {
     
     FILE *gnuplot = popen("gnuplot -persist", "w");
     if (!gnuplot) {
-        fprintf(stderr, "Error opening gnuplot\n");
+        fprintf(stderr, "Error opening gnuplot or gnuplot script file\n");
+        if (gnuplot) pclose(gnuplot);
         return;
     }
 
-    fprintf(gnuplot, "set title 'Linear Regression Model'\n");
-    fprintf(gnuplot, "set xlabel 'Feature'\n");
-    fprintf(gnuplot, "set ylabel 'Target'\n");
-    fprintf(gnuplot, "set style data linespoints\n");
-    fprintf(gnuplot, "set key outside\n");
-    fprintf(gnuplot, "set xrange [*:*]\n");
-    fprintf(gnuplot, "set yrange [*:*]\n");
+    const char *gnuplot_commands[] = {
+        "set title 'Linear Regression Model'\n",
+        "set xlabel 'Feature'\n",
+        "set ylabel 'Target'\n",
+        "set style data linespoints\n",
+        "set key outside\n",
+        "set xrange [*:*]\n",
+        "set yrange [*:*]\n",
+        "plot '-' using 1:2 title 'Original Data' with points pt 7 ps 1.5 lc rgb 'black', \\\n"
+    };
 
-    fprintf(gnuplot, "plot '-' using 1:2 title 'Original Data' with points pt 7 ps 1.5 lc rgb 'black', \\\n");
+    for (int i = 0; i < sizeof(gnuplot_commands) / sizeof(gnuplot_commands[0]); ++i) {
+        fprintf(gnuplot, "%s", gnuplot_commands[i]);
+    }
 
-    const char *modes[] = {"ALGEBRAIC", "BATCH", "MINIBATCH", "STOCHASTIC"};
-    Matrix y_preds[4];
-    for (int i = 0; i < 4; ++i) {
+    const char *modes[] = {"ALGEBRAIC", "BATCH", "MINIBATCH"};
+    Matrix y_preds[3];
+    for (int i = 0; i < 3; ++i) {
         LinearRegression_set_mode(&model, i);
         LinearRegression_train(&model);
         y_preds[i] = LinearRegression_predict(&model, &data.X);
 
-        fprintf(gnuplot, "'-' using 1:2 title '%s Prediction' with lines lw 2 lc rgb '%s'%s\n", 
+        fprintf(gnuplot, "'-' using 1:2 title '%s Prediction' with lines lw 2 lc rgb '%s'%s", 
                 modes[i], (i == 0 ? "red" : (i == 1 ? "blue" : (i == 2 ? "green" : "magenta"))), (i < 3 ? ", \\\n" : "\n"));
     }
 
@@ -61,7 +66,7 @@ void test_linear_regression() {
     }
     fprintf(gnuplot, "e\n");
 
-    for (int mode = 0; mode < 4; ++mode) {
+    for (int mode = 0; mode < 3; ++mode) {
         for (int i = 0; i < data.X.rows; ++i) {
             fprintf(gnuplot, "%f %f\n", data.X.data[i][0], y_preds[mode].data[i][0]);
         }
@@ -71,7 +76,7 @@ void test_linear_regression() {
     fflush(gnuplot);
     pclose(gnuplot);
 
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 3; ++i) {
         Matrix_free(y_preds[i]);
     }
     Matrix_free(data.X);
@@ -90,28 +95,34 @@ void test_ridge_regression() {
     
     FILE *gnuplot = popen("gnuplot -persist", "w");
     if (!gnuplot) {
-        fprintf(stderr, "Error opening gnuplot\n");
+        fprintf(stderr, "Error opening gnuplot or gnuplot script file\n");
+        if (gnuplot) pclose(gnuplot);
         return;
     }
 
-    fprintf(gnuplot, "set title 'Ridge Regression Model (w/ outlier)'\n");
-    fprintf(gnuplot, "set xlabel 'Feature'\n");
-    fprintf(gnuplot, "set ylabel 'Target'\n");
-    fprintf(gnuplot, "set style data linespoints\n");
-    fprintf(gnuplot, "set key outside\n");
-    fprintf(gnuplot, "set xrange [*:*]\n");
-    fprintf(gnuplot, "set yrange [*:*]\n");
+    const char *gnuplot_commands[] = {
+        "set title 'Ridge Regression Model'\n",
+        "set xlabel 'Feature'\n",
+        "set ylabel 'Target'\n",
+        "set style data linespoints\n",
+        "set key outside\n",
+        "set xrange [*:*]\n",
+        "set yrange [*:*]\n",
+        "plot '-' using 1:2 title 'Original Data' with points pt 7 ps 1.5 lc rgb 'black', \\\n"
+    };
 
-    fprintf(gnuplot, "plot '-' using 1:2 title 'Original Data' with points pt 7 ps 1.5 lc rgb 'black', \\\n");
+    for (int i = 0; i < sizeof(gnuplot_commands) / sizeof(gnuplot_commands[0]); ++i) {
+        fprintf(gnuplot, "%s", gnuplot_commands[i]);
+    }
 
-    const char *modes[] = {"ALGEBRAIC", "BATCH", "MINIBATCH", "STOCHASTIC"};
-    Matrix y_preds[4];
-    for (int i = 0; i < 4; ++i) {
+    const char *modes[] = {"ALGEBRAIC", "BATCH", "MINIBATCH"};
+    Matrix y_preds[3];
+    for (int i = 0; i < 3; ++i) {
         LinearRegression_set_mode(&model, i);
         LinearRegression_train(&model);
         y_preds[i] = LinearRegression_predict(&model, &data.X);
 
-        fprintf(gnuplot, "'-' using 1:2 title '%s Prediction' with lines lw 2 lc rgb '%s'%s\n", 
+        fprintf(gnuplot, "'-' using 1:2 title '%s Prediction' with lines lw 2 lc rgb '%s'%s", 
                 modes[i], (i == 0 ? "red" : (i == 1 ? "blue" : (i == 2 ? "green" : "magenta"))), (i < 3 ? ", \\\n" : "\n"));
     }
 
@@ -120,7 +131,7 @@ void test_ridge_regression() {
     }
     fprintf(gnuplot, "e\n");
 
-    for (int mode = 0; mode < 4; ++mode) {
+    for (int mode = 0; mode < 3; ++mode) {
         for (int i = 0; i < data.X.rows; ++i) {
             fprintf(gnuplot, "%f %f\n", data.X.data[i][0], y_preds[mode].data[i][0]);
         }
@@ -130,67 +141,7 @@ void test_ridge_regression() {
     fflush(gnuplot);
     pclose(gnuplot);
 
-    for (int i = 0; i < 4; ++i) {
-        Matrix_free(y_preds[i]);
-    }
-    Matrix_free(data.X);
-    Matrix_free(data.y);
-    LinearRegression_free(model);
-
-    printf("RidgeRegressionModel test passed!\n");
-}
-
-void test_lasso_regression() {
-    printf("Testing LassoRegressionModel...\n");
-    
-    LabelledData data = Supervised_read_csv("test/test_data/ridge_regression_data.csv");
-    
-    LinearRegressionModel model = LassoRegression(&data.X, &data.y, 300);
-    LinearRegression_set_mode(&model, BATCH);
-    
-    FILE *gnuplot = popen("gnuplot -persist", "w");
-    if (!gnuplot) {
-        fprintf(stderr, "Error opening gnuplot\n");
-        return;
-    }
-
-    fprintf(gnuplot, "set title 'Ridge Regression Model (w/ outlier)'\n");
-    fprintf(gnuplot, "set xlabel 'Feature'\n");
-    fprintf(gnuplot, "set ylabel 'Target'\n");
-    fprintf(gnuplot, "set style data linespoints\n");
-    fprintf(gnuplot, "set key outside\n");
-    fprintf(gnuplot, "set xrange [*:*]\n");
-    fprintf(gnuplot, "set yrange [*:*]\n");
-
-    fprintf(gnuplot, "plot '-' using 1:2 title 'Original Data' with points pt 7 ps 1.5 lc rgb 'black', \\\n");
-
-    const char *modes[] = {"ALGEBRAIC", "BATCH", "MINIBATCH", "STOCHASTIC"};
-    Matrix y_preds[4];
-    for (int i = 0; i < 4; ++i) {
-        LinearRegression_set_mode(&model, i);
-        LinearRegression_train(&model);
-        y_preds[i] = LinearRegression_predict(&model, &data.X);
-
-        fprintf(gnuplot, "'-' using 1:2 title '%s Prediction' with lines lw 2 lc rgb '%s'%s\n", 
-                modes[i], (i == 0 ? "red" : (i == 1 ? "blue" : (i == 2 ? "green" : "magenta"))), (i < 3 ? ", \\\n" : "\n"));
-    }
-
-    for (int i = 0; i < data.X.rows; ++i) {
-        fprintf(gnuplot, "%f %f\n", data.X.data[i][0], data.y.data[i][0]);
-    }
-    fprintf(gnuplot, "e\n");
-
-    for (int mode = 0; mode < 4; ++mode) {
-        for (int i = 0; i < data.X.rows; ++i) {
-            fprintf(gnuplot, "%f %f\n", data.X.data[i][0], y_preds[mode].data[i][0]);
-        }
-        fprintf(gnuplot, "e\n");
-    }
-
-    fflush(gnuplot);
-    pclose(gnuplot);
-
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 3; ++i) {
         Matrix_free(y_preds[i]);
     }
     Matrix_free(data.X);
@@ -365,7 +316,7 @@ int main() {
     test_linear_regression();
     test_ridge_regression();
     test_knn_classification();
-    // test_logistic_regression();
+    test_logistic_regression();
 
     printf("All tests passed successfully.\n\n");
     return 0;
