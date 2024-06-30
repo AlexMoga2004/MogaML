@@ -13,7 +13,7 @@ const double TEST_TOLERANCE = 1e-4;
             fprintf(gnuplot_file, fmt, ##__VA_ARGS__); \
         } while (0)
 
-void generate_synthetic_data(Matrix *X, Matrix *y, int num_samples, int num_features) {
+static void generate_synthetic_data(Matrix *X, Matrix *y, int num_samples, int num_features) {
     *X = Matrix_zeros(num_samples, num_features);
     for (int i = 0; i < num_samples; ++i) {
         for (int j = 0; j < num_features; ++j) {
@@ -360,7 +360,6 @@ void test_logistic_regression() {
     printf("Logistic Regression Test Passed!\n");
 }
 
-
 void test_naive_bayes() {
     printf("Testing Gaussian Naive Bayes...\n");
 
@@ -368,12 +367,61 @@ void test_naive_bayes() {
 
     GaussianNBCModel model = GaussianNBC(&data.X, &data.y);
 
-    LabelledData new_data = Supervised_read_csv("test/test_data/naive_bayes_new_data.csv");
+    // Hardcoded new data
+    Matrix new_X = Matrix_zeros(5, 2);
+    new_X.data[0][0] = 0.1; new_X.data[0][1] = 0.9;  // Class 0
+    new_X.data[1][0] = 0.8; new_X.data[1][1] = 0.2;  // Class 2
+    new_X.data[2][0] = 0.3; new_X.data[2][1] = 0.3;  // Class 0
+    new_X.data[3][0] = 0.7; new_X.data[3][1] = 0.7;  // Class 1
+    new_X.data[4][0] = 0.5; new_X.data[4][1] = 0.5;  // Class 2
+
+    Matrix new_y = Matrix_zeros(5, 1);
+    new_y.data[0][0] = 0;  // Class 0
+    new_y.data[1][0] = 2;  // Class 2
+    new_y.data[2][0] = 0;  // Class 0
+    new_y.data[3][0] = 1;  // Class 1
+    new_y.data[4][0] = 2;  // Class 2
+
+    LabelledData new_data;
+    new_data.X = new_X;
+    new_data.y = new_y;
 
     Matrix predictions = GaussianNBC_predict(&model, &new_data.X);
 
     printf("Predictions:\n");
     Matrix_display(&predictions);
+
+    FILE *gnuplot_file = popen("gnuplot -persist", "w");
+    if (!gnuplot_file) {
+        fprintf(stderr, "Error opening gnuplot\n");
+        return;
+    }
+
+    GP_WRITE("set title 'Naive Bayes Classifier'\n");
+    GP_WRITE("set xlabel 'Feature 1'\n");
+    GP_WRITE("set ylabel 'Feature 2'\n");
+    GP_WRITE("set style data points\n");
+    GP_WRITE("set pointsize 1.5\n");
+    GP_WRITE("set palette defined (0 'red', 1 'green', 2 'blue')\n");
+    GP_WRITE("plot '-' using 1:2:3 with points pt 7 palette title 'Original Data',\\\n");
+    GP_WRITE("     '-' using 1:2:($3) with points pt 10 palette title 'Predicted Data'\n");
+
+    // Write original data
+    for (int i = 0; i < data.X.rows; ++i) {
+        int class_label = (int)data.y.data[i][0];
+        GP_WRITE("%f %f %d\n", data.X.data[i][0], data.X.data[i][1], class_label);
+    }
+    GP_WRITE("e\n");
+
+    // Write predicted data
+    for (int i = 0; i < new_data.X.rows; ++i) {
+        int predicted_label = (int)predictions.data[i][0];
+        GP_WRITE("%f %f %d\n", new_data.X.data[i][0], new_data.X.data[i][1], predicted_label);
+    }
+    GP_WRITE("e\n");
+
+    fflush(gnuplot_file);
+    pclose(gnuplot_file);
 
     Matrix_free(data.X);
     Matrix_free(data.y);
@@ -388,10 +436,12 @@ void test_naive_bayes() {
 }
 
 int main() {
+
     test_linear_regression();
     test_ridge_regression();
     test_knn_classification();
     test_logistic_regression();
+    test_naive_bayes();
     test_linear_regression_loss_surface();
 
     printf("All tests passed successfully.\n\n");
