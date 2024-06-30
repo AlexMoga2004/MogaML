@@ -1,24 +1,10 @@
-# Define the coefficients
-b = -0.2101346383
-w1 = 0.6316231723
-w2 = -1.5096572143
-
-# Define the function for the decision boundary
-f(x) = (1/w2) * (b + w1 * x)
-
-# Gnuplot commands
 set title 'Logistic Regression Model'
 set xlabel 'Feature 1'
 set ylabel 'Feature 2'
 set style data points
 set pointsize 1.5
-set xrange [-5:5]
-set yrange [-5:5]
-set samples 1000
-
-# Original Data
 plot '-' using 1:2:($3 == 1 ? 1 : 2):($3 == 1 ? 2 : 1) with points pt variable lc variable title 'Original Data',\
-
+     '-' using 1:2:($3 > 0.5 ? 2 : 1) with points pt 7 lc variable title 'Predicted Data'
 0.838760 -2.307984 1
 1.077187 -1.079137 1
 -0.015668 0.915338 0
@@ -120,10 +106,6 @@ plot '-' using 1:2:($3 == 1 ? 1 : 2):($3 == 1 ? 2 : 1) with points pt variable l
 -0.212306 -1.273111 1
 0.526995 2.713513 1
 e
-
-# Predicted Data
-plot '-' using 1:2:($3 > 0.5 ? 2 : 1) with points pt 7 lc variable title 'Predicted Data'
-
 0.679296 0.934693 0.316074
 0.383502 0.519416 0.417808
 0.830965 0.034572 0.664363
@@ -135,6 +117,7 @@ plot '-' using 1:2:($3 > 0.5 ? 2 : 1) with points pt 7 lc variable title 'Predic
 0.846167 0.526929 0.487281
 0.091965 0.653919 0.327619
 e
-
-# Plot the decision boundary line
-plot f(x) with lines title 'Decision Boundary'
+set xrange [-5:5]
+set yrange [-5:5]
+set samples 1000
+plot 1.0 / (1.0 + exp(-(0.2101346383 + 0.6316231723*x + -1.5096572143*y))) with lines title 'Decision Boundary'

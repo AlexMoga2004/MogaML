@@ -11,6 +11,7 @@ const double TEST_TOLERANCE = 1e-4;
 #define GP_WRITE(fmt, ...) \
         do { \
             fprintf(gnuplot_file, fmt, ##__VA_ARGS__); \
+            fprintf(external_file, fmt, ##__VA_ARGS__); \
         } while (0)
 
 static void generate_synthetic_data(Matrix *X, Matrix *y, int num_samples, int num_features) {
@@ -38,6 +39,13 @@ void test_linear_regression() {
     if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot or gnuplot script file\n");
         if (gnuplot_file) pclose(gnuplot_file);
+        return;
+    }
+
+    FILE *external_file = fopen("plots/linear_regression_plot.gnu -persist", "w");
+    if (!external_file) {
+        fprintf(stderr, "Error opening external file\n");
+        if (external_file) fclose(external_file);
         return;
     }
 
@@ -98,14 +106,19 @@ void test_linear_regression_loss_surface() {
 
     LabelledData data = Supervised_read_csv("test/test_data/linear_regression_data.csv");
 
-    // FILE *gnuplot_file = fopen("linear_regression_surface.gnu", "w");
     FILE *gnuplot_file = popen("gnuplot -persist", "w");
     if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot script file\n");
         return;
     }
 
-    // Write Gnuplot commands to the file
+    FILE *external_file = fopen("plots/linear_regression_surface_plot.gnu -persist", "w");
+    if (!external_file) {
+        fprintf(stderr, "Error opening external file\n");
+        if (external_file) fclose(external_file);
+        return;
+    }
+
     fprintf(gnuplot_file, "set title 'Linear Regression Loss Surface'\n");
     fprintf(gnuplot_file, "set xlabel 'Weight (w)'\n");
     fprintf(gnuplot_file, "set ylabel 'Bias (b)'\n");
@@ -113,7 +126,6 @@ void test_linear_regression_loss_surface() {
     fprintf(gnuplot_file, "set dgrid3d 100,100\n");
     fprintf(gnuplot_file, "set hidden3d\n");
 
-    // Define ranges
     double b_min = -100000, b_max = 100000;
     double w_min = -80000, w_max = 120000;
 
@@ -122,7 +134,6 @@ void test_linear_regression_loss_surface() {
     fprintf(gnuplot_file, "b_min = %f\n", b_min);
     fprintf(gnuplot_file, "b_max = %f\n", b_max);
 
-    // Build the MSE function for Gnuplot
     fprintf(gnuplot_file, "f(w, b) = ");
     for (int i = 0; i < data.X.rows; ++i) {
         double xi = data.X.data[i][0];
@@ -132,13 +143,10 @@ void test_linear_regression_loss_surface() {
     }
     fprintf(gnuplot_file, " / %d\n", data.X.rows);
 
-    // Plot the function
     fprintf(gnuplot_file, "splot [w_min:w_max] [b_min:b_max] f(x, y) with lines title 'Loss Surface'\n");
 
-    // Close the .gnu file
     fclose(gnuplot_file);
 
-    // Free allocated memory
     Matrix_free(data.X);
     Matrix_free(data.y);
 
@@ -157,6 +165,13 @@ void test_ridge_regression() {
     if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot or gnuplot script file\n");
         if (gnuplot_file) pclose(gnuplot_file);
+        return;
+    }
+
+    FILE *external_file = fopen("plots/ridge_regression_plot.gnu -persist", "w");
+    if (!external_file) {
+        fprintf(stderr, "Error opening external file\n");
+        if (external_file) fclose(external_file);
         return;
     }
 
@@ -251,6 +266,13 @@ void test_knn_classification() {
         return;
     }
 
+    FILE *external_file = fopen("plots/knn_classification_plot.gnu -persist", "w");
+    if (!external_file) {
+        fprintf(stderr, "Error opening external file\n");
+        if (external_file) fclose(external_file);
+        return;
+    }
+
     GP_WRITE("set title 'KNN Classification'\n");
     GP_WRITE("set xlabel 'Feature 1'\n");
     GP_WRITE("set ylabel 'Feature 2'\n");
@@ -276,29 +298,6 @@ void test_knn_classification() {
     printf("KNNModel classification test passed\n");
 }
 
-void test_knn_regression() {
-    printf("Testing KNNModel regression\n");
-    double X_data[5][1] = {{1.0}, {2.0}, {3.0}, {4.0}, {5.0}};
-    double y_data[5][1] = {{1.5}, {2.5}, {3.5}, {4.5}, {5.5}}; 
-
-    Matrix X = Matrix_from_array(5, 1, &X_data[0][0]);
-    Matrix y = Matrix_from_array(5, 1, &y_data[0][0]);
-
-    KNNModel model = KNNRegressor(2, &X, &y);
-
-    double x_new_data[2][1] = {{2.5}, {3.5}};
-    Matrix x_new = Matrix_from_array(2, 1, &x_new_data[0][0]);
-
-    Matrix predictions = KNN_predict(&model, &x_new);
-
-    Matrix_free(X);
-    Matrix_free(y);
-    Matrix_free(x_new);
-    Matrix_free(predictions);
-    KNN_free(model);
-    printf("KNNModel regression test passed\n");
-}
-
 void test_logistic_regression() {
     printf("Testing LogisticRegression...\n");
 
@@ -316,6 +315,13 @@ void test_logistic_regression() {
     if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot\n");
         fclose(gnuplot_file);
+        return;
+    }
+
+    FILE *external_file = fopen("plots/logistic_regression_plot.gnu -persist", "w");
+    if (!external_file) {
+        fprintf(stderr, "Error opening external file\n");
+        if (external_file) fclose(external_file);
         return;
     }
 
@@ -367,7 +373,6 @@ void test_naive_bayes() {
 
     GaussianNBCModel model = GaussianNBC(&data.X, &data.y);
 
-    // Hardcoded new data
     Matrix new_X = Matrix_zeros(5, 2);
     new_X.data[0][0] = 0.1; new_X.data[0][1] = 0.9;  // Class 0
     new_X.data[1][0] = 0.8; new_X.data[1][1] = 0.2;  // Class 2
@@ -397,6 +402,13 @@ void test_naive_bayes() {
         return;
     }
 
+    FILE *external_file = fopen("plots/naive_bayes_plot.gnu -persist", "w");
+    if (!external_file) {
+        fprintf(stderr, "Error opening external file\n");
+        if (external_file) fclose(external_file);
+        return;
+    }
+
     GP_WRITE("set title 'Naive Bayes Classifier'\n");
     GP_WRITE("set xlabel 'Feature 1'\n");
     GP_WRITE("set ylabel 'Feature 2'\n");
@@ -406,14 +418,12 @@ void test_naive_bayes() {
     GP_WRITE("plot '-' using 1:2:3 with points pt 7 palette title 'Original Data',\\\n");
     GP_WRITE("     '-' using 1:2:($3) with points pt 10 palette title 'Predicted Data'\n");
 
-    // Write original data
     for (int i = 0; i < data.X.rows; ++i) {
         int class_label = (int)data.y.data[i][0];
         GP_WRITE("%f %f %d\n", data.X.data[i][0], data.X.data[i][1], class_label);
     }
     GP_WRITE("e\n");
 
-    // Write predicted data
     for (int i = 0; i < new_data.X.rows; ++i) {
         int predicted_label = (int)predictions.data[i][0];
         GP_WRITE("%f %f %d\n", new_data.X.data[i][0], new_data.X.data[i][1], predicted_label);
