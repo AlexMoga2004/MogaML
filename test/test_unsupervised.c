@@ -18,7 +18,7 @@ void plot_clusters(const Matrix *X, const Matrix *labels) {
         return;
     }
 
-    FILE *external_file = fopen("plots/clustering_plot.gnu -persist", "w");
+    FILE *external_file = fopen("plots/clustering_plot.gnu", "w");
     if (!external_file) {
         fprintf(stderr, "Error opening external file\n");
         if (external_file) fclose(external_file);

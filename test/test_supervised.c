@@ -42,7 +42,7 @@ void test_linear_regression() {
         return;
     }
 
-    FILE *external_file = fopen("plots/linear_regression_plot.gnu -persist", "w");
+    FILE *external_file = fopen("plots/linear_regression_plot.gnu", "w");
     if (!external_file) {
         fprintf(stderr, "Error opening external file\n");
         if (external_file) fclose(external_file);
@@ -112,7 +112,7 @@ void test_linear_regression_loss_surface() {
         return;
     }
 
-    FILE *external_file = fopen("plots/linear_regression_surface_plot.gnu -persist", "w");
+    FILE *external_file = fopen("plots/linear_regression_surface_plot.gnu", "w");
     if (!external_file) {
         fprintf(stderr, "Error opening external file\n");
         if (external_file) fclose(external_file);
@@ -168,7 +168,7 @@ void test_ridge_regression() {
         return;
     }
 
-    FILE *external_file = fopen("plots/ridge_regression_plot.gnu -persist", "w");
+    FILE *external_file = fopen("plots/ridge_regression_plot.gnu", "w");
     if (!external_file) {
         fprintf(stderr, "Error opening external file\n");
         if (external_file) fclose(external_file);
@@ -263,7 +263,7 @@ void test_knn_classification() {
         return;
     }
 
-    FILE *external_file = fopen("plots/knn_classification_plot.gnu -persist", "w");
+    FILE *external_file = fopen("plots/knn_classification_plot.gnu", "w");
     if (!external_file) {
         fprintf(stderr, "Error opening external file\n");
         if (external_file) fclose(external_file);
@@ -315,7 +315,7 @@ void test_logistic_regression() {
         return;
     }
 
-    FILE *external_file = fopen("plots/logistic_regression_plot.gnu -persist", "w");
+    FILE *external_file = fopen("plots/logistic_regression_plot.gnu", "w");
     if (!external_file) {
         fprintf(stderr, "Error opening external file\n");
         if (external_file) fclose(external_file);
@@ -396,7 +396,7 @@ void test_naive_bayes() {
         return;
     }
 
-    FILE *external_file = fopen("plots/naive_bayes_plot.gnu -persist", "w");
+    FILE *external_file = fopen("plots/naive_bayes_plot.gnu", "w");
     if (!external_file) {
         fprintf(stderr, "Error opening external file\n");
         if (external_file) fclose(external_file);
