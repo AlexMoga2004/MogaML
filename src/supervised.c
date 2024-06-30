@@ -333,58 +333,6 @@ double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matri
     return mse;
 }
 
-// static int Matrix_unique_count(const Matrix *y) {
-//     if (y->cols != 1) {
-//         ERROR("Error: Matrix_unique_count expects a column vector.\n");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     int count = 0;
-//     double *seen = (double *)malloc(y->rows * sizeof(double));
-
-//     for (int i = 0; i < y->rows; ++i) {
-//         bool found = false;
-//         for (int j = 0; j < count; ++j) {
-//             if (seen[j] == y->data[i][0]) {
-//                 found = true;
-//                 break;
-//             }
-//         }
-//         if (!found) {
-//             seen[count++] = y->data[i][0];
-//         }
-//     }
-
-//     free(seen);
-//     return count;
-// }
-
-// static int Matrix_unique_count_in_column(const Matrix *X, int col) {
-//     if (col >= X->cols || col < 0) {
-//         ERROR("Error: Column index out of bounds in Matrix_unique_count_in_column.\n");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     int count = 0;
-//     double *seen = (double *)malloc(X->rows * sizeof(double));
-
-//     for (int i = 0; i < X->rows; ++i) {
-//         bool found = false;
-//         for (int j = 0; j < count; ++j) {
-//             if (seen[j] == X->data[i][col]) {
-//                 found = true;
-//                 break;
-//             }
-//         }
-//         if (!found) {
-//             seen[count++] = X->data[i][col];
-//         }
-//     }
-
-//     free(seen);
-//     return count;
-// }
-
 LabelledData Supervised_read_csv(const char *filename) {
     LabelledData data;
 
