@@ -7,12 +7,21 @@
 #define GP_WRITE(fmt, ...) \
         do { \
             fprintf(gnuplot_file, fmt, ##__VA_ARGS__); \
+            fprintf(external_file, fmt, ##__VA_ARGS__); \
         } while (0)
 
 void plot_clusters(const Matrix *X, const Matrix *labels) {
+
     FILE *gnuplot_file = popen("gnuplot -persist", "w");
     if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot\n");
+        return;
+    }
+
+    FILE *external_file = fopen("plots/clustering_plot.gnu -persist", "w");
+    if (!external_file) {
+        fprintf(stderr, "Error opening external file\n");
+        if (external_file) fclose(external_file);
         return;
     }
 

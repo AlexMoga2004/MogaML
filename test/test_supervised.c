@@ -245,9 +245,6 @@ void test_knn_classification() {
 
     Matrix predictions = KNN_predict(&model, &x_new);
 
-    printf("Classification predictions:\n");
-    Matrix_display(&predictions);
-
     FILE *train_data_file = fopen("train_data.tmp", "w");
     for (int i = 0; i < X.rows; ++i) {
         fprintf(train_data_file, "%f %f %d\n", X.data[i][0], X.data[i][1], (int)y.data[i][0]);
@@ -392,9 +389,6 @@ void test_naive_bayes() {
     new_data.y = new_y;
 
     Matrix predictions = GaussianNBC_predict(&model, &new_data.X);
-
-    printf("Predictions:\n");
-    Matrix_display(&predictions);
 
     FILE *gnuplot_file = popen("gnuplot -persist", "w");
     if (!gnuplot_file) {
