@@ -246,21 +246,16 @@ void test_knn_regression() {
 void test_logistic_regression() {
     printf("Testing LogisticRegression...\n");
 
-    // Read data from CSV file
     LabelledData data = Supervised_read_csv("test/test_data/logistic_regression_data.csv");
 
-    // Initialize and train the logistic regression model
     LogisticRegressionModel model = LogisticRegression(&data.X, &data.y);
     LogisticRegression_train(&model);
 
-    // Generate synthetic data for testing
     Matrix X_new, y_new;
     generate_synthetic_data(&X_new, &y_new, 10, data.X.cols);
 
-    // Predict using the trained model
     Matrix y_pred = LogisticRegression_predict(&model, &X_new);
 
-    // Open a pipe to gnuplot
     FILE *gnuplot_file = popen("gnuplot -persist", "w");
     if (!gnuplot_file) {
         fprintf(stderr, "Error opening gnuplot\n");
@@ -268,17 +263,12 @@ void test_logistic_regression() {
         return;
     }
 
-    // Helper macro to write to both the file and gnuplot
-    
-
-    // Write gnuplot commands to the file and gnuplot
     GP_WRITE("set title 'Logistic Regression Model'\n");
     GP_WRITE("set xlabel 'Feature 1'\n");
     GP_WRITE("set ylabel 'Feature 2'\n");
     GP_WRITE("set style data points\n");
     GP_WRITE("set pointsize 1.5\n");
 
-    // Plot the original data
     GP_WRITE("plot '-' using 1:2:($3 == 1 ? 1 : 2):($3 == 1 ? 2 : 1) with points pt variable lc variable title 'Original Data',\\\n");
     GP_WRITE("     '-' using 1:2:($3 > 0.5 ? 2 : 1) with points pt 7 lc variable title 'Predicted Data'\n");
     for (int i = 0; i < data.X.rows; ++i) {
