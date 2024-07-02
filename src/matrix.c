@@ -363,7 +363,6 @@ Matrix Matrix_slice_rows(const Matrix *mat, int start, int end) {
 }
 
 Matrix Matrix_submatrix(const Matrix *mat, int start_row, int end_row, int start_col, int end_col) {
-    // Check validity of indices
     if (start_row < 0 || start_row >= mat->rows || end_row <= start_row || end_row > mat->rows ||
         start_col < 0 || start_col >= mat->cols || end_col <= start_col || end_col > mat->cols) {
         ERROR("Error in Matrix_submatrix: invalid submatrix indices\n");
@@ -457,7 +456,6 @@ SVDResult Matrix_svd(const Matrix *mat) {
     Matrix matT = Matrix_transpose(mat);
     Matrix matTmat = Matrix_multiply(&matT, mat);
 
-    // for (int s = 0; s < 1; ++s) {
     for (int s = 0; s < k; ++s) {
         // Initialize random vector x
         Matrix x = Matrix_zeros(mat->cols, 1);
