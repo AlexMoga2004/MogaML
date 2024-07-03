@@ -77,6 +77,72 @@ Matrix NN_forward_pass(NeuralNetwork *network, const Matrix *input) {
     exit(EXIT_FAILURE);
 }
 
-// Matrix NN_backward_pass(NeuralNetwork *network, const Matrix *input) {
+void NN_backpropagation(NeuralNetwork *network, const Matrix *input, const Matrix *expected_output, double learning_rate) {
+    int num_layers = network->num_layers;
+    Matrix activations[num_layers + 1];
+    Matrix z_values[num_layers];
+    
+    activations[0] = Matrix_clone(input);
+    for (int layer_num = 0; layer_num < num_layers; ++layer_num) {
+        Layer current_layer = network->layers[layer_num];
+        Matrix z = Matrix_zeros(current_layer.num_neurons, 1);
+        Matrix activation = Matrix_zeros(current_layer.num_neurons, 1);
 
-// }
+        for (int neuron_num = 0; neuron_num < current_layer.num_neurons; ++neuron_num) {
+            Neuron neuron = current_layer.neurons[neuron_num];
+            double preactivation = neuron.bias;
+
+            for (int i = 0; i < neuron.weights.rows; ++i) {
+                preactivation += neuron.weights.data[i][0] * activations[layer_num].data[i][0];
+            }
+            z.data[neuron_num][0] = preactivation;
+            activation.data[neuron_num][0] = neuron.activation.apply(preactivation);
+        }
+
+        z_values[layer_num] = z;
+        activations[layer_num + 1] = activation;
+    }
+
+    Matrix output_error = Matrix_sub(&activations[num_layers], expected_output);  
+
+    for (int layer_num = num_layers - 1; layer_num >= 0; --layer_num) {
+        Layer current_layer = network->layers[layer_num];
+        Matrix layer_error = Matrix_zeros(current_layer.num_neurons, 1);
+
+        for (int neuron_num = 0; neuron_num < current_layer.num_neurons; ++neuron_num) {
+            Neuron *neuron = &current_layer.neurons[neuron_num];
+            double z = z_values[layer_num].data[neuron_num][0];
+            double delta = output_error.data[neuron_num][0] * neuron->activation.apply_derivative(z);
+
+            layer_error.data[neuron_num][0] = delta;
+
+            for (int i = 0; i < neuron->weights.rows; ++i) {
+                neuron->weights.data[i][0] -= learning_rate * delta * activations[layer_num].data[i][0];
+            }
+            neuron->bias -= learning_rate * delta;
+        }
+
+        if (layer_num > 0) {
+            Matrix new_error = Matrix_zeros(activations[layer_num].rows, 1);
+            for (int i = 0; i < activations[layer_num].rows; ++i) {
+                double sum = 0.0;
+                for (int neuron_num = 0; neuron_num < current_layer.num_neurons; ++neuron_num) {
+                    Neuron neuron = current_layer.neurons[neuron_num];
+                    sum += neuron.weights.data[i][0] * layer_error.data[neuron_num][0];
+                }
+                new_error.data[i][0] = sum;
+            }
+            Matrix_free(output_error);
+            output_error = new_error;
+        }
+
+        Matrix_free(layer_error);
+    }
+
+    for (int i = 0; i < num_layers + 1; ++i) {
+        Matrix_free(activations[i]);
+        Matrix_free(z_values[i]);
+    }
+
+    Matrix_free(output_error);
+}
