@@ -77,7 +77,7 @@ Matrix NN_forward_pass(NeuralNetwork *network, const Matrix *input) {
     exit(EXIT_FAILURE);
 }
 
-void NN_backpropagation(NeuralNetwork *network, const Matrix *input, const Matrix *expected_output, double learning_rate) {
+void NN_backward_pass(NeuralNetwork *network, const Matrix *input, const Matrix *expected_output, double learning_rate) {
     int num_layers = network->num_layers;
     Matrix activations[num_layers + 1];
     Matrix z_values[num_layers];
