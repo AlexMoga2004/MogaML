@@ -107,45 +107,183 @@ double Matrix_frobenius_norm(const Matrix *mat);
 double Vector_norm(const Matrix *mat, unsigned int k);
 
 /**
- * @brief Computes the largest value in a row vector
+ * @brief Computes the largest value in a column vector
  * 
  * @param mat Pointer to the Vector (embedded in a Matrix)
  * @return double Value of the largest element in the Vector
- * @throw Exception for Matrices that are not row vectors (Must have dimension (Nx1))
+ * @throw Exception for Matrices that are not column vectors (Must have dimension (Nx1))
  */
 double Vector_max(const Matrix *mat);
 
 /**
- * @brief Computes the index of the largest value in a row vector
+ * @brief Computes the index of the largest value in a column vector
  * 
  * @param mat Pointer to the Vector (embedded in a Matrix)
  * @return int Index of the largest element in the Vector
- * @throw Exception for Matrices that are not row vectors (Must have dimension (Nx1))
+ * @throw Exception for Matrices that are not column vectors (Must have dimension (Nx1))
  */
 int Vector_max_index(const Matrix *mat);
 
 /**
- * @brief 
+ * @brief Initialises new Matrix with entries set to 0
  * 
- * @param rows 
- * @param cols 
+ * @param rows Number of rows in the Matrix
+ * @param cols Number of columns in the Matrix
  * @return Matrix 
  */
 Matrix Matrix_zeros(int rows, int cols);
+
+/**
+ * @brief Initialises an Identity matrix (square matrix with diagonal entries 1)
+ * 
+ * @param size Number of rows and columns
+ * @return Matrix 
+ */
 Matrix Matrix_identity(int size);
+
+/**
+ * @brief Initialises a Matrix given a 2D array of elements
+ * 
+ * @param rows Number of rows in the Matrix
+ * @param cols Number of columns in the Matrix
+ * @param data 2D Array, containing the rows of the Matrix
+ * @return Matrix 
+ */
 Matrix Matrix_from_array(int rows, int cols, double *data);
+
+/**
+ * @brief Scales a matrix by a constant factor
+ * 
+ * @param c Factor
+ * @param mat Pointer to original Matrix
+ * @return New Matrix
+ */
 Matrix Matrix_scale(double c, const Matrix *mat);
+
+/**
+ * @brief Sums the entries in two Matrices element-wise
+ * 
+ * @param mat1 Pointer to first Matrix
+ * @param mat2 Pointer to second Matrix
+ * @return Result of the Matrix addition
+ * @throw Exception when the Matrices have different dimensions
+ */
 Matrix Matrix_add(const Matrix *mat1, const Matrix *mat2);
+
+/**
+ * @brief Subtracts the entries in two Matrices element-wise
+ * 
+ * @param mat1 Pointer to first Matrix
+ * @param mat2 Pointer to second Matrix
+ * @return Result of the Matrix subtraction
+ * @throw Exception when the Matrices have different dimensions
+ */
 Matrix Matrix_sub(const Matrix *mat1, const Matrix *mat2);
+
+/**
+ * @brief Multiplies two Matrices
+ * 
+ * @param mat1 Pointer to first Matrix
+ * @param mat2 Pointer to second Matrix
+ * @return Result of Matrix multiplication
+ * @throw Exception, requires mat1->cols == mat2->rows
+ */
 Matrix Matrix_multiply(const Matrix *mat1, const Matrix *mat2);
+
+/**
+ * @brief Computes the minor of a Matrix by removing a row and a column
+ * 
+ * @param mat Pointer to original Matrix
+ * @param row Index of row to remove
+ * @param col Index of column to remove
+ * @return Remaining Matrix minor
+ * @throw Exception, requires 0 <= row < Matrix.rows && 0 <= col < Matrix.cols
+ */
 Matrix Matrix_minor(const Matrix *mat, int row, int col);
+
+/**
+ * @brief Get a single row from a matrix
+ * 
+ * @param mat Pointer to original Matrix
+ * @param row Index of row to fetch
+ * @return Row vector (in Matrix form) containing the desired row 
+ * @throw Exception, requires 0 <= row < Matrix.rows
+ */
 Matrix Matrix_row(const Matrix *mat, int row);
+
+/**
+ * @brief Get a single column from a matrix
+ * 
+ * @param mat Pointer to original Matrix
+ * @param col Index of column to fetch
+ * @return Column vector (in Matrix form) containing the desired column 
+ * @throw Exception, requires 0 <= col < Matrix.cols
+ */
 Matrix Matrix_col(const Matrix *mat, int col);
+
+/**
+ * @brief Get rows within the specified range
+ * 
+ * @param mat Original matrix
+ * @param start Index to start fetching from (inclusive)
+ * @param end Index to stop fetching (exclusive)
+ * @return Sub-matrix containing specified rows
+ * @throw Exception, requires 0 <= start < end <= matrix.rows
+ */
 Matrix Matrix_slice_rows(const Matrix *mat, int start, int end);
+
+/**
+ * @brief Get a Matrix that contains a subset of the rows and columns
+ * 
+ * @param mat Pointer to original Matrix
+ * @param start_row Index to start fetching rows from (inclusive)
+ * @param end_row Index to stop fetching rows from (exclusive)
+ * @param start_col Index to start fetching cols from (inclusive)
+ * @param end_col Index to stop fetching cols from (exclusive)
+ * @return Matrix containing the specified rows and columns
+ * @throw Exception, requires 0 <= start_row < end_row <= mat->rows
+ */
 Matrix Matrix_submatrix(const Matrix *mat, int start_row, int end_row, int start_col, int end_col);
+
+/**
+ * @brief Flip the rows and columns of a Matrix
+ * 
+ * @param mat Pointer to original matrix
+ * @return Transposed Matrix
+ */
 Matrix Matrix_transpose(const Matrix *mat);
+
+/**
+ * @brief Create a new matrix with identical entries
+ * 
+ * @param mat Pointer to originial Matrix
+ * @return Identical Matrix
+ */
 Matrix Matrix_clone(const Matrix *mat);
+
+/**
+ * @brief Compute the inverse of a square Matrix
+ * 
+ * @param mat Pointer to original Matrix
+ * @return Matrix 
+ * @throw Exception for non-square Matrices, and for singular Matrices
+ */
 Matrix Matrix_inverse(const Matrix *mat);
+
+/**
+ * @brief Return the solution to the equation Ax=b
+ * 
+ * @param A Pointer to Matrix A
+ * @param b Pointer to column Vector b (embedded as a Matrix)
+ * @return Column vector x as a Matrix, the solution to the equation
+ * @throw Exception, for incompatible dimensions, or singular Matrices A
+ */
 Matrix Matrix_solve(const Matrix *A, const Matrix *b);
 
+/**
+ * @brief Compute the Singular Value Decomposition (SVD) of a Matrix
+ * 
+ * @param mat Pointer to Matrix
+ * @return SVDResult containing orthonormal Matrices U, V, and diagonal Matrix Sigma with entries in decreasing order
+ */
 SVDResult Matrix_svd(const Matrix *mat);
