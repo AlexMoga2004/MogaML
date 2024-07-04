@@ -32,6 +32,12 @@ double standard_normal() {
     return sqrt(rand1) * cos(rand2);
 }
 
+/** 
+ * @brief Frees the memory allocated for the Matrix
+ * 
+ * @param mat Matrix to be freed 
+ * @note Subsequent accessing of Matrix data causes segfault
+ */
 void Matrix_free(Matrix mat) { 
 	for (int i = 0; i < mat.rows; ++i) { 
 		free(mat.data[i]);
@@ -39,6 +45,11 @@ void Matrix_free(Matrix mat) {
 	free(mat.data);
 } 
 
+/**
+ * @brief Sets all entries of the Matrix to 0
+ * 
+ * @param mat Pointer to Matrix to be reset
+ */
 void Matrix_reset(Matrix *mat) {
 	for (int i = 0; i < mat->rows; ++i) {
 		for (int j = 0; j < mat->cols; ++j) {
@@ -47,6 +58,11 @@ void Matrix_reset(Matrix *mat) {
 	}
 }
 
+/**
+ * @brief Prints the contents of the mAtrix to stdout, formatted with newlines
+ * 
+ * @param mat Pointer to Matrix to be displayed
+ */
 void Matrix_display(const Matrix *mat) { 
 	for (int i = 0; i < mat->rows; ++i) { 
 		for (int j = 0; j < mat->cols; ++j) { 
@@ -57,34 +73,58 @@ void Matrix_display(const Matrix *mat) {
 	printf("\n");
 }
 
-int Matrix_equal(const Matrix *mat1, const Matrix *mat2) {
+/**
+ * @brief Checks if two Matrices are pairwise (exactly) equal
+ * 
+ * @param mat1 Pointer to first Matrix
+ * @param mat2 Pointer to second Matrix
+ * @return true if the matrices have the same dimension, and have equal entries
+ * @return false otherwise
+ */
+bool Matrix_equal(const Matrix *mat1, const Matrix *mat2) {
     if (mat1->rows != mat2->rows || mat1->cols != mat2->cols) {
-        return 0;
+        return false;
     }
     for (int i = 0; i < mat1->rows; i++) {
         for (int j = 0; j < mat1->cols; j++) {
             if (fabs(mat1->data[i][j] - mat2->data[i][j]) > MATRIX_TOLERANCE) {
-                return 0;
+                return false;
             }
         }
     }
-    return 1;
+    return true;
 }
 
-int Matrix_approx_equal(const Matrix *mat1, const Matrix *mat2, double tolerance) {
+/**
+ * @brief Checks if two Matrices are pairwise equal within a given tolerance
+ * 
+ * @param mat1 Pointer to first Matrix
+ * @param mat2 Pointer to second Matrix
+ * @param tolerance Maximum difference between each element 
+ * @return true if the matrices have the same dimension, and the entries are within the tolerance of each other
+ * @return false otherwise
+ */
+bool Matrix_approx_equal(const Matrix *mat1, const Matrix *mat2, double tolerance) {
     if (mat1->rows != mat2->rows || mat1->cols != mat2->cols) {
-        return 0;
+        return false;
     }
     for (int i = 0; i < mat1->rows; i++) {
         for (int j = 0; j < mat1->cols; j++) {
             if (fabs(mat1->data[i][j] - mat2->data[i][j]) > tolerance) {
-                return 0;
+                return false;
             }
         }
     }
-    return 1;
+    return true;
 }
 
+/**
+ * @brief Computes the determinant of a square Matrix
+ * 
+ * @param mat Pointer to the Matrix
+ * @return double Value of the determinant
+ * @throw Exception for non-square Matrices
+ */
 double Matrix_det(const Matrix *mat) { 
 	if (mat->rows != mat->cols) {
 		ERROR("Error in Matrix_det, dimension mismatch!\n");
@@ -103,6 +143,13 @@ double Matrix_det(const Matrix *mat) {
 	return result;
 }
 
+/**
+ * @brief Computes the sum of the diagonal entries of a square Matrix
+ * 
+ * @param mat Pointer to the Matrix
+ * @returns double Value of the trace
+ * @throw Exception for non-square Matrices
+ */
 double Matrix_trace(const Matrix *mat) {
 	if (mat->rows != mat->cols) {
 		ERROR("error in Matrix_trace, non-square matrix!\n");
@@ -118,6 +165,12 @@ double Matrix_trace(const Matrix *mat) {
 	return result;
 }
 
+/**
+ * @brief Computes the l2-norm of a Matrix
+ * 
+ * @param mat Pointer to the Matrix
+ * @return double value of the l2-norm
+ */
 double Matrix_norm(const Matrix *mat) {
     double norm = 0.0;
     for (int i = 0; i < mat->rows; ++i) {
@@ -128,6 +181,12 @@ double Matrix_norm(const Matrix *mat) {
     return sqrt(norm);
 }
 
+/**
+ * @brief Computes the frobenius norm of a Matrix
+ * 
+ * @param mat Pointer to the Matrix
+ * @return double value of the frobenius norm
+ */
 double Matrix_frobenius_norm(const Matrix *mat) {
 	Matrix matT = Matrix_transpose(mat);
 	Matrix mat_matT = Matrix_multiply(mat, &matT);
@@ -136,7 +195,14 @@ double Matrix_frobenius_norm(const Matrix *mat) {
 	);
 }
 
-double Vector_norm(const Matrix *mat, double l) {
+/**
+ * @brief Computes the l-k norm of a Vector
+ * 
+ * @param mat Pointer to the Vector (embedded in a Matrix)
+ * @param k Non-negative integer to adjust norm type
+ * @return double l-k norm
+ */
+double Vector_norm(const Matrix *mat, unsigned int k) {
 	if (mat->cols != 1) {
 		ERROR("Error in Vector_norm, not a vector!");
 		exit(EXIT_FAILURE);
@@ -144,12 +210,19 @@ double Vector_norm(const Matrix *mat, double l) {
 
 	double sum = 0.0;
 	for (int i = 0; i < mat->rows; ++i) {
-		sum += fabs(pow(mat->data[i][0], l));
+		sum += fabs(pow(mat->data[i][0], k));
 	}
 
-	return pow(sum, 1/l);
+	return pow(sum, 1/(double)k);
 }
 
+/**
+ * @brief Computes the largest value in a row vector
+ * 
+ * @param mat Pointer to the Vector (embedded in a Matrix)
+ * @return double Value of the largest element in the Vector
+ * @throw Exception for Matrices that are not row vectors (Must have dimension (Nx1))
+ */
 double Vector_max(const Matrix *mat) {
 	if (mat->cols != 1) {
 		ERROR("Error in Vector_max_index, not a vector!");
@@ -167,7 +240,14 @@ double Vector_max(const Matrix *mat) {
 	return max;
 }
 
-double Vector_max_index(const Matrix *mat) {
+/**
+ * @brief Computes the index of the largest value in a row vector
+ * 
+ * @param mat Pointer to the Vector (embedded in a Matrix)
+ * @return int Index of the largest element in the Vector
+ * @throw Exception for Matrices that are not row vectors (Must have dimension (Nx1))
+ */
+int Vector_max_index(const Matrix *mat) {
 	if (mat->cols != 1) {
 		ERROR("Error in Vector_max_index, not a vector!");
 		exit(EXIT_FAILURE);
