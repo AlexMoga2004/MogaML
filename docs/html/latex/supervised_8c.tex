@@ -1,0 +1,286 @@
+\hypertarget{supervised_8c}{}\doxysection{src/supervised.c File Reference}
+\label{supervised_8c}\index{src/supervised.c@{src/supervised.c}}
+{\ttfamily \#include \char`\"{}supervised.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{supervised_8c_a15378cd15bafb3a79061424b452497aa}{ERROR}}(fmt, ...)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{supervised_8c_aa127a892813ccc0e97d691458451764c}{Supervised\+\_\+find\+\_\+nearest\+\_\+centroid}} (const double $\ast$point, const Matrix $\ast$centroids)
+\item 
+Linear\+Regression\+Model \mbox{\hyperlink{supervised_8c_ac010c236594f34eec858d56129c90598}{Linear\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y)
+\item 
+Linear\+Regression\+Model \mbox{\hyperlink{supervised_8c_a494c1f52b29734bf3c26527f14471199}{Ridge\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y, double lambda)
+\item 
+Linear\+Regression\+Model \mbox{\hyperlink{supervised_8c_ada92614f6bb9b5485e4848ca78b7ec5f}{Lasso\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y, double lambda)
+\item 
+Loss\+Function \mbox{\hyperlink{supervised_8c_ab940090e3cc4ce97d8f33093c4fef34c}{Linear\+Regression\+\_\+default\+\_\+loss}} ()
+\item 
+Loss\+Function \mbox{\hyperlink{supervised_8c_ab52dbcf7b69725ca95e4cab15e30edca}{Ridge\+Regression\+\_\+default\+\_\+loss}} ()
+\item 
+Loss\+Function \mbox{\hyperlink{supervised_8c_a1a14c0628471a3d4d7b0796b67621671}{Lasso\+Regression\+\_\+default\+\_\+loss}} ()
+\item 
+void \mbox{\hyperlink{supervised_8c_aa76664efc74e09516a30e62d88e4f4bd}{Linear\+Regression\+\_\+set\+\_\+loss}} (Linear\+Regression\+Model $\ast$model, Loss\+Function loss\+\_\+function)
+\item 
+void \mbox{\hyperlink{supervised_8c_a775d600b7b79920fddae84a00a70e73f}{Linear\+Regression\+\_\+train}} (Linear\+Regression\+Model $\ast$model)
+\item 
+void \mbox{\hyperlink{supervised_8c_ad2579d63c38b43bd3c8d312886a3c09b}{Linear\+Regression\+\_\+set\+\_\+mode}} (Linear\+Regression\+Model $\ast$model, enum Computation\+Mode mode)
+\item 
+void \mbox{\hyperlink{supervised_8c_a294ebe78ea4cf4efc94d78e876a8ad59}{Linear\+Regression\+\_\+free}} (Linear\+Regression\+Model model)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_acfaa3c2f34733c263cea22c0307ccc86}{Linear\+Regression\+\_\+exact\+\_\+optimum}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$hyper\+\_\+params)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_a5a27dcfd4a3058ac540a1dda98c3f014}{Ridge\+Regression\+\_\+exact\+\_\+optimum}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$hyper\+\_\+params)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_a2953b6fe071ac2ae528194f75f7a2262}{Lasso\+Regression\+\_\+exact\+\_\+optimum}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$hyper\+\_\+params)
+\item 
+double \mbox{\hyperlink{supervised_8c_a607a8b1aad07b768eec253d04e3e48f2}{Linear\+Regression\+\_\+compute\+\_\+mse}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
+\item 
+double \mbox{\hyperlink{supervised_8c_a15ce02dd066b7b96c3007af6fd6b41aa}{Ridge\+Regression\+\_\+compute\+\_\+mse}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
+\item 
+double \mbox{\hyperlink{supervised_8c_a4c7df091d3f37eec716c1154f5c94b46}{Lasso\+Regression\+\_\+compute\+\_\+mse}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
+\item 
+Labelled\+Data \mbox{\hyperlink{supervised_8c_a77ba20a314ffc525b7ecd0fe59346f1d}{Supervised\+\_\+read\+\_\+csv}} (const char $\ast$filename)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_a6053843927a90b4f99000efe62a8fb97}{Linear\+Regression\+\_\+predict}} (const Linear\+Regression\+Model $\ast$model, const Matrix $\ast$x\+\_\+new)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_acb7456e6a7176158d8e22fce435a8bdd}{Linear\+Regression\+\_\+compute\+\_\+gradient}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_a867008d90b95e5461b7eda382d9d7d65}{Ridge\+Regression\+\_\+compute\+\_\+gradient}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_a79c3fbe41cba464f0373d8ab6b1fbdea}{Lasso\+Regression\+\_\+compute\+\_\+gradient}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
+\item 
+KNNModel \mbox{\hyperlink{supervised_8c_ac9ed3dd691efd68c4f25a2f7d3afbd5e}{KNNClassifier}} (unsigned int k, const Matrix $\ast$X, const Matrix $\ast$y)
+\item 
+KNNModel \mbox{\hyperlink{supervised_8c_a4a2e38bdf8cbbc53376ae4552e62c11a}{KNNRegressor}} (unsigned int k, const Matrix $\ast$X, const Matrix $\ast$y)
+\item 
+void \mbox{\hyperlink{supervised_8c_a3776959a50f51e4bc8b576ea3437fcda}{KNN\+\_\+free}} (KNNModel model)
+\item 
+void \mbox{\hyperlink{supervised_8c_a316e5d6e0bc2e41113efcdce20b6d1ae}{KNN\+\_\+append\+\_\+data}} (KNNModel $\ast$model, const Matrix $\ast$X\+\_\+new, const Matrix $\ast$y\+\_\+new)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_a8825870bd962004f547bb30c8104c626}{KNN\+\_\+predict}} (const KNNModel $\ast$model, const Matrix $\ast$x\+\_\+new)
+\item 
+Logistic\+Regression\+Model \mbox{\hyperlink{supervised_8c_a85948da0aa56844e8b06bdeeeb33def2}{Logistic\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y)
+\item 
+void \mbox{\hyperlink{supervised_8c_a2adc34eb19c5b6aa555de1379fd9f77f}{Logistic\+Regression\+\_\+train}} (Logistic\+Regression\+Model $\ast$model)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_aee9e0a96e668ac1c6ed4ad4850e052b7}{Logistic\+Regression\+\_\+predict}} (const Logistic\+Regression\+Model $\ast$model, const Matrix $\ast$X\+\_\+new)
+\item 
+Gaussian\+NBCModel \mbox{\hyperlink{supervised_8c_a1dd4c95c33c07ccf88c1ad0f30a192d1}{Gaussian\+NBC}} (const Matrix $\ast$X, const Matrix $\ast$y)
+\item 
+Matrix \mbox{\hyperlink{supervised_8c_ac4813e6a41c81d0d597460aee8de74b9}{Gaussian\+NBC\+\_\+predict}} (const Gaussian\+NBCModel $\ast$model, const Matrix $\ast$X\+\_\+new)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{supervised_8c_a15378cd15bafb3a79061424b452497aa}\label{supervised_8c_a15378cd15bafb3a79061424b452497aa}} 
+\index{supervised.c@{supervised.c}!ERROR@{ERROR}}
+\index{ERROR@{ERROR}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{ERROR}{ERROR}}
+{\footnotesize\ttfamily \#define ERROR(\begin{DoxyParamCaption}\item[{}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ fmt,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{supervised_8c_a1dd4c95c33c07ccf88c1ad0f30a192d1}\label{supervised_8c_a1dd4c95c33c07ccf88c1ad0f30a192d1}} 
+\index{supervised.c@{supervised.c}!GaussianNBC@{GaussianNBC}}
+\index{GaussianNBC@{GaussianNBC}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{GaussianNBC()}{GaussianNBC()}}
+{\footnotesize\ttfamily Gaussian\+NBCModel Gaussian\+NBC (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_ac4813e6a41c81d0d597460aee8de74b9}\label{supervised_8c_ac4813e6a41c81d0d597460aee8de74b9}} 
+\index{supervised.c@{supervised.c}!GaussianNBC\_predict@{GaussianNBC\_predict}}
+\index{GaussianNBC\_predict@{GaussianNBC\_predict}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{GaussianNBC\_predict()}{GaussianNBC\_predict()}}
+{\footnotesize\ttfamily Matrix Gaussian\+NBC\+\_\+predict (\begin{DoxyParamCaption}\item[{const Gaussian\+NBCModel $\ast$}]{model,  }\item[{const Matrix $\ast$}]{X\+\_\+new }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a316e5d6e0bc2e41113efcdce20b6d1ae}\label{supervised_8c_a316e5d6e0bc2e41113efcdce20b6d1ae}} 
+\index{supervised.c@{supervised.c}!KNN\_append\_data@{KNN\_append\_data}}
+\index{KNN\_append\_data@{KNN\_append\_data}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{KNN\_append\_data()}{KNN\_append\_data()}}
+{\footnotesize\ttfamily void KNN\+\_\+append\+\_\+data (\begin{DoxyParamCaption}\item[{KNNModel $\ast$}]{model,  }\item[{const Matrix $\ast$}]{X\+\_\+new,  }\item[{const Matrix $\ast$}]{y\+\_\+new }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a3776959a50f51e4bc8b576ea3437fcda}\label{supervised_8c_a3776959a50f51e4bc8b576ea3437fcda}} 
+\index{supervised.c@{supervised.c}!KNN\_free@{KNN\_free}}
+\index{KNN\_free@{KNN\_free}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{KNN\_free()}{KNN\_free()}}
+{\footnotesize\ttfamily void KNN\+\_\+free (\begin{DoxyParamCaption}\item[{KNNModel}]{model }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a8825870bd962004f547bb30c8104c626}\label{supervised_8c_a8825870bd962004f547bb30c8104c626}} 
+\index{supervised.c@{supervised.c}!KNN\_predict@{KNN\_predict}}
+\index{KNN\_predict@{KNN\_predict}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{KNN\_predict()}{KNN\_predict()}}
+{\footnotesize\ttfamily Matrix KNN\+\_\+predict (\begin{DoxyParamCaption}\item[{const KNNModel $\ast$}]{model,  }\item[{const Matrix $\ast$}]{x\+\_\+new }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_ac9ed3dd691efd68c4f25a2f7d3afbd5e}\label{supervised_8c_ac9ed3dd691efd68c4f25a2f7d3afbd5e}} 
+\index{supervised.c@{supervised.c}!KNNClassifier@{KNNClassifier}}
+\index{KNNClassifier@{KNNClassifier}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{KNNClassifier()}{KNNClassifier()}}
+{\footnotesize\ttfamily KNNModel KNNClassifier (\begin{DoxyParamCaption}\item[{unsigned int}]{k,  }\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a4a2e38bdf8cbbc53376ae4552e62c11a}\label{supervised_8c_a4a2e38bdf8cbbc53376ae4552e62c11a}} 
+\index{supervised.c@{supervised.c}!KNNRegressor@{KNNRegressor}}
+\index{KNNRegressor@{KNNRegressor}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{KNNRegressor()}{KNNRegressor()}}
+{\footnotesize\ttfamily KNNModel KNNRegressor (\begin{DoxyParamCaption}\item[{unsigned int}]{k,  }\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_ada92614f6bb9b5485e4848ca78b7ec5f}\label{supervised_8c_ada92614f6bb9b5485e4848ca78b7ec5f}} 
+\index{supervised.c@{supervised.c}!LassoRegression@{LassoRegression}}
+\index{LassoRegression@{LassoRegression}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LassoRegression()}{LassoRegression()}}
+{\footnotesize\ttfamily Linear\+Regression\+Model Lasso\+Regression (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{double}]{lambda }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a79c3fbe41cba464f0373d8ab6b1fbdea}\label{supervised_8c_a79c3fbe41cba464f0373d8ab6b1fbdea}} 
+\index{supervised.c@{supervised.c}!LassoRegression\_compute\_gradient@{LassoRegression\_compute\_gradient}}
+\index{LassoRegression\_compute\_gradient@{LassoRegression\_compute\_gradient}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LassoRegression\_compute\_gradient()}{LassoRegression\_compute\_gradient()}}
+{\footnotesize\ttfamily Matrix Lasso\+Regression\+\_\+compute\+\_\+gradient (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a4c7df091d3f37eec716c1154f5c94b46}\label{supervised_8c_a4c7df091d3f37eec716c1154f5c94b46}} 
+\index{supervised.c@{supervised.c}!LassoRegression\_compute\_mse@{LassoRegression\_compute\_mse}}
+\index{LassoRegression\_compute\_mse@{LassoRegression\_compute\_mse}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LassoRegression\_compute\_mse()}{LassoRegression\_compute\_mse()}}
+{\footnotesize\ttfamily double Lasso\+Regression\+\_\+compute\+\_\+mse (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a1a14c0628471a3d4d7b0796b67621671}\label{supervised_8c_a1a14c0628471a3d4d7b0796b67621671}} 
+\index{supervised.c@{supervised.c}!LassoRegression\_default\_loss@{LassoRegression\_default\_loss}}
+\index{LassoRegression\_default\_loss@{LassoRegression\_default\_loss}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LassoRegression\_default\_loss()}{LassoRegression\_default\_loss()}}
+{\footnotesize\ttfamily Loss\+Function Lasso\+Regression\+\_\+default\+\_\+loss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a2953b6fe071ac2ae528194f75f7a2262}\label{supervised_8c_a2953b6fe071ac2ae528194f75f7a2262}} 
+\index{supervised.c@{supervised.c}!LassoRegression\_exact\_optimum@{LassoRegression\_exact\_optimum}}
+\index{LassoRegression\_exact\_optimum@{LassoRegression\_exact\_optimum}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LassoRegression\_exact\_optimum()}{LassoRegression\_exact\_optimum()}}
+{\footnotesize\ttfamily Matrix Lasso\+Regression\+\_\+exact\+\_\+optimum (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_ac010c236594f34eec858d56129c90598}\label{supervised_8c_ac010c236594f34eec858d56129c90598}} 
+\index{supervised.c@{supervised.c}!LinearRegression@{LinearRegression}}
+\index{LinearRegression@{LinearRegression}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression()}{LinearRegression()}}
+{\footnotesize\ttfamily Linear\+Regression\+Model Linear\+Regression (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_acb7456e6a7176158d8e22fce435a8bdd}\label{supervised_8c_acb7456e6a7176158d8e22fce435a8bdd}} 
+\index{supervised.c@{supervised.c}!LinearRegression\_compute\_gradient@{LinearRegression\_compute\_gradient}}
+\index{LinearRegression\_compute\_gradient@{LinearRegression\_compute\_gradient}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression\_compute\_gradient()}{LinearRegression\_compute\_gradient()}}
+{\footnotesize\ttfamily Matrix Linear\+Regression\+\_\+compute\+\_\+gradient (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a607a8b1aad07b768eec253d04e3e48f2}\label{supervised_8c_a607a8b1aad07b768eec253d04e3e48f2}} 
+\index{supervised.c@{supervised.c}!LinearRegression\_compute\_mse@{LinearRegression\_compute\_mse}}
+\index{LinearRegression\_compute\_mse@{LinearRegression\_compute\_mse}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression\_compute\_mse()}{LinearRegression\_compute\_mse()}}
+{\footnotesize\ttfamily double Linear\+Regression\+\_\+compute\+\_\+mse (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_ab940090e3cc4ce97d8f33093c4fef34c}\label{supervised_8c_ab940090e3cc4ce97d8f33093c4fef34c}} 
+\index{supervised.c@{supervised.c}!LinearRegression\_default\_loss@{LinearRegression\_default\_loss}}
+\index{LinearRegression\_default\_loss@{LinearRegression\_default\_loss}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression\_default\_loss()}{LinearRegression\_default\_loss()}}
+{\footnotesize\ttfamily Loss\+Function Linear\+Regression\+\_\+default\+\_\+loss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_acfaa3c2f34733c263cea22c0307ccc86}\label{supervised_8c_acfaa3c2f34733c263cea22c0307ccc86}} 
+\index{supervised.c@{supervised.c}!LinearRegression\_exact\_optimum@{LinearRegression\_exact\_optimum}}
+\index{LinearRegression\_exact\_optimum@{LinearRegression\_exact\_optimum}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression\_exact\_optimum()}{LinearRegression\_exact\_optimum()}}
+{\footnotesize\ttfamily Matrix Linear\+Regression\+\_\+exact\+\_\+optimum (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a294ebe78ea4cf4efc94d78e876a8ad59}\label{supervised_8c_a294ebe78ea4cf4efc94d78e876a8ad59}} 
+\index{supervised.c@{supervised.c}!LinearRegression\_free@{LinearRegression\_free}}
+\index{LinearRegression\_free@{LinearRegression\_free}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression\_free()}{LinearRegression\_free()}}
+{\footnotesize\ttfamily void Linear\+Regression\+\_\+free (\begin{DoxyParamCaption}\item[{Linear\+Regression\+Model}]{model }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a6053843927a90b4f99000efe62a8fb97}\label{supervised_8c_a6053843927a90b4f99000efe62a8fb97}} 
+\index{supervised.c@{supervised.c}!LinearRegression\_predict@{LinearRegression\_predict}}
+\index{LinearRegression\_predict@{LinearRegression\_predict}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression\_predict()}{LinearRegression\_predict()}}
+{\footnotesize\ttfamily Matrix Linear\+Regression\+\_\+predict (\begin{DoxyParamCaption}\item[{const Linear\+Regression\+Model $\ast$}]{model,  }\item[{const Matrix $\ast$}]{x\+\_\+new }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_aa76664efc74e09516a30e62d88e4f4bd}\label{supervised_8c_aa76664efc74e09516a30e62d88e4f4bd}} 
+\index{supervised.c@{supervised.c}!LinearRegression\_set\_loss@{LinearRegression\_set\_loss}}
+\index{LinearRegression\_set\_loss@{LinearRegression\_set\_loss}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression\_set\_loss()}{LinearRegression\_set\_loss()}}
+{\footnotesize\ttfamily void Linear\+Regression\+\_\+set\+\_\+loss (\begin{DoxyParamCaption}\item[{Linear\+Regression\+Model $\ast$}]{model,  }\item[{Loss\+Function}]{loss\+\_\+function }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_ad2579d63c38b43bd3c8d312886a3c09b}\label{supervised_8c_ad2579d63c38b43bd3c8d312886a3c09b}} 
+\index{supervised.c@{supervised.c}!LinearRegression\_set\_mode@{LinearRegression\_set\_mode}}
+\index{LinearRegression\_set\_mode@{LinearRegression\_set\_mode}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression\_set\_mode()}{LinearRegression\_set\_mode()}}
+{\footnotesize\ttfamily void Linear\+Regression\+\_\+set\+\_\+mode (\begin{DoxyParamCaption}\item[{Linear\+Regression\+Model $\ast$}]{model,  }\item[{enum Computation\+Mode}]{mode }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a775d600b7b79920fddae84a00a70e73f}\label{supervised_8c_a775d600b7b79920fddae84a00a70e73f}} 
+\index{supervised.c@{supervised.c}!LinearRegression\_train@{LinearRegression\_train}}
+\index{LinearRegression\_train@{LinearRegression\_train}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LinearRegression\_train()}{LinearRegression\_train()}}
+{\footnotesize\ttfamily void Linear\+Regression\+\_\+train (\begin{DoxyParamCaption}\item[{Linear\+Regression\+Model $\ast$}]{model }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a85948da0aa56844e8b06bdeeeb33def2}\label{supervised_8c_a85948da0aa56844e8b06bdeeeb33def2}} 
+\index{supervised.c@{supervised.c}!LogisticRegression@{LogisticRegression}}
+\index{LogisticRegression@{LogisticRegression}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LogisticRegression()}{LogisticRegression()}}
+{\footnotesize\ttfamily Logistic\+Regression\+Model Logistic\+Regression (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_aee9e0a96e668ac1c6ed4ad4850e052b7}\label{supervised_8c_aee9e0a96e668ac1c6ed4ad4850e052b7}} 
+\index{supervised.c@{supervised.c}!LogisticRegression\_predict@{LogisticRegression\_predict}}
+\index{LogisticRegression\_predict@{LogisticRegression\_predict}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LogisticRegression\_predict()}{LogisticRegression\_predict()}}
+{\footnotesize\ttfamily Matrix Logistic\+Regression\+\_\+predict (\begin{DoxyParamCaption}\item[{const Logistic\+Regression\+Model $\ast$}]{model,  }\item[{const Matrix $\ast$}]{X\+\_\+new }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a2adc34eb19c5b6aa555de1379fd9f77f}\label{supervised_8c_a2adc34eb19c5b6aa555de1379fd9f77f}} 
+\index{supervised.c@{supervised.c}!LogisticRegression\_train@{LogisticRegression\_train}}
+\index{LogisticRegression\_train@{LogisticRegression\_train}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{LogisticRegression\_train()}{LogisticRegression\_train()}}
+{\footnotesize\ttfamily void Logistic\+Regression\+\_\+train (\begin{DoxyParamCaption}\item[{Logistic\+Regression\+Model $\ast$}]{model }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a494c1f52b29734bf3c26527f14471199}\label{supervised_8c_a494c1f52b29734bf3c26527f14471199}} 
+\index{supervised.c@{supervised.c}!RidgeRegression@{RidgeRegression}}
+\index{RidgeRegression@{RidgeRegression}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{RidgeRegression()}{RidgeRegression()}}
+{\footnotesize\ttfamily Linear\+Regression\+Model Ridge\+Regression (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{double}]{lambda }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a867008d90b95e5461b7eda382d9d7d65}\label{supervised_8c_a867008d90b95e5461b7eda382d9d7d65}} 
+\index{supervised.c@{supervised.c}!RidgeRegression\_compute\_gradient@{RidgeRegression\_compute\_gradient}}
+\index{RidgeRegression\_compute\_gradient@{RidgeRegression\_compute\_gradient}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{RidgeRegression\_compute\_gradient()}{RidgeRegression\_compute\_gradient()}}
+{\footnotesize\ttfamily Matrix Ridge\+Regression\+\_\+compute\+\_\+gradient (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a15ce02dd066b7b96c3007af6fd6b41aa}\label{supervised_8c_a15ce02dd066b7b96c3007af6fd6b41aa}} 
+\index{supervised.c@{supervised.c}!RidgeRegression\_compute\_mse@{RidgeRegression\_compute\_mse}}
+\index{RidgeRegression\_compute\_mse@{RidgeRegression\_compute\_mse}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{RidgeRegression\_compute\_mse()}{RidgeRegression\_compute\_mse()}}
+{\footnotesize\ttfamily double Ridge\+Regression\+\_\+compute\+\_\+mse (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_ab52dbcf7b69725ca95e4cab15e30edca}\label{supervised_8c_ab52dbcf7b69725ca95e4cab15e30edca}} 
+\index{supervised.c@{supervised.c}!RidgeRegression\_default\_loss@{RidgeRegression\_default\_loss}}
+\index{RidgeRegression\_default\_loss@{RidgeRegression\_default\_loss}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{RidgeRegression\_default\_loss()}{RidgeRegression\_default\_loss()}}
+{\footnotesize\ttfamily Loss\+Function Ridge\+Regression\+\_\+default\+\_\+loss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a5a27dcfd4a3058ac540a1dda98c3f014}\label{supervised_8c_a5a27dcfd4a3058ac540a1dda98c3f014}} 
+\index{supervised.c@{supervised.c}!RidgeRegression\_exact\_optimum@{RidgeRegression\_exact\_optimum}}
+\index{RidgeRegression\_exact\_optimum@{RidgeRegression\_exact\_optimum}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{RidgeRegression\_exact\_optimum()}{RidgeRegression\_exact\_optimum()}}
+{\footnotesize\ttfamily Matrix Ridge\+Regression\+\_\+exact\+\_\+optimum (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_aa127a892813ccc0e97d691458451764c}\label{supervised_8c_aa127a892813ccc0e97d691458451764c}} 
+\index{supervised.c@{supervised.c}!Supervised\_find\_nearest\_centroid@{Supervised\_find\_nearest\_centroid}}
+\index{Supervised\_find\_nearest\_centroid@{Supervised\_find\_nearest\_centroid}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{Supervised\_find\_nearest\_centroid()}{Supervised\_find\_nearest\_centroid()}}
+{\footnotesize\ttfamily int Supervised\+\_\+find\+\_\+nearest\+\_\+centroid (\begin{DoxyParamCaption}\item[{const double $\ast$}]{point,  }\item[{const Matrix $\ast$}]{centroids }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{supervised_8c_a77ba20a314ffc525b7ecd0fe59346f1d}\label{supervised_8c_a77ba20a314ffc525b7ecd0fe59346f1d}} 
+\index{supervised.c@{supervised.c}!Supervised\_read\_csv@{Supervised\_read\_csv}}
+\index{Supervised\_read\_csv@{Supervised\_read\_csv}!supervised.c@{supervised.c}}
+\doxysubsubsection{\texorpdfstring{Supervised\_read\_csv()}{Supervised\_read\_csv()}}
+{\footnotesize\ttfamily Labelled\+Data Supervised\+\_\+read\+\_\+csv (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+

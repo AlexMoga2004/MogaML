@@ -1,0 +1,465 @@
+\hypertarget{matrix_8c}{}\doxysection{src/matrix.c File Reference}
+\label{matrix_8c}\index{src/matrix.c@{src/matrix.c}}
+{\ttfamily \#include \char`\"{}matrix.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{matrix_8c_a15378cd15bafb3a79061424b452497aa}{ERROR}}(fmt, ...)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{matrix_8c_a312e8a3d627e5427365b31692b8de51f}{standard\+\_\+normal}} ()
+\item 
+void \mbox{\hyperlink{matrix_8c_a96816288c6884e9f08413215aefb32d9}{Matrix\+\_\+free}} (Matrix mat)
+\begin{DoxyCompactList}\small\item\em Frees the memory allocated for the Matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{matrix_8c_aee8ed44a01182faac1556a61205f83b9}{Matrix\+\_\+reset}} (Matrix $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Sets all entries of the Matrix to 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{matrix_8c_a5a7e20959850d975063407c016ac9277}{Matrix\+\_\+display}} (const Matrix $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Prints the contents of the m\+Atrix to stdout, formatted with newlines. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{matrix_8c_a1b1f80874edb42bff89a6d0c6b76d78e}{Matrix\+\_\+equal}} (const Matrix $\ast$mat1, const Matrix $\ast$mat2)
+\begin{DoxyCompactList}\small\item\em Checks if two Matrices are pairwise (exactly) equal. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{matrix_8c_af73def8ff253254749f8f2083ea75a2e}{Matrix\+\_\+approx\+\_\+equal}} (const Matrix $\ast$mat1, const Matrix $\ast$mat2, double tolerance)
+\begin{DoxyCompactList}\small\item\em Checks if two Matrices are pairwise equal within a given tolerance. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{matrix_8c_a212ad4a6e2d8696c7eacff7d98bdd09b}{Matrix\+\_\+det}} (const Matrix $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Computes the determinant of a square Matrix. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{matrix_8c_a2d4e88834683e2cf703275b6e619f82c}{Matrix\+\_\+trace}} (const Matrix $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Computes the sum of the diagonal entries of a square Matrix. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{matrix_8c_a595050b8411791fb7a2fe8d6cebdf1e7}{Matrix\+\_\+norm}} (const Matrix $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Computes the l2-\/norm of a Matrix. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{matrix_8c_a11d6307244299f68a42c8526cad7f818}{Matrix\+\_\+frobenius\+\_\+norm}} (const Matrix $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Computes the frobenius norm of a Matrix. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{matrix_8c_af1f1e0547156be5a61f10097e162094f}{Vector\+\_\+norm}} (const Matrix $\ast$mat, unsigned int k)
+\begin{DoxyCompactList}\small\item\em Computes the l-\/k norm of a Vector. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{matrix_8c_ae77636786c306a2ff8b90d3efc29b45e}{Vector\+\_\+max}} (const Matrix $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Computes the largest value in a row vector. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{matrix_8c_a01b7f6478c0d84f19c37c916845928e4}{Vector\+\_\+max\+\_\+index}} (const Matrix $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Computes the index of the largest value in a row vector. \end{DoxyCompactList}\item 
+Matrix \mbox{\hyperlink{matrix_8c_a5e4df77caabb780f85168caee87d85c7}{Matrix\+\_\+zeros}} (int rows, int cols)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_a1463d7db9f6090c50403d06373424fa8}{Matrix\+\_\+identity}} (int size)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_a249272b2dc585a5077eef59405ed50be}{Matrix\+\_\+from\+\_\+array}} (int rows, int cols, double $\ast$data)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_ae6d9d3c9ee403387d861b5c5854cf8f5}{Matrix\+\_\+scale}} (double c, const Matrix $\ast$mat)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_addbd35a76e06e9f400c43397cf152d3b}{Matrix\+\_\+add}} (const Matrix $\ast$mat1, const Matrix $\ast$mat2)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_a2ba47f703d2b329550e5596217f706a5}{Matrix\+\_\+sub}} (const Matrix $\ast$mat1, const Matrix $\ast$mat2)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_ae2f9d8786dd36019e6c8d185185a22cf}{Matrix\+\_\+multiply}} (const Matrix $\ast$mat1, const Matrix $\ast$mat2)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_ae78260007e51a5b3dae17601221f4efc}{Matrix\+\_\+minor}} (const Matrix $\ast$mat, int row, int col)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_ab34beacc26836893fcbc1b15dd4bb2f5}{Matrix\+\_\+row}} (const Matrix $\ast$mat, int row\+\_\+index)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_ae0020e44506794d7ee2c9db68b5d9076}{Matrix\+\_\+col}} (const Matrix $\ast$mat, int col\+\_\+index)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_a5b5215cf910962458c1ba78b6bc20ec3}{Matrix\+\_\+slice\+\_\+rows}} (const Matrix $\ast$mat, int start, int end)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_aecf30f35812fc667bdaf5725b7d0d437}{Matrix\+\_\+submatrix}} (const Matrix $\ast$mat, int start\+\_\+row, int end\+\_\+row, int start\+\_\+col, int end\+\_\+col)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_a4d9fbede80fd7ed4aa2574094af692a7}{Matrix\+\_\+transpose}} (const Matrix $\ast$mat)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_ad6d08df4d2f75ccc0ba405360b75b1a4}{Matrix\+\_\+clone}} (const Matrix $\ast$mat)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_a39e37ce76d2f9dc4f8da5f8dddbc4f2e}{Matrix\+\_\+inverse}} (const Matrix $\ast$mat)
+\item 
+Matrix \mbox{\hyperlink{matrix_8c_a086b1c20f55ff003583ce502449c04ba}{Matrix\+\_\+solve}} (const Matrix $\ast$A, const Matrix $\ast$b)
+\item 
+SVDResult \mbox{\hyperlink{matrix_8c_a16efaa7b2063f73abe048a4c2e9b3ee7}{Matrix\+\_\+svd}} (const Matrix $\ast$mat)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{matrix_8c_a4e37e2d0ea797e1f19a103dc45acbb6d}{MATRIX\+\_\+\+MAX\+\_\+\+ITER}} = 1000
+\item 
+const double \mbox{\hyperlink{matrix_8c_a9210573348d7ad7d594b21ddc2baf1c7}{MATRIX\+\_\+\+TOLERANCE}} = 1e-\/6
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{matrix_8c_a15378cd15bafb3a79061424b452497aa}\label{matrix_8c_a15378cd15bafb3a79061424b452497aa}} 
+\index{matrix.c@{matrix.c}!ERROR@{ERROR}}
+\index{ERROR@{ERROR}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{ERROR}{ERROR}}
+{\footnotesize\ttfamily \#define ERROR(\begin{DoxyParamCaption}\item[{}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ fmt,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{matrix_8c_addbd35a76e06e9f400c43397cf152d3b}\label{matrix_8c_addbd35a76e06e9f400c43397cf152d3b}} 
+\index{matrix.c@{matrix.c}!Matrix\_add@{Matrix\_add}}
+\index{Matrix\_add@{Matrix\_add}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_add()}{Matrix\_add()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+add (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat1,  }\item[{const Matrix $\ast$}]{mat2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_af73def8ff253254749f8f2083ea75a2e}\label{matrix_8c_af73def8ff253254749f8f2083ea75a2e}} 
+\index{matrix.c@{matrix.c}!Matrix\_approx\_equal@{Matrix\_approx\_equal}}
+\index{Matrix\_approx\_equal@{Matrix\_approx\_equal}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_approx\_equal()}{Matrix\_approx\_equal()}}
+{\footnotesize\ttfamily bool Matrix\+\_\+approx\+\_\+equal (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat1,  }\item[{const Matrix $\ast$}]{mat2,  }\item[{double}]{tolerance }\end{DoxyParamCaption})}
+
+
+
+Checks if two Matrices are pairwise equal within a given tolerance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat1} & Pointer to first Matrix \\
+\hline
+{\em mat2} & Pointer to second Matrix \\
+\hline
+{\em tolerance} & Maximum difference between each element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the matrices have the same dimension, and the entries are within the tolerance of each other 
+
+false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{matrix_8c_ad6d08df4d2f75ccc0ba405360b75b1a4}\label{matrix_8c_ad6d08df4d2f75ccc0ba405360b75b1a4}} 
+\index{matrix.c@{matrix.c}!Matrix\_clone@{Matrix\_clone}}
+\index{Matrix\_clone@{Matrix\_clone}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_clone()}{Matrix\_clone()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+clone (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ae0020e44506794d7ee2c9db68b5d9076}\label{matrix_8c_ae0020e44506794d7ee2c9db68b5d9076}} 
+\index{matrix.c@{matrix.c}!Matrix\_col@{Matrix\_col}}
+\index{Matrix\_col@{Matrix\_col}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_col()}{Matrix\_col()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+col (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat,  }\item[{int}]{col\+\_\+index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a212ad4a6e2d8696c7eacff7d98bdd09b}\label{matrix_8c_a212ad4a6e2d8696c7eacff7d98bdd09b}} 
+\index{matrix.c@{matrix.c}!Matrix\_det@{Matrix\_det}}
+\index{Matrix\_det@{Matrix\_det}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_det()}{Matrix\_det()}}
+{\footnotesize\ttfamily double Matrix\+\_\+det (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+
+
+Computes the determinant of a square Matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Pointer to the Matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double Value of the determinant 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & for non-\/square Matrices \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{matrix_8c_a5a7e20959850d975063407c016ac9277}\label{matrix_8c_a5a7e20959850d975063407c016ac9277}} 
+\index{matrix.c@{matrix.c}!Matrix\_display@{Matrix\_display}}
+\index{Matrix\_display@{Matrix\_display}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_display()}{Matrix\_display()}}
+{\footnotesize\ttfamily void Matrix\+\_\+display (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+
+
+Prints the contents of the m\+Atrix to stdout, formatted with newlines. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Pointer to Matrix to be displayed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8c_a1b1f80874edb42bff89a6d0c6b76d78e}\label{matrix_8c_a1b1f80874edb42bff89a6d0c6b76d78e}} 
+\index{matrix.c@{matrix.c}!Matrix\_equal@{Matrix\_equal}}
+\index{Matrix\_equal@{Matrix\_equal}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_equal()}{Matrix\_equal()}}
+{\footnotesize\ttfamily bool Matrix\+\_\+equal (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat1,  }\item[{const Matrix $\ast$}]{mat2 }\end{DoxyParamCaption})}
+
+
+
+Checks if two Matrices are pairwise (exactly) equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat1} & Pointer to first Matrix \\
+\hline
+{\em mat2} & Pointer to second Matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the matrices have the same dimension, and have equal entries 
+
+false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{matrix_8c_a96816288c6884e9f08413215aefb32d9}\label{matrix_8c_a96816288c6884e9f08413215aefb32d9}} 
+\index{matrix.c@{matrix.c}!Matrix\_free@{Matrix\_free}}
+\index{Matrix\_free@{Matrix\_free}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_free()}{Matrix\_free()}}
+{\footnotesize\ttfamily void Matrix\+\_\+free (\begin{DoxyParamCaption}\item[{Matrix}]{mat }\end{DoxyParamCaption})}
+
+
+
+Frees the memory allocated for the Matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Matrix to be freed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Subsequent accessing of Matrix data causes segfault 
+\end{DoxyNote}
+\mbox{\Hypertarget{matrix_8c_a11d6307244299f68a42c8526cad7f818}\label{matrix_8c_a11d6307244299f68a42c8526cad7f818}} 
+\index{matrix.c@{matrix.c}!Matrix\_frobenius\_norm@{Matrix\_frobenius\_norm}}
+\index{Matrix\_frobenius\_norm@{Matrix\_frobenius\_norm}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_frobenius\_norm()}{Matrix\_frobenius\_norm()}}
+{\footnotesize\ttfamily double Matrix\+\_\+frobenius\+\_\+norm (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+
+
+Computes the frobenius norm of a Matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Pointer to the Matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double value of the frobenius norm 
+\end{DoxyReturn}
+\mbox{\Hypertarget{matrix_8c_a249272b2dc585a5077eef59405ed50be}\label{matrix_8c_a249272b2dc585a5077eef59405ed50be}} 
+\index{matrix.c@{matrix.c}!Matrix\_from\_array@{Matrix\_from\_array}}
+\index{Matrix\_from\_array@{Matrix\_from\_array}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_from\_array()}{Matrix\_from\_array()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+from\+\_\+array (\begin{DoxyParamCaption}\item[{int}]{rows,  }\item[{int}]{cols,  }\item[{double $\ast$}]{data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a1463d7db9f6090c50403d06373424fa8}\label{matrix_8c_a1463d7db9f6090c50403d06373424fa8}} 
+\index{matrix.c@{matrix.c}!Matrix\_identity@{Matrix\_identity}}
+\index{Matrix\_identity@{Matrix\_identity}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_identity()}{Matrix\_identity()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+identity (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a39e37ce76d2f9dc4f8da5f8dddbc4f2e}\label{matrix_8c_a39e37ce76d2f9dc4f8da5f8dddbc4f2e}} 
+\index{matrix.c@{matrix.c}!Matrix\_inverse@{Matrix\_inverse}}
+\index{Matrix\_inverse@{Matrix\_inverse}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_inverse()}{Matrix\_inverse()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+inverse (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ae78260007e51a5b3dae17601221f4efc}\label{matrix_8c_ae78260007e51a5b3dae17601221f4efc}} 
+\index{matrix.c@{matrix.c}!Matrix\_minor@{Matrix\_minor}}
+\index{Matrix\_minor@{Matrix\_minor}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_minor()}{Matrix\_minor()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+minor (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat,  }\item[{int}]{row,  }\item[{int}]{col }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ae2f9d8786dd36019e6c8d185185a22cf}\label{matrix_8c_ae2f9d8786dd36019e6c8d185185a22cf}} 
+\index{matrix.c@{matrix.c}!Matrix\_multiply@{Matrix\_multiply}}
+\index{Matrix\_multiply@{Matrix\_multiply}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_multiply()}{Matrix\_multiply()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+multiply (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat1,  }\item[{const Matrix $\ast$}]{mat2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a595050b8411791fb7a2fe8d6cebdf1e7}\label{matrix_8c_a595050b8411791fb7a2fe8d6cebdf1e7}} 
+\index{matrix.c@{matrix.c}!Matrix\_norm@{Matrix\_norm}}
+\index{Matrix\_norm@{Matrix\_norm}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_norm()}{Matrix\_norm()}}
+{\footnotesize\ttfamily double Matrix\+\_\+norm (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+
+
+Computes the l2-\/norm of a Matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Pointer to the Matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double value of the l2-\/norm 
+\end{DoxyReturn}
+\mbox{\Hypertarget{matrix_8c_aee8ed44a01182faac1556a61205f83b9}\label{matrix_8c_aee8ed44a01182faac1556a61205f83b9}} 
+\index{matrix.c@{matrix.c}!Matrix\_reset@{Matrix\_reset}}
+\index{Matrix\_reset@{Matrix\_reset}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_reset()}{Matrix\_reset()}}
+{\footnotesize\ttfamily void Matrix\+\_\+reset (\begin{DoxyParamCaption}\item[{Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+
+
+Sets all entries of the Matrix to 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Pointer to Matrix to be reset \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8c_ab34beacc26836893fcbc1b15dd4bb2f5}\label{matrix_8c_ab34beacc26836893fcbc1b15dd4bb2f5}} 
+\index{matrix.c@{matrix.c}!Matrix\_row@{Matrix\_row}}
+\index{Matrix\_row@{Matrix\_row}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_row()}{Matrix\_row()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+row (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat,  }\item[{int}]{row\+\_\+index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ae6d9d3c9ee403387d861b5c5854cf8f5}\label{matrix_8c_ae6d9d3c9ee403387d861b5c5854cf8f5}} 
+\index{matrix.c@{matrix.c}!Matrix\_scale@{Matrix\_scale}}
+\index{Matrix\_scale@{Matrix\_scale}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_scale()}{Matrix\_scale()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+scale (\begin{DoxyParamCaption}\item[{double}]{c,  }\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a5b5215cf910962458c1ba78b6bc20ec3}\label{matrix_8c_a5b5215cf910962458c1ba78b6bc20ec3}} 
+\index{matrix.c@{matrix.c}!Matrix\_slice\_rows@{Matrix\_slice\_rows}}
+\index{Matrix\_slice\_rows@{Matrix\_slice\_rows}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_slice\_rows()}{Matrix\_slice\_rows()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+slice\+\_\+rows (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat,  }\item[{int}]{start,  }\item[{int}]{end }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a086b1c20f55ff003583ce502449c04ba}\label{matrix_8c_a086b1c20f55ff003583ce502449c04ba}} 
+\index{matrix.c@{matrix.c}!Matrix\_solve@{Matrix\_solve}}
+\index{Matrix\_solve@{Matrix\_solve}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_solve()}{Matrix\_solve()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+solve (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{A,  }\item[{const Matrix $\ast$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a2ba47f703d2b329550e5596217f706a5}\label{matrix_8c_a2ba47f703d2b329550e5596217f706a5}} 
+\index{matrix.c@{matrix.c}!Matrix\_sub@{Matrix\_sub}}
+\index{Matrix\_sub@{Matrix\_sub}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_sub()}{Matrix\_sub()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+sub (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat1,  }\item[{const Matrix $\ast$}]{mat2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_aecf30f35812fc667bdaf5725b7d0d437}\label{matrix_8c_aecf30f35812fc667bdaf5725b7d0d437}} 
+\index{matrix.c@{matrix.c}!Matrix\_submatrix@{Matrix\_submatrix}}
+\index{Matrix\_submatrix@{Matrix\_submatrix}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_submatrix()}{Matrix\_submatrix()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+submatrix (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat,  }\item[{int}]{start\+\_\+row,  }\item[{int}]{end\+\_\+row,  }\item[{int}]{start\+\_\+col,  }\item[{int}]{end\+\_\+col }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a16efaa7b2063f73abe048a4c2e9b3ee7}\label{matrix_8c_a16efaa7b2063f73abe048a4c2e9b3ee7}} 
+\index{matrix.c@{matrix.c}!Matrix\_svd@{Matrix\_svd}}
+\index{Matrix\_svd@{Matrix\_svd}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_svd()}{Matrix\_svd()}}
+{\footnotesize\ttfamily SVDResult Matrix\+\_\+svd (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a2d4e88834683e2cf703275b6e619f82c}\label{matrix_8c_a2d4e88834683e2cf703275b6e619f82c}} 
+\index{matrix.c@{matrix.c}!Matrix\_trace@{Matrix\_trace}}
+\index{Matrix\_trace@{Matrix\_trace}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_trace()}{Matrix\_trace()}}
+{\footnotesize\ttfamily double Matrix\+\_\+trace (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+
+
+Computes the sum of the diagonal entries of a square Matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Pointer to the Matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double Value of the trace 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & for non-\/square Matrices \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{matrix_8c_a4d9fbede80fd7ed4aa2574094af692a7}\label{matrix_8c_a4d9fbede80fd7ed4aa2574094af692a7}} 
+\index{matrix.c@{matrix.c}!Matrix\_transpose@{Matrix\_transpose}}
+\index{Matrix\_transpose@{Matrix\_transpose}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_transpose()}{Matrix\_transpose()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+transpose (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a5e4df77caabb780f85168caee87d85c7}\label{matrix_8c_a5e4df77caabb780f85168caee87d85c7}} 
+\index{matrix.c@{matrix.c}!Matrix\_zeros@{Matrix\_zeros}}
+\index{Matrix\_zeros@{Matrix\_zeros}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Matrix\_zeros()}{Matrix\_zeros()}}
+{\footnotesize\ttfamily Matrix Matrix\+\_\+zeros (\begin{DoxyParamCaption}\item[{int}]{rows,  }\item[{int}]{cols }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a312e8a3d627e5427365b31692b8de51f}\label{matrix_8c_a312e8a3d627e5427365b31692b8de51f}} 
+\index{matrix.c@{matrix.c}!standard\_normal@{standard\_normal}}
+\index{standard\_normal@{standard\_normal}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{standard\_normal()}{standard\_normal()}}
+{\footnotesize\ttfamily double standard\+\_\+normal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ae77636786c306a2ff8b90d3efc29b45e}\label{matrix_8c_ae77636786c306a2ff8b90d3efc29b45e}} 
+\index{matrix.c@{matrix.c}!Vector\_max@{Vector\_max}}
+\index{Vector\_max@{Vector\_max}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Vector\_max()}{Vector\_max()}}
+{\footnotesize\ttfamily double Vector\+\_\+max (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+
+
+Computes the largest value in a row vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Pointer to the Vector (embedded in a Matrix) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double Value of the largest element in the Vector 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & for Matrices that are not row vectors (Must have dimension (Nx1)) \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{matrix_8c_a01b7f6478c0d84f19c37c916845928e4}\label{matrix_8c_a01b7f6478c0d84f19c37c916845928e4}} 
+\index{matrix.c@{matrix.c}!Vector\_max\_index@{Vector\_max\_index}}
+\index{Vector\_max\_index@{Vector\_max\_index}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Vector\_max\_index()}{Vector\_max\_index()}}
+{\footnotesize\ttfamily int Vector\+\_\+max\+\_\+index (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat }\end{DoxyParamCaption})}
+
+
+
+Computes the index of the largest value in a row vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Pointer to the Vector (embedded in a Matrix) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Index of the largest element in the Vector 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & for Matrices that are not row vectors (Must have dimension (Nx1)) \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{matrix_8c_af1f1e0547156be5a61f10097e162094f}\label{matrix_8c_af1f1e0547156be5a61f10097e162094f}} 
+\index{matrix.c@{matrix.c}!Vector\_norm@{Vector\_norm}}
+\index{Vector\_norm@{Vector\_norm}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{Vector\_norm()}{Vector\_norm()}}
+{\footnotesize\ttfamily double Vector\+\_\+norm (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{mat,  }\item[{unsigned int}]{k }\end{DoxyParamCaption})}
+
+
+
+Computes the l-\/k norm of a Vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & Pointer to the Vector (embedded in a Matrix) \\
+\hline
+{\em k} & Non-\/negative integer to adjust norm type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double l-\/k norm 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{matrix_8c_a4e37e2d0ea797e1f19a103dc45acbb6d}\label{matrix_8c_a4e37e2d0ea797e1f19a103dc45acbb6d}} 
+\index{matrix.c@{matrix.c}!MATRIX\_MAX\_ITER@{MATRIX\_MAX\_ITER}}
+\index{MATRIX\_MAX\_ITER@{MATRIX\_MAX\_ITER}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{MATRIX\_MAX\_ITER}{MATRIX\_MAX\_ITER}}
+{\footnotesize\ttfamily const int MATRIX\+\_\+\+MAX\+\_\+\+ITER = 1000}
+
+\mbox{\Hypertarget{matrix_8c_a9210573348d7ad7d594b21ddc2baf1c7}\label{matrix_8c_a9210573348d7ad7d594b21ddc2baf1c7}} 
+\index{matrix.c@{matrix.c}!MATRIX\_TOLERANCE@{MATRIX\_TOLERANCE}}
+\index{MATRIX\_TOLERANCE@{MATRIX\_TOLERANCE}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{MATRIX\_TOLERANCE}{MATRIX\_TOLERANCE}}
+{\footnotesize\ttfamily const double MATRIX\+\_\+\+TOLERANCE = 1e-\/6}
+

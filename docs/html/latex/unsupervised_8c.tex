@@ -1,0 +1,102 @@
+\hypertarget{unsupervised_8c}{}\doxysection{src/unsupervised.c File Reference}
+\label{unsupervised_8c}\index{src/unsupervised.c@{src/unsupervised.c}}
+{\ttfamily \#include \char`\"{}unsupervised.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{unsupervised_8c_ac9d3b34ee7e35eab6a81ed21f18f6e64}{LEARNING\+\_\+\+RATE}}~0.\+01
+\item 
+\#define \mbox{\hyperlink{unsupervised_8c_ad455e60ecb4b0eba516ee2dd166bba1d}{EPOCHS}}~1000
+\item 
+\#define \mbox{\hyperlink{unsupervised_8c_a4f450fa5760cb125aadbe54a30768983}{MINIBATCH\+\_\+\+SIZE}}~32
+\item 
+\#define \mbox{\hyperlink{unsupervised_8c_a30c17564229ec2e37dfea9c6c9ad643e}{TOLERANCE}}~1e-\/6
+\item 
+\#define \mbox{\hyperlink{unsupervised_8c_a15378cd15bafb3a79061424b452497aa}{ERROR}}(fmt, ...)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Matrix \mbox{\hyperlink{unsupervised_8c_aef6c1050daecdc425e0cfd20ae8942ed}{Unsupervised\+\_\+read\+\_\+csv}} (const char $\ast$filename)
+\item 
+KMeans\+Model \mbox{\hyperlink{unsupervised_8c_a86a20d404f4532895b9062e3f638f39b}{KMeans}} (unsigned int k, const Matrix $\ast$X)
+\item 
+void \mbox{\hyperlink{unsupervised_8c_a1dd7baa0fb404e6378152c48be2d03c2}{KMeans\+\_\+train}} (KMeans\+Model $\ast$model)
+\item 
+Matrix \mbox{\hyperlink{unsupervised_8c_a7c4e20d389e3c3dca00a037f4044a114}{KMeans\+\_\+predict}} (const KMeans\+Model $\ast$model, const Matrix $\ast$X\+\_\+new)
+\item 
+void \mbox{\hyperlink{unsupervised_8c_ae929fe4e7c064da30d7be3fb6b7ba676}{KMeans\+\_\+free}} (KMeans\+Model $\ast$model)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{unsupervised_8c_ad455e60ecb4b0eba516ee2dd166bba1d}\label{unsupervised_8c_ad455e60ecb4b0eba516ee2dd166bba1d}} 
+\index{unsupervised.c@{unsupervised.c}!EPOCHS@{EPOCHS}}
+\index{EPOCHS@{EPOCHS}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{EPOCHS}{EPOCHS}}
+{\footnotesize\ttfamily \#define EPOCHS~1000}
+
+\mbox{\Hypertarget{unsupervised_8c_a15378cd15bafb3a79061424b452497aa}\label{unsupervised_8c_a15378cd15bafb3a79061424b452497aa}} 
+\index{unsupervised.c@{unsupervised.c}!ERROR@{ERROR}}
+\index{ERROR@{ERROR}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{ERROR}{ERROR}}
+{\footnotesize\ttfamily \#define ERROR(\begin{DoxyParamCaption}\item[{}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ fmt,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{unsupervised_8c_ac9d3b34ee7e35eab6a81ed21f18f6e64}\label{unsupervised_8c_ac9d3b34ee7e35eab6a81ed21f18f6e64}} 
+\index{unsupervised.c@{unsupervised.c}!LEARNING\_RATE@{LEARNING\_RATE}}
+\index{LEARNING\_RATE@{LEARNING\_RATE}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{LEARNING\_RATE}{LEARNING\_RATE}}
+{\footnotesize\ttfamily \#define LEARNING\+\_\+\+RATE~0.\+01}
+
+\mbox{\Hypertarget{unsupervised_8c_a4f450fa5760cb125aadbe54a30768983}\label{unsupervised_8c_a4f450fa5760cb125aadbe54a30768983}} 
+\index{unsupervised.c@{unsupervised.c}!MINIBATCH\_SIZE@{MINIBATCH\_SIZE}}
+\index{MINIBATCH\_SIZE@{MINIBATCH\_SIZE}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{MINIBATCH\_SIZE}{MINIBATCH\_SIZE}}
+{\footnotesize\ttfamily \#define MINIBATCH\+\_\+\+SIZE~32}
+
+\mbox{\Hypertarget{unsupervised_8c_a30c17564229ec2e37dfea9c6c9ad643e}\label{unsupervised_8c_a30c17564229ec2e37dfea9c6c9ad643e}} 
+\index{unsupervised.c@{unsupervised.c}!TOLERANCE@{TOLERANCE}}
+\index{TOLERANCE@{TOLERANCE}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{TOLERANCE}{TOLERANCE}}
+{\footnotesize\ttfamily \#define TOLERANCE~1e-\/6}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{unsupervised_8c_a86a20d404f4532895b9062e3f638f39b}\label{unsupervised_8c_a86a20d404f4532895b9062e3f638f39b}} 
+\index{unsupervised.c@{unsupervised.c}!KMeans@{KMeans}}
+\index{KMeans@{KMeans}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{KMeans()}{KMeans()}}
+{\footnotesize\ttfamily KMeans\+Model KMeans (\begin{DoxyParamCaption}\item[{unsigned int}]{k,  }\item[{const Matrix $\ast$}]{X }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{unsupervised_8c_ae929fe4e7c064da30d7be3fb6b7ba676}\label{unsupervised_8c_ae929fe4e7c064da30d7be3fb6b7ba676}} 
+\index{unsupervised.c@{unsupervised.c}!KMeans\_free@{KMeans\_free}}
+\index{KMeans\_free@{KMeans\_free}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{KMeans\_free()}{KMeans\_free()}}
+{\footnotesize\ttfamily void KMeans\+\_\+free (\begin{DoxyParamCaption}\item[{KMeans\+Model $\ast$}]{model }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{unsupervised_8c_a7c4e20d389e3c3dca00a037f4044a114}\label{unsupervised_8c_a7c4e20d389e3c3dca00a037f4044a114}} 
+\index{unsupervised.c@{unsupervised.c}!KMeans\_predict@{KMeans\_predict}}
+\index{KMeans\_predict@{KMeans\_predict}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{KMeans\_predict()}{KMeans\_predict()}}
+{\footnotesize\ttfamily Matrix KMeans\+\_\+predict (\begin{DoxyParamCaption}\item[{const KMeans\+Model $\ast$}]{model,  }\item[{const Matrix $\ast$}]{X\+\_\+new }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{unsupervised_8c_a1dd7baa0fb404e6378152c48be2d03c2}\label{unsupervised_8c_a1dd7baa0fb404e6378152c48be2d03c2}} 
+\index{unsupervised.c@{unsupervised.c}!KMeans\_train@{KMeans\_train}}
+\index{KMeans\_train@{KMeans\_train}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{KMeans\_train()}{KMeans\_train()}}
+{\footnotesize\ttfamily void KMeans\+\_\+train (\begin{DoxyParamCaption}\item[{KMeans\+Model $\ast$}]{model }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{unsupervised_8c_aef6c1050daecdc425e0cfd20ae8942ed}\label{unsupervised_8c_aef6c1050daecdc425e0cfd20ae8942ed}} 
+\index{unsupervised.c@{unsupervised.c}!Unsupervised\_read\_csv@{Unsupervised\_read\_csv}}
+\index{Unsupervised\_read\_csv@{Unsupervised\_read\_csv}!unsupervised.c@{unsupervised.c}}
+\doxysubsubsection{\texorpdfstring{Unsupervised\_read\_csv()}{Unsupervised\_read\_csv()}}
+{\footnotesize\ttfamily Matrix Unsupervised\+\_\+read\+\_\+csv (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+

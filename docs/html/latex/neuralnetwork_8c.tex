@@ -1,0 +1,57 @@
+\hypertarget{neuralnetwork_8c}{}\doxysection{src/neuralnetwork.c File Reference}
+\label{neuralnetwork_8c}\index{src/neuralnetwork.c@{src/neuralnetwork.c}}
+{\ttfamily \#include \char`\"{}neuralnetwork.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Activation\+Function \mbox{\hyperlink{neuralnetwork_8c_a45158b47422b6168ef96676527b06d6c}{NN\+\_\+get\+\_\+sigmoid}} ()
+\item 
+Neuron \mbox{\hyperlink{neuralnetwork_8c_a88861f518ccc51c6d2923bbe199b5011}{NN\+\_\+create\+\_\+neuron}} (int input\+\_\+size, Activation\+Function activation)
+\item 
+Layer \mbox{\hyperlink{neuralnetwork_8c_a4f833b9290813a3347d7984b8cf6ee4a}{NN\+\_\+create\+\_\+layer}} (int num\+\_\+neurons, int input\+\_\+size, Activation\+Function activation)
+\item 
+Neural\+Network \mbox{\hyperlink{neuralnetwork_8c_ae2d1965c4fda653ea666605b364303c9}{NN\+\_\+create\+\_\+network}} (int $\ast$layer\+\_\+sizes, int num\+\_\+layers, Activation\+Function activation)
+\item 
+Matrix \mbox{\hyperlink{neuralnetwork_8c_ae4e6b0ef6f4d4a8cd8b4883c28570f28}{NN\+\_\+forward\+\_\+pass}} (Neural\+Network $\ast$network, const Matrix $\ast$input)
+\item 
+void \mbox{\hyperlink{neuralnetwork_8c_ae17c735274371573e6775022fa5a9885}{NN\+\_\+backward\+\_\+pass}} (Neural\+Network $\ast$network, const Matrix $\ast$input, const Matrix $\ast$expected\+\_\+output, double learning\+\_\+rate)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{neuralnetwork_8c_ae17c735274371573e6775022fa5a9885}\label{neuralnetwork_8c_ae17c735274371573e6775022fa5a9885}} 
+\index{neuralnetwork.c@{neuralnetwork.c}!NN\_backward\_pass@{NN\_backward\_pass}}
+\index{NN\_backward\_pass@{NN\_backward\_pass}!neuralnetwork.c@{neuralnetwork.c}}
+\doxysubsubsection{\texorpdfstring{NN\_backward\_pass()}{NN\_backward\_pass()}}
+{\footnotesize\ttfamily void NN\+\_\+backward\+\_\+pass (\begin{DoxyParamCaption}\item[{Neural\+Network $\ast$}]{network,  }\item[{const Matrix $\ast$}]{input,  }\item[{const Matrix $\ast$}]{expected\+\_\+output,  }\item[{double}]{learning\+\_\+rate }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{neuralnetwork_8c_a4f833b9290813a3347d7984b8cf6ee4a}\label{neuralnetwork_8c_a4f833b9290813a3347d7984b8cf6ee4a}} 
+\index{neuralnetwork.c@{neuralnetwork.c}!NN\_create\_layer@{NN\_create\_layer}}
+\index{NN\_create\_layer@{NN\_create\_layer}!neuralnetwork.c@{neuralnetwork.c}}
+\doxysubsubsection{\texorpdfstring{NN\_create\_layer()}{NN\_create\_layer()}}
+{\footnotesize\ttfamily Layer NN\+\_\+create\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+neurons,  }\item[{int}]{input\+\_\+size,  }\item[{Activation\+Function}]{activation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{neuralnetwork_8c_ae2d1965c4fda653ea666605b364303c9}\label{neuralnetwork_8c_ae2d1965c4fda653ea666605b364303c9}} 
+\index{neuralnetwork.c@{neuralnetwork.c}!NN\_create\_network@{NN\_create\_network}}
+\index{NN\_create\_network@{NN\_create\_network}!neuralnetwork.c@{neuralnetwork.c}}
+\doxysubsubsection{\texorpdfstring{NN\_create\_network()}{NN\_create\_network()}}
+{\footnotesize\ttfamily Neural\+Network NN\+\_\+create\+\_\+network (\begin{DoxyParamCaption}\item[{int $\ast$}]{layer\+\_\+sizes,  }\item[{int}]{num\+\_\+layers,  }\item[{Activation\+Function}]{activation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{neuralnetwork_8c_a88861f518ccc51c6d2923bbe199b5011}\label{neuralnetwork_8c_a88861f518ccc51c6d2923bbe199b5011}} 
+\index{neuralnetwork.c@{neuralnetwork.c}!NN\_create\_neuron@{NN\_create\_neuron}}
+\index{NN\_create\_neuron@{NN\_create\_neuron}!neuralnetwork.c@{neuralnetwork.c}}
+\doxysubsubsection{\texorpdfstring{NN\_create\_neuron()}{NN\_create\_neuron()}}
+{\footnotesize\ttfamily Neuron NN\+\_\+create\+\_\+neuron (\begin{DoxyParamCaption}\item[{int}]{input\+\_\+size,  }\item[{Activation\+Function}]{activation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{neuralnetwork_8c_ae4e6b0ef6f4d4a8cd8b4883c28570f28}\label{neuralnetwork_8c_ae4e6b0ef6f4d4a8cd8b4883c28570f28}} 
+\index{neuralnetwork.c@{neuralnetwork.c}!NN\_forward\_pass@{NN\_forward\_pass}}
+\index{NN\_forward\_pass@{NN\_forward\_pass}!neuralnetwork.c@{neuralnetwork.c}}
+\doxysubsubsection{\texorpdfstring{NN\_forward\_pass()}{NN\_forward\_pass()}}
+{\footnotesize\ttfamily Matrix NN\+\_\+forward\+\_\+pass (\begin{DoxyParamCaption}\item[{Neural\+Network $\ast$}]{network,  }\item[{const Matrix $\ast$}]{input }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{neuralnetwork_8c_a45158b47422b6168ef96676527b06d6c}\label{neuralnetwork_8c_a45158b47422b6168ef96676527b06d6c}} 
+\index{neuralnetwork.c@{neuralnetwork.c}!NN\_get\_sigmoid@{NN\_get\_sigmoid}}
+\index{NN\_get\_sigmoid@{NN\_get\_sigmoid}!neuralnetwork.c@{neuralnetwork.c}}
+\doxysubsubsection{\texorpdfstring{NN\_get\_sigmoid()}{NN\_get\_sigmoid()}}
+{\footnotesize\ttfamily Activation\+Function NN\+\_\+get\+\_\+sigmoid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+

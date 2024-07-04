@@ -1,0 +1,26 @@
+# Doxyfile configuration for generating HTML documentation
+
+# Set the name of the project
+PROJECT_NAME           = "MogaML"
+
+# Set to YES to generate HTML output
+GENERATE_HTML          = YES
+
+# Directory where the generated documentation will be placed
+OUTPUT_DIRECTORY       = docs/html
+
+# List of directories to include
+INPUT                  = ./src
+
+# Exclude specific directories
+EXCLUDE                = ./src/private
+
+# Set to YES to generate documentation for all entities, including undocumented ones
+EXTRACT_ALL            = YES
+
+# Allow undocumented members and classes to be missing in the documentation
+WARN_IF_UNDOCUMENTED   = NO
+
+# Enable MathJax for rendering mathematical formulas in HTML output
+USE_MATHJAX            = YES
+
