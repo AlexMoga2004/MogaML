@@ -407,7 +407,7 @@ Matrix Matrix_sub(const Matrix *mat1, const Matrix *mat2) {
  * @param mat1 Pointer to first Matrix
  * @param mat2 Pointer to second Matrix
  * @return Result of Matrix multiplication
- * @throw Exception, requires mat1->cols == mat2->rows
+ * @throw Exception requires mat1->cols == mat2->rows
  */
 Matrix Matrix_multiply(const Matrix *mat1, const Matrix *mat2) { 
 	// Treat 1x1 matrix as a constant
@@ -442,7 +442,7 @@ Matrix Matrix_multiply(const Matrix *mat1, const Matrix *mat2) {
  * @param row Index of row to remove
  * @param col Index of column to remove
  * @return Remaining Matrix minor
- * @throw Exception, requires 0 <= row < Matrix.rows && 0 <= col < Matrix.cols
+ * @throw Exception requires 0 <= row < Matrix.rows && 0 <= col < Matrix.cols
  */
 Matrix Matrix_minor(const Matrix *mat, int row, int col) {
 	if (mat->rows <= 1 || mat->cols <= 1) {
@@ -479,7 +479,7 @@ Matrix Matrix_minor(const Matrix *mat, int row, int col) {
  * @param mat Pointer to original Matrix
  * @param row Index of row to fetch
  * @return Row vector (in Matrix form) containing the desired row 
- * @throw Exception, requires 0 <= row < Matrix.rows
+ * @throw Exception requires 0 <= row < Matrix.rows
  */
 Matrix Matrix_row(const Matrix *mat, int row_index) {
     if (row_index < 0 || row_index >= mat->rows) {
@@ -500,7 +500,7 @@ Matrix Matrix_row(const Matrix *mat, int row_index) {
  * @param mat Pointer to original Matrix
  * @param col Index of column to fetch
  * @return Column vector (in Matrix form) containing the desired column 
- * @throw Exception, requires 0 <= col < Matrix.cols
+ * @throw Exception requires 0 <= col < Matrix.cols
  */
 Matrix Matrix_col(const Matrix *mat, int col_index) {
     if (col_index < 0 || col_index >= mat->cols) {
@@ -522,7 +522,7 @@ Matrix Matrix_col(const Matrix *mat, int col_index) {
  * @param start Index to start fetching from (inclusive)
  * @param end Index to stop fetching (exclusive)
  * @return Sub-matrix containing specified rows
- * @throw Exception, requires 0 <= start < end <= matrix.rows
+ * @throw Exception requires 0 <= start < end <= matrix.rows
  */
 Matrix Matrix_slice_rows(const Matrix *mat, int start, int end) {
     int num_rows = end - start;
@@ -544,7 +544,7 @@ Matrix Matrix_slice_rows(const Matrix *mat, int start, int end) {
  * @param start_col Index to start fetching cols from (inclusive)
  * @param end_col Index to stop fetching cols from (exclusive)
  * @return Matrix containing the specified rows and columns
- * @throw Exception, requires 0 <= start_row < end_row <= mat->rows
+ * @throw Exception requires 0 <= start_row < end_row <= mat->rows && 0 <= start_col < end_col <= mat->cols
  */
 Matrix Matrix_submatrix(const Matrix *mat, int start_row, int end_row, int start_col, int end_col) {
     if (start_row < 0 || start_row >= mat->rows || end_row <= start_row || end_row > mat->rows ||
@@ -632,7 +632,7 @@ Matrix Matrix_inverse(const Matrix *mat) {
  * @param A Pointer to Matrix A
  * @param b Pointer to column Vector b (embedded as a Matrix)
  * @return Column vector x as a Matrix, the solution to the equation
- * @throw Exception, for incompatible dimensions, or singular Matrices A
+ * @throw Exception for incompatible dimensions, or singular Matrices A
  */
 Matrix Matrix_solve(const Matrix *A, const Matrix *b) {
 	if (A->rows != A->cols) {

@@ -95,12 +95,11 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a15378cd15bafb3a79061424b452497aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a15378cd15bafb3a79061424b452497aa">ERROR</a>(fmt, ...)</td></tr>
+<tr class="memdesc:a15378cd15bafb3a79061424b452497aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to output message to error stream.  <br /></td></tr>
 <tr class="separator:a15378cd15bafb3a79061424b452497aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a312e8a3d627e5427365b31692b8de51f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a312e8a3d627e5427365b31692b8de51f">standard_normal</a> ()</td></tr>
-<tr class="separator:a312e8a3d627e5427365b31692b8de51f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96816288c6884e9f08413215aefb32d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a96816288c6884e9f08413215aefb32d9">Matrix_free</a> (Matrix mat)</td></tr>
 <tr class="memdesc:a96816288c6884e9f08413215aefb32d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory allocated for the Matrix.  <br /></td></tr>
 <tr class="separator:a96816288c6884e9f08413215aefb32d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,45 +137,64 @@ Functions</h2></td></tr>
 <tr class="memdesc:a01b7f6478c0d84f19c37c916845928e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the index of the largest value in a row vector.  <br /></td></tr>
 <tr class="separator:a01b7f6478c0d84f19c37c916845928e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e4df77caabb780f85168caee87d85c7"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a5e4df77caabb780f85168caee87d85c7">Matrix_zeros</a> (int rows, int cols)</td></tr>
+<tr class="memdesc:a5e4df77caabb780f85168caee87d85c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises new Matrix with entries set to 0.  <br /></td></tr>
 <tr class="separator:a5e4df77caabb780f85168caee87d85c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1463d7db9f6090c50403d06373424fa8"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a1463d7db9f6090c50403d06373424fa8">Matrix_identity</a> (int size)</td></tr>
+<tr class="memdesc:a1463d7db9f6090c50403d06373424fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises an Identity matrix (square matrix with diagonal entries 1)  <br /></td></tr>
 <tr class="separator:a1463d7db9f6090c50403d06373424fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a249272b2dc585a5077eef59405ed50be"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a249272b2dc585a5077eef59405ed50be">Matrix_from_array</a> (int rows, int cols, double *data)</td></tr>
+<tr class="memdesc:a249272b2dc585a5077eef59405ed50be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises a Matrix given a 2D array of elements.  <br /></td></tr>
 <tr class="separator:a249272b2dc585a5077eef59405ed50be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6d9d3c9ee403387d861b5c5854cf8f5"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#ae6d9d3c9ee403387d861b5c5854cf8f5">Matrix_scale</a> (double c, const Matrix *mat)</td></tr>
+<tr class="memdesc:ae6d9d3c9ee403387d861b5c5854cf8f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scales a matrix by a constant factor.  <br /></td></tr>
 <tr class="separator:ae6d9d3c9ee403387d861b5c5854cf8f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addbd35a76e06e9f400c43397cf152d3b"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#addbd35a76e06e9f400c43397cf152d3b">Matrix_add</a> (const Matrix *mat1, const Matrix *mat2)</td></tr>
+<tr class="memdesc:addbd35a76e06e9f400c43397cf152d3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sums the entries in two Matrices element-wise.  <br /></td></tr>
 <tr class="separator:addbd35a76e06e9f400c43397cf152d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ba47f703d2b329550e5596217f706a5"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a2ba47f703d2b329550e5596217f706a5">Matrix_sub</a> (const Matrix *mat1, const Matrix *mat2)</td></tr>
+<tr class="memdesc:a2ba47f703d2b329550e5596217f706a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtracts the entries in two Matrices element-wise.  <br /></td></tr>
 <tr class="separator:a2ba47f703d2b329550e5596217f706a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2f9d8786dd36019e6c8d185185a22cf"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#ae2f9d8786dd36019e6c8d185185a22cf">Matrix_multiply</a> (const Matrix *mat1, const Matrix *mat2)</td></tr>
+<tr class="memdesc:ae2f9d8786dd36019e6c8d185185a22cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies two Matrices.  <br /></td></tr>
 <tr class="separator:ae2f9d8786dd36019e6c8d185185a22cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae78260007e51a5b3dae17601221f4efc"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#ae78260007e51a5b3dae17601221f4efc">Matrix_minor</a> (const Matrix *mat, int row, int col)</td></tr>
+<tr class="memdesc:ae78260007e51a5b3dae17601221f4efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the minor of a Matrix by removing a row and a column.  <br /></td></tr>
 <tr class="separator:ae78260007e51a5b3dae17601221f4efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab34beacc26836893fcbc1b15dd4bb2f5"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#ab34beacc26836893fcbc1b15dd4bb2f5">Matrix_row</a> (const Matrix *mat, int row_index)</td></tr>
+<tr class="memdesc:ab34beacc26836893fcbc1b15dd4bb2f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a single row from a matrix.  <br /></td></tr>
 <tr class="separator:ab34beacc26836893fcbc1b15dd4bb2f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0020e44506794d7ee2c9db68b5d9076"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#ae0020e44506794d7ee2c9db68b5d9076">Matrix_col</a> (const Matrix *mat, int col_index)</td></tr>
+<tr class="memdesc:ae0020e44506794d7ee2c9db68b5d9076"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a single column from a matrix.  <br /></td></tr>
 <tr class="separator:ae0020e44506794d7ee2c9db68b5d9076"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b5215cf910962458c1ba78b6bc20ec3"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a5b5215cf910962458c1ba78b6bc20ec3">Matrix_slice_rows</a> (const Matrix *mat, int start, int end)</td></tr>
+<tr class="memdesc:a5b5215cf910962458c1ba78b6bc20ec3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get rows within the specified range.  <br /></td></tr>
 <tr class="separator:a5b5215cf910962458c1ba78b6bc20ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecf30f35812fc667bdaf5725b7d0d437"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#aecf30f35812fc667bdaf5725b7d0d437">Matrix_submatrix</a> (const Matrix *mat, int start_row, int end_row, int start_col, int end_col)</td></tr>
+<tr class="memdesc:aecf30f35812fc667bdaf5725b7d0d437"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Matrix that contains a subset of the rows and columns.  <br /></td></tr>
 <tr class="separator:aecf30f35812fc667bdaf5725b7d0d437"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d9fbede80fd7ed4aa2574094af692a7"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a4d9fbede80fd7ed4aa2574094af692a7">Matrix_transpose</a> (const Matrix *mat)</td></tr>
+<tr class="memdesc:a4d9fbede80fd7ed4aa2574094af692a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flip the rows and columns of a Matrix.  <br /></td></tr>
 <tr class="separator:a4d9fbede80fd7ed4aa2574094af692a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6d08df4d2f75ccc0ba405360b75b1a4"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#ad6d08df4d2f75ccc0ba405360b75b1a4">Matrix_clone</a> (const Matrix *mat)</td></tr>
+<tr class="memdesc:ad6d08df4d2f75ccc0ba405360b75b1a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new matrix with identical entries.  <br /></td></tr>
 <tr class="separator:ad6d08df4d2f75ccc0ba405360b75b1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39e37ce76d2f9dc4f8da5f8dddbc4f2e"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a39e37ce76d2f9dc4f8da5f8dddbc4f2e">Matrix_inverse</a> (const Matrix *mat)</td></tr>
+<tr class="memdesc:a39e37ce76d2f9dc4f8da5f8dddbc4f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the inverse of a square Matrix.  <br /></td></tr>
 <tr class="separator:a39e37ce76d2f9dc4f8da5f8dddbc4f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a086b1c20f55ff003583ce502449c04ba"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a086b1c20f55ff003583ce502449c04ba">Matrix_solve</a> (const Matrix *A, const Matrix *b)</td></tr>
+<tr class="memdesc:a086b1c20f55ff003583ce502449c04ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the solution to the equation Ax=b.  <br /></td></tr>
 <tr class="separator:a086b1c20f55ff003583ce502449c04ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16efaa7b2063f73abe048a4c2e9b3ee7"><td class="memItemLeft" align="right" valign="top">SVDResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a16efaa7b2063f73abe048a4c2e9b3ee7">Matrix_svd</a> (const Matrix *mat)</td></tr>
+<tr class="memdesc:a16efaa7b2063f73abe048a4c2e9b3ee7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Singular Value Decomposition (SVD) of a Matrix.  <br /></td></tr>
 <tr class="separator:a16efaa7b2063f73abe048a4c2e9b3ee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a4e37e2d0ea797e1f19a103dc45acbb6d"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a4e37e2d0ea797e1f19a103dc45acbb6d">MATRIX_MAX_ITER</a> = 1000</td></tr>
+<tr class="memdesc:a4e37e2d0ea797e1f19a103dc45acbb6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of iterations for any numerical method on Matrices.  <br /></td></tr>
 <tr class="separator:a4e37e2d0ea797e1f19a103dc45acbb6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9210573348d7ad7d594b21ddc2baf1c7"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8c.html#a9210573348d7ad7d594b21ddc2baf1c7">MATRIX_TOLERANCE</a> = 1e-6</td></tr>
+<tr class="memdesc:a9210573348d7ad7d594b21ddc2baf1c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum margin of error for floating point arithmetic on Matrices.  <br /></td></tr>
 <tr class="separator:a9210573348d7ad7d594b21ddc2baf1c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -209,6 +227,8 @@ Variables</h2></td></tr>
 <div class="line">            fprintf(stderr, fmt, ##__VA_ARGS__); \</div>
 <div class="line">        } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
+<p>Macro to output message to error stream. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
@@ -237,6 +257,22 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Sums the entries in two Matrices element-wise. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat1</td><td>Pointer to first Matrix </td></tr>
+    <tr><td class="paramname">mat2</td><td>Pointer to second Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of the Matrix addition </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td>when the Matrices have different dimensions </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -303,6 +339,15 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Create a new matrix with identical entries. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Pointer to originial Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Identical Matrix </dd></dl>
+
 </div>
 </div>
 <a id="ae0020e44506794d7ee2c9db68b5d9076" name="ae0020e44506794d7ee2c9db68b5d9076"></a>
@@ -330,6 +375,22 @@ false otherwise </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get a single column from a matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">col</td><td>Index of column to fetch </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Column vector (in Matrix form) containing the desired column </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= col &lt; Matrix.cols </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -518,6 +579,17 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Initialises a Matrix given a 2D array of elements. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rows</td><td>Number of rows in the Matrix </td></tr>
+    <tr><td class="paramname">cols</td><td>Number of columns in the Matrix </td></tr>
+    <tr><td class="paramname">data</td><td>2D Array, containing the rows of the Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix </dd></dl>
+
 </div>
 </div>
 <a id="a1463d7db9f6090c50403d06373424fa8" name="a1463d7db9f6090c50403d06373424fa8"></a>
@@ -536,6 +608,15 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Initialises an Identity matrix (square matrix with diagonal entries 1) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>Number of rows and columns </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix </dd></dl>
+
 </div>
 </div>
 <a id="a39e37ce76d2f9dc4f8da5f8dddbc4f2e" name="a39e37ce76d2f9dc4f8da5f8dddbc4f2e"></a>
@@ -553,6 +634,21 @@ false otherwise </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Compute the inverse of a square Matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td>for non-square Matrices, and for singular Matrices </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -588,6 +684,23 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Computes the minor of a Matrix by removing a row and a column. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">row</td><td>Index of row to remove </td></tr>
+    <tr><td class="paramname">col</td><td>Index of column to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Remaining Matrix minor </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= row &lt; Matrix.rows &amp;&amp; 0 &lt;= col &lt; Matrix.cols </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ae2f9d8786dd36019e6c8d185185a22cf" name="ae2f9d8786dd36019e6c8d185185a22cf"></a>
@@ -615,6 +728,22 @@ false otherwise </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Multiplies two Matrices. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat1</td><td>Pointer to first Matrix </td></tr>
+    <tr><td class="paramname">mat2</td><td>Pointer to second Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of Matrix multiplication </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception,requires</td><td>mat1-&gt;cols == mat2-&gt;rows </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -697,6 +826,22 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Get a single row from a matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">row</td><td>Index of row to fetch </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Row vector (in Matrix form) containing the desired row </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= row &lt; Matrix.rows </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ae6d9d3c9ee403387d861b5c5854cf8f5" name="ae6d9d3c9ee403387d861b5c5854cf8f5"></a>
@@ -724,6 +869,16 @@ false otherwise </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Scales a matrix by a constant factor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>Factor </td></tr>
+    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New Matrix </dd></dl>
 
 </div>
 </div>
@@ -759,6 +914,23 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Get rows within the specified range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Original matrix </td></tr>
+    <tr><td class="paramname">start</td><td>Index to start fetching from (inclusive) </td></tr>
+    <tr><td class="paramname">end</td><td>Index to stop fetching (exclusive) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Sub-matrix containing specified rows </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= start &lt; end &lt;= matrix.rows </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a086b1c20f55ff003583ce502449c04ba" name="a086b1c20f55ff003583ce502449c04ba"></a>
@@ -787,6 +959,22 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Return the solution to the equation Ax=b. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>Pointer to Matrix A </td></tr>
+    <tr><td class="paramname">b</td><td>Pointer to column Vector b (embedded as a Matrix) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Column vector x as a Matrix, the solution to the equation </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception,for</td><td>incompatible dimensions, or singular Matrices A </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a2ba47f703d2b329550e5596217f706a5" name="a2ba47f703d2b329550e5596217f706a5"></a>
@@ -814,6 +1002,22 @@ false otherwise </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Subtracts the entries in two Matrices element-wise. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat1</td><td>Pointer to first Matrix </td></tr>
+    <tr><td class="paramname">mat2</td><td>Pointer to second Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of the Matrix subtraction </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td>when the Matrices have different dimensions </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -861,6 +1065,25 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Get a Matrix that contains a subset of the rows and columns. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">start_row</td><td>Index to start fetching rows from (inclusive) </td></tr>
+    <tr><td class="paramname">end_row</td><td>Index to stop fetching rows from (exclusive) </td></tr>
+    <tr><td class="paramname">start_col</td><td>Index to start fetching cols from (inclusive) </td></tr>
+    <tr><td class="paramname">end_col</td><td>Index to stop fetching cols from (exclusive) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix containing the specified rows and columns </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= start_row &lt; end_row &lt;= mat-&gt;rows </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a16efaa7b2063f73abe048a4c2e9b3ee7" name="a16efaa7b2063f73abe048a4c2e9b3ee7"></a>
@@ -878,6 +1101,15 @@ false otherwise </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Compute the Singular Value Decomposition (SVD) of a Matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Pointer to Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>SVDResult containing orthonormal Matrices U, V, and diagonal Matrix Sigma with entries in decreasing order </dd></dl>
 
 </div>
 </div>
@@ -930,6 +1162,15 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Flip the rows and columns of a Matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mat</td><td>Pointer to original matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Transposed Matrix </dd></dl>
+
 </div>
 </div>
 <a id="a5e4df77caabb780f85168caee87d85c7" name="a5e4df77caabb780f85168caee87d85c7"></a>
@@ -958,22 +1199,15 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a312e8a3d627e5427365b31692b8de51f" name="a312e8a3d627e5427365b31692b8de51f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a312e8a3d627e5427365b31692b8de51f">&#9670;&#160;</a></span>standard_normal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double standard_normal </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Initialises new Matrix with entries set to 0. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rows</td><td>Number of rows in the Matrix </td></tr>
+    <tr><td class="paramname">cols</td><td>Number of columns in the Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix </dd></dl>
 
 </div>
 </div>
@@ -1094,6 +1328,8 @@ false otherwise </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Maximum number of iterations for any numerical method on Matrices. </p>
+
 </div>
 </div>
 <a id="a9210573348d7ad7d594b21ddc2baf1c7" name="a9210573348d7ad7d594b21ddc2baf1c7"></a>
@@ -1107,6 +1343,8 @@ false otherwise </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Maximum margin of error for floating point arithmetic on Matrices. </p>
 
 </div>
 </div>

@@ -241,7 +241,7 @@ Matrix Matrix_slice_rows(const Matrix *mat, int start, int end);
  * @param start_col Index to start fetching cols from (inclusive)
  * @param end_col Index to stop fetching cols from (exclusive)
  * @return Matrix containing the specified rows and columns
- * @throw Exception, requires 0 <= start_row < end_row <= mat->rows
+ * @throw Exception, requires 0 <= start_row < end_row <= mat->rows && 0 <= start_col < end_col <= mat->cols
  */
 Matrix Matrix_submatrix(const Matrix *mat, int start_row, int end_row, int start_col, int end_col);
 
