@@ -1,0 +1,105 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}File Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}File List}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}File Documentation}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}src/dimreduction.c File Reference}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Function Documentation}{3}{subsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.1}ChiSquared\_Reduce()}{3}{subsubsection.2.1.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.2}PCA\_Reduce()}{4}{subsubsection.2.1.1.2}%
+\contentsline {section}{\numberline {2.2}src/main.c File Reference}{4}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Function Documentation}{4}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.1}main()}{4}{subsubsection.2.2.1.1}%
+\contentsline {section}{\numberline {2.3}src/matrix.c File Reference}{4}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Macro Definition Documentation}{6}{subsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.1.1}ERROR}{6}{subsubsection.2.3.1.1}%
+\contentsline {subsection}{\numberline {2.3.2}Function Documentation}{6}{subsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.1}Matrix\_add()}{6}{subsubsection.2.3.2.1}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}Matrix\_approx\_equal()}{7}{subsubsection.2.3.2.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.3}Matrix\_clone()}{7}{subsubsection.2.3.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.2.4}Matrix\_col()}{8}{subsubsection.2.3.2.4}%
+\contentsline {subsubsection}{\numberline {2.3.2.5}Matrix\_det()}{8}{subsubsection.2.3.2.5}%
+\contentsline {subsubsection}{\numberline {2.3.2.6}Matrix\_display()}{9}{subsubsection.2.3.2.6}%
+\contentsline {subsubsection}{\numberline {2.3.2.7}Matrix\_equal()}{9}{subsubsection.2.3.2.7}%
+\contentsline {subsubsection}{\numberline {2.3.2.8}Matrix\_free()}{9}{subsubsection.2.3.2.8}%
+\contentsline {subsubsection}{\numberline {2.3.2.9}Matrix\_frobenius\_norm()}{10}{subsubsection.2.3.2.9}%
+\contentsline {subsubsection}{\numberline {2.3.2.10}Matrix\_from\_array()}{10}{subsubsection.2.3.2.10}%
+\contentsline {subsubsection}{\numberline {2.3.2.11}Matrix\_identity()}{10}{subsubsection.2.3.2.11}%
+\contentsline {subsubsection}{\numberline {2.3.2.12}Matrix\_inverse()}{11}{subsubsection.2.3.2.12}%
+\contentsline {subsubsection}{\numberline {2.3.2.13}Matrix\_minor()}{11}{subsubsection.2.3.2.13}%
+\contentsline {subsubsection}{\numberline {2.3.2.14}Matrix\_multiply()}{12}{subsubsection.2.3.2.14}%
+\contentsline {subsubsection}{\numberline {2.3.2.15}Matrix\_norm()}{12}{subsubsection.2.3.2.15}%
+\contentsline {subsubsection}{\numberline {2.3.2.16}Matrix\_reset()}{13}{subsubsection.2.3.2.16}%
+\contentsline {subsubsection}{\numberline {2.3.2.17}Matrix\_row()}{13}{subsubsection.2.3.2.17}%
+\contentsline {subsubsection}{\numberline {2.3.2.18}Matrix\_scale()}{13}{subsubsection.2.3.2.18}%
+\contentsline {subsubsection}{\numberline {2.3.2.19}Matrix\_slice\_rows()}{14}{subsubsection.2.3.2.19}%
+\contentsline {subsubsection}{\numberline {2.3.2.20}Matrix\_solve()}{14}{subsubsection.2.3.2.20}%
+\contentsline {subsubsection}{\numberline {2.3.2.21}Matrix\_sub()}{15}{subsubsection.2.3.2.21}%
+\contentsline {subsubsection}{\numberline {2.3.2.22}Matrix\_submatrix()}{15}{subsubsection.2.3.2.22}%
+\contentsline {subsubsection}{\numberline {2.3.2.23}Matrix\_svd()}{16}{subsubsection.2.3.2.23}%
+\contentsline {subsubsection}{\numberline {2.3.2.24}Matrix\_trace()}{16}{subsubsection.2.3.2.24}%
+\contentsline {subsubsection}{\numberline {2.3.2.25}Matrix\_transpose()}{17}{subsubsection.2.3.2.25}%
+\contentsline {subsubsection}{\numberline {2.3.2.26}Matrix\_zeros()}{17}{subsubsection.2.3.2.26}%
+\contentsline {subsubsection}{\numberline {2.3.2.27}Vector\_max()}{17}{subsubsection.2.3.2.27}%
+\contentsline {subsubsection}{\numberline {2.3.2.28}Vector\_max\_index()}{18}{subsubsection.2.3.2.28}%
+\contentsline {subsubsection}{\numberline {2.3.2.29}Vector\_norm()}{18}{subsubsection.2.3.2.29}%
+\contentsline {subsection}{\numberline {2.3.3}Variable Documentation}{19}{subsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.1}MATRIX\_MAX\_ITER}{19}{subsubsection.2.3.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.3.2}MATRIX\_TOLERANCE}{19}{subsubsection.2.3.3.2}%
+\contentsline {section}{\numberline {2.4}src/neuralnetwork.c File Reference}{19}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Function Documentation}{19}{subsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.1.1}NN\_backward\_pass()}{19}{subsubsection.2.4.1.1}%
+\contentsline {subsubsection}{\numberline {2.4.1.2}NN\_create\_layer()}{20}{subsubsection.2.4.1.2}%
+\contentsline {subsubsection}{\numberline {2.4.1.3}NN\_create\_network()}{20}{subsubsection.2.4.1.3}%
+\contentsline {subsubsection}{\numberline {2.4.1.4}NN\_create\_neuron()}{20}{subsubsection.2.4.1.4}%
+\contentsline {subsubsection}{\numberline {2.4.1.5}NN\_forward\_pass()}{20}{subsubsection.2.4.1.5}%
+\contentsline {subsubsection}{\numberline {2.4.1.6}NN\_get\_sigmoid()}{20}{subsubsection.2.4.1.6}%
+\contentsline {section}{\numberline {2.5}src/supervised.c File Reference}{20}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Macro Definition Documentation}{22}{subsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.1.1}ERROR}{22}{subsubsection.2.5.1.1}%
+\contentsline {subsection}{\numberline {2.5.2}Function Documentation}{22}{subsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.2.1}GaussianNBC()}{22}{subsubsection.2.5.2.1}%
+\contentsline {subsubsection}{\numberline {2.5.2.2}GaussianNBC\_predict()}{23}{subsubsection.2.5.2.2}%
+\contentsline {subsubsection}{\numberline {2.5.2.3}KNN\_append\_data()}{23}{subsubsection.2.5.2.3}%
+\contentsline {subsubsection}{\numberline {2.5.2.4}KNN\_free()}{24}{subsubsection.2.5.2.4}%
+\contentsline {subsubsection}{\numberline {2.5.2.5}KNN\_predict()}{24}{subsubsection.2.5.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.2.6}KNNClassifier()}{24}{subsubsection.2.5.2.6}%
+\contentsline {subsubsection}{\numberline {2.5.2.7}KNNRegressor()}{25}{subsubsection.2.5.2.7}%
+\contentsline {subsubsection}{\numberline {2.5.2.8}LassoRegression()}{25}{subsubsection.2.5.2.8}%
+\contentsline {subsubsection}{\numberline {2.5.2.9}LassoRegression\_compute\_gradient()}{26}{subsubsection.2.5.2.9}%
+\contentsline {subsubsection}{\numberline {2.5.2.10}LassoRegression\_compute\_mse()}{26}{subsubsection.2.5.2.10}%
+\contentsline {subsubsection}{\numberline {2.5.2.11}LassoRegression\_default\_loss()}{27}{subsubsection.2.5.2.11}%
+\contentsline {subsubsection}{\numberline {2.5.2.12}LassoRegression\_exact\_optimum()}{27}{subsubsection.2.5.2.12}%
+\contentsline {subsubsection}{\numberline {2.5.2.13}LinearRegression()}{28}{subsubsection.2.5.2.13}%
+\contentsline {subsubsection}{\numberline {2.5.2.14}LinearRegression\_compute\_gradient()}{28}{subsubsection.2.5.2.14}%
+\contentsline {subsubsection}{\numberline {2.5.2.15}LinearRegression\_compute\_mse()}{29}{subsubsection.2.5.2.15}%
+\contentsline {subsubsection}{\numberline {2.5.2.16}LinearRegression\_default\_loss()}{29}{subsubsection.2.5.2.16}%
+\contentsline {subsubsection}{\numberline {2.5.2.17}LinearRegression\_exact\_optimum()}{29}{subsubsection.2.5.2.17}%
+\contentsline {subsubsection}{\numberline {2.5.2.18}LinearRegression\_free()}{30}{subsubsection.2.5.2.18}%
+\contentsline {subsubsection}{\numberline {2.5.2.19}LinearRegression\_predict()}{30}{subsubsection.2.5.2.19}%
+\contentsline {subsubsection}{\numberline {2.5.2.20}LinearRegression\_set\_loss()}{30}{subsubsection.2.5.2.20}%
+\contentsline {subsubsection}{\numberline {2.5.2.21}LinearRegression\_set\_mode()}{31}{subsubsection.2.5.2.21}%
+\contentsline {subsubsection}{\numberline {2.5.2.22}LinearRegression\_train()}{31}{subsubsection.2.5.2.22}%
+\contentsline {subsubsection}{\numberline {2.5.2.23}LogisticRegression()}{31}{subsubsection.2.5.2.23}%
+\contentsline {subsubsection}{\numberline {2.5.2.24}LogisticRegression\_predict()}{32}{subsubsection.2.5.2.24}%
+\contentsline {subsubsection}{\numberline {2.5.2.25}LogisticRegression\_train()}{32}{subsubsection.2.5.2.25}%
+\contentsline {subsubsection}{\numberline {2.5.2.26}RidgeRegression()}{33}{subsubsection.2.5.2.26}%
+\contentsline {subsubsection}{\numberline {2.5.2.27}RidgeRegression\_compute\_gradient()}{33}{subsubsection.2.5.2.27}%
+\contentsline {subsubsection}{\numberline {2.5.2.28}RidgeRegression\_compute\_mse()}{34}{subsubsection.2.5.2.28}%
+\contentsline {subsubsection}{\numberline {2.5.2.29}RidgeRegression\_default\_loss()}{34}{subsubsection.2.5.2.29}%
+\contentsline {subsubsection}{\numberline {2.5.2.30}RidgeRegression\_exact\_optimum()}{34}{subsubsection.2.5.2.30}%
+\contentsline {subsubsection}{\numberline {2.5.2.31}Supervised\_find\_nearest\_centroid()}{35}{subsubsection.2.5.2.31}%
+\contentsline {subsubsection}{\numberline {2.5.2.32}Supervised\_read\_csv()}{35}{subsubsection.2.5.2.32}%
+\contentsline {section}{\numberline {2.6}src/unsupervised.c File Reference}{36}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Macro Definition Documentation}{36}{subsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.1.1}EPOCHS}{36}{subsubsection.2.6.1.1}%
+\contentsline {subsubsection}{\numberline {2.6.1.2}ERROR}{37}{subsubsection.2.6.1.2}%
+\contentsline {subsubsection}{\numberline {2.6.1.3}LEARNING\_RATE}{37}{subsubsection.2.6.1.3}%
+\contentsline {subsubsection}{\numberline {2.6.1.4}MINIBATCH\_SIZE}{37}{subsubsection.2.6.1.4}%
+\contentsline {subsubsection}{\numberline {2.6.1.5}TOLERANCE}{37}{subsubsection.2.6.1.5}%
+\contentsline {subsection}{\numberline {2.6.2}Function Documentation}{37}{subsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.2.1}KMeans()}{37}{subsubsection.2.6.2.1}%
+\contentsline {subsubsection}{\numberline {2.6.2.2}KMeans\_free()}{38}{subsubsection.2.6.2.2}%
+\contentsline {subsubsection}{\numberline {2.6.2.3}KMeans\_predict()}{38}{subsubsection.2.6.2.3}%
+\contentsline {subsubsection}{\numberline {2.6.2.4}KMeans\_train()}{38}{subsubsection.2.6.2.4}%
+\contentsline {subsubsection}{\numberline {2.6.2.5}Unsupervised\_read\_csv()}{39}{subsubsection.2.6.2.5}%
+\contentsline {chapter}{Index}{41}{section*.11}%

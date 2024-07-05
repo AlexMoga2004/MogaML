@@ -1,0 +1,305 @@
+\begin{theindex}
+
+  \item {ChiSquared\_Reduce}
+    \subitem {dimreduction.c}, \hyperpage{3}
+
+  \indexspace
+
+  \item {dimreduction.c}
+    \subitem {ChiSquared\_Reduce}, \hyperpage{3}
+    \subitem {PCA\_Reduce}, \hyperpage{4}
+
+  \indexspace
+
+  \item {EPOCHS}
+    \subitem {unsupervised.c}, \hyperpage{36}
+  \item {ERROR}
+    \subitem {matrix.c}, \hyperpage{6}
+    \subitem {supervised.c}, \hyperpage{22}
+    \subitem {unsupervised.c}, \hyperpage{36}
+
+  \indexspace
+
+  \item {GaussianNBC}
+    \subitem {supervised.c}, \hyperpage{22}
+  \item {GaussianNBC\_predict}
+    \subitem {supervised.c}, \hyperpage{23}
+
+  \indexspace
+
+  \item {KMeans}
+    \subitem {unsupervised.c}, \hyperpage{37}
+  \item {KMeans\_free}
+    \subitem {unsupervised.c}, \hyperpage{38}
+  \item {KMeans\_predict}
+    \subitem {unsupervised.c}, \hyperpage{38}
+  \item {KMeans\_train}
+    \subitem {unsupervised.c}, \hyperpage{38}
+  \item {KNN\_append\_data}
+    \subitem {supervised.c}, \hyperpage{23}
+  \item {KNN\_free}
+    \subitem {supervised.c}, \hyperpage{23}
+  \item {KNN\_predict}
+    \subitem {supervised.c}, \hyperpage{24}
+  \item {KNNClassifier}
+    \subitem {supervised.c}, \hyperpage{24}
+  \item {KNNRegressor}
+    \subitem {supervised.c}, \hyperpage{25}
+
+  \indexspace
+
+  \item {LassoRegression}
+    \subitem {supervised.c}, \hyperpage{25}
+  \item {LassoRegression\_compute\_gradient}
+    \subitem {supervised.c}, \hyperpage{26}
+  \item {LassoRegression\_compute\_mse}
+    \subitem {supervised.c}, \hyperpage{26}
+  \item {LassoRegression\_default\_loss}
+    \subitem {supervised.c}, \hyperpage{27}
+  \item {LassoRegression\_exact\_optimum}
+    \subitem {supervised.c}, \hyperpage{27}
+  \item {LEARNING\_RATE}
+    \subitem {unsupervised.c}, \hyperpage{37}
+  \item {LinearRegression}
+    \subitem {supervised.c}, \hyperpage{27}
+  \item {LinearRegression\_compute\_gradient}
+    \subitem {supervised.c}, \hyperpage{28}
+  \item {LinearRegression\_compute\_mse}
+    \subitem {supervised.c}, \hyperpage{28}
+  \item {LinearRegression\_default\_loss}
+    \subitem {supervised.c}, \hyperpage{29}
+  \item {LinearRegression\_exact\_optimum}
+    \subitem {supervised.c}, \hyperpage{29}
+  \item {LinearRegression\_free}
+    \subitem {supervised.c}, \hyperpage{30}
+  \item {LinearRegression\_predict}
+    \subitem {supervised.c}, \hyperpage{30}
+  \item {LinearRegression\_set\_loss}
+    \subitem {supervised.c}, \hyperpage{30}
+  \item {LinearRegression\_set\_mode}
+    \subitem {supervised.c}, \hyperpage{31}
+  \item {LinearRegression\_train}
+    \subitem {supervised.c}, \hyperpage{31}
+  \item {LogisticRegression}
+    \subitem {supervised.c}, \hyperpage{31}
+  \item {LogisticRegression\_predict}
+    \subitem {supervised.c}, \hyperpage{32}
+  \item {LogisticRegression\_train}
+    \subitem {supervised.c}, \hyperpage{32}
+
+  \indexspace
+
+  \item {main}
+    \subitem {main.c}, \hyperpage{4}
+  \item {main.c}
+    \subitem {main}, \hyperpage{4}
+  \item {matrix.c}
+    \subitem {ERROR}, \hyperpage{6}
+    \subitem {Matrix\_add}, \hyperpage{6}
+    \subitem {Matrix\_approx\_equal}, \hyperpage{7}
+    \subitem {Matrix\_clone}, \hyperpage{7}
+    \subitem {Matrix\_col}, \hyperpage{8}
+    \subitem {Matrix\_det}, \hyperpage{8}
+    \subitem {Matrix\_display}, \hyperpage{9}
+    \subitem {Matrix\_equal}, \hyperpage{9}
+    \subitem {Matrix\_free}, \hyperpage{9}
+    \subitem {Matrix\_frobenius\_norm}, \hyperpage{10}
+    \subitem {Matrix\_from\_array}, \hyperpage{10}
+    \subitem {Matrix\_identity}, \hyperpage{10}
+    \subitem {Matrix\_inverse}, \hyperpage{11}
+    \subitem {MATRIX\_MAX\_ITER}, \hyperpage{19}
+    \subitem {Matrix\_minor}, \hyperpage{11}
+    \subitem {Matrix\_multiply}, \hyperpage{12}
+    \subitem {Matrix\_norm}, \hyperpage{12}
+    \subitem {Matrix\_reset}, \hyperpage{12}
+    \subitem {Matrix\_row}, \hyperpage{13}
+    \subitem {Matrix\_scale}, \hyperpage{13}
+    \subitem {Matrix\_slice\_rows}, \hyperpage{14}
+    \subitem {Matrix\_solve}, \hyperpage{14}
+    \subitem {Matrix\_sub}, \hyperpage{15}
+    \subitem {Matrix\_submatrix}, \hyperpage{15}
+    \subitem {Matrix\_svd}, \hyperpage{16}
+    \subitem {MATRIX\_TOLERANCE}, \hyperpage{19}
+    \subitem {Matrix\_trace}, \hyperpage{16}
+    \subitem {Matrix\_transpose}, \hyperpage{16}
+    \subitem {Matrix\_zeros}, \hyperpage{17}
+    \subitem {Vector\_max}, \hyperpage{17}
+    \subitem {Vector\_max\_index}, \hyperpage{18}
+    \subitem {Vector\_norm}, \hyperpage{18}
+  \item {Matrix\_add}
+    \subitem {matrix.c}, \hyperpage{6}
+  \item {Matrix\_approx\_equal}
+    \subitem {matrix.c}, \hyperpage{7}
+  \item {Matrix\_clone}
+    \subitem {matrix.c}, \hyperpage{7}
+  \item {Matrix\_col}
+    \subitem {matrix.c}, \hyperpage{8}
+  \item {Matrix\_det}
+    \subitem {matrix.c}, \hyperpage{8}
+  \item {Matrix\_display}
+    \subitem {matrix.c}, \hyperpage{9}
+  \item {Matrix\_equal}
+    \subitem {matrix.c}, \hyperpage{9}
+  \item {Matrix\_free}
+    \subitem {matrix.c}, \hyperpage{9}
+  \item {Matrix\_frobenius\_norm}
+    \subitem {matrix.c}, \hyperpage{10}
+  \item {Matrix\_from\_array}
+    \subitem {matrix.c}, \hyperpage{10}
+  \item {Matrix\_identity}
+    \subitem {matrix.c}, \hyperpage{10}
+  \item {Matrix\_inverse}
+    \subitem {matrix.c}, \hyperpage{11}
+  \item {MATRIX\_MAX\_ITER}
+    \subitem {matrix.c}, \hyperpage{19}
+  \item {Matrix\_minor}
+    \subitem {matrix.c}, \hyperpage{11}
+  \item {Matrix\_multiply}
+    \subitem {matrix.c}, \hyperpage{12}
+  \item {Matrix\_norm}
+    \subitem {matrix.c}, \hyperpage{12}
+  \item {Matrix\_reset}
+    \subitem {matrix.c}, \hyperpage{12}
+  \item {Matrix\_row}
+    \subitem {matrix.c}, \hyperpage{13}
+  \item {Matrix\_scale}
+    \subitem {matrix.c}, \hyperpage{13}
+  \item {Matrix\_slice\_rows}
+    \subitem {matrix.c}, \hyperpage{14}
+  \item {Matrix\_solve}
+    \subitem {matrix.c}, \hyperpage{14}
+  \item {Matrix\_sub}
+    \subitem {matrix.c}, \hyperpage{15}
+  \item {Matrix\_submatrix}
+    \subitem {matrix.c}, \hyperpage{15}
+  \item {Matrix\_svd}
+    \subitem {matrix.c}, \hyperpage{16}
+  \item {MATRIX\_TOLERANCE}
+    \subitem {matrix.c}, \hyperpage{19}
+  \item {Matrix\_trace}
+    \subitem {matrix.c}, \hyperpage{16}
+  \item {Matrix\_transpose}
+    \subitem {matrix.c}, \hyperpage{16}
+  \item {Matrix\_zeros}
+    \subitem {matrix.c}, \hyperpage{17}
+  \item {MINIBATCH\_SIZE}
+    \subitem {unsupervised.c}, \hyperpage{37}
+
+  \indexspace
+
+  \item {neuralnetwork.c}
+    \subitem {NN\_backward\_pass}, \hyperpage{19}
+    \subitem {NN\_create\_layer}, \hyperpage{19}
+    \subitem {NN\_create\_network}, \hyperpage{20}
+    \subitem {NN\_create\_neuron}, \hyperpage{20}
+    \subitem {NN\_forward\_pass}, \hyperpage{20}
+    \subitem {NN\_get\_sigmoid}, \hyperpage{20}
+  \item {NN\_backward\_pass}
+    \subitem {neuralnetwork.c}, \hyperpage{19}
+  \item {NN\_create\_layer}
+    \subitem {neuralnetwork.c}, \hyperpage{19}
+  \item {NN\_create\_network}
+    \subitem {neuralnetwork.c}, \hyperpage{20}
+  \item {NN\_create\_neuron}
+    \subitem {neuralnetwork.c}, \hyperpage{20}
+  \item {NN\_forward\_pass}
+    \subitem {neuralnetwork.c}, \hyperpage{20}
+  \item {NN\_get\_sigmoid}
+    \subitem {neuralnetwork.c}, \hyperpage{20}
+
+  \indexspace
+
+  \item {PCA\_Reduce}
+    \subitem {dimreduction.c}, \hyperpage{4}
+
+  \indexspace
+
+  \item {RidgeRegression}
+    \subitem {supervised.c}, \hyperpage{33}
+  \item {RidgeRegression\_compute\_gradient}
+    \subitem {supervised.c}, \hyperpage{33}
+  \item {RidgeRegression\_compute\_mse}
+    \subitem {supervised.c}, \hyperpage{34}
+  \item {RidgeRegression\_default\_loss}
+    \subitem {supervised.c}, \hyperpage{34}
+  \item {RidgeRegression\_exact\_optimum}
+    \subitem {supervised.c}, \hyperpage{34}
+
+  \indexspace
+
+  \item {src/dimreduction.c}, \hyperpage{3}
+  \item {src/main.c}, \hyperpage{4}
+  \item {src/matrix.c}, \hyperpage{4}
+  \item {src/neuralnetwork.c}, \hyperpage{19}
+  \item {src/supervised.c}, \hyperpage{20}
+  \item {src/unsupervised.c}, \hyperpage{36}
+  \item {supervised.c}
+    \subitem {ERROR}, \hyperpage{22}
+    \subitem {GaussianNBC}, \hyperpage{22}
+    \subitem {GaussianNBC\_predict}, \hyperpage{23}
+    \subitem {KNN\_append\_data}, \hyperpage{23}
+    \subitem {KNN\_free}, \hyperpage{23}
+    \subitem {KNN\_predict}, \hyperpage{24}
+    \subitem {KNNClassifier}, \hyperpage{24}
+    \subitem {KNNRegressor}, \hyperpage{25}
+    \subitem {LassoRegression}, \hyperpage{25}
+    \subitem {LassoRegression\_compute\_gradient}, \hyperpage{26}
+    \subitem {LassoRegression\_compute\_mse}, \hyperpage{26}
+    \subitem {LassoRegression\_default\_loss}, \hyperpage{27}
+    \subitem {LassoRegression\_exact\_optimum}, \hyperpage{27}
+    \subitem {LinearRegression}, \hyperpage{27}
+    \subitem {LinearRegression\_compute\_gradient}, \hyperpage{28}
+    \subitem {LinearRegression\_compute\_mse}, \hyperpage{28}
+    \subitem {LinearRegression\_default\_loss}, \hyperpage{29}
+    \subitem {LinearRegression\_exact\_optimum}, \hyperpage{29}
+    \subitem {LinearRegression\_free}, \hyperpage{30}
+    \subitem {LinearRegression\_predict}, \hyperpage{30}
+    \subitem {LinearRegression\_set\_loss}, \hyperpage{30}
+    \subitem {LinearRegression\_set\_mode}, \hyperpage{31}
+    \subitem {LinearRegression\_train}, \hyperpage{31}
+    \subitem {LogisticRegression}, \hyperpage{31}
+    \subitem {LogisticRegression\_predict}, \hyperpage{32}
+    \subitem {LogisticRegression\_train}, \hyperpage{32}
+    \subitem {RidgeRegression}, \hyperpage{33}
+    \subitem {RidgeRegression\_compute\_gradient}, \hyperpage{33}
+    \subitem {RidgeRegression\_compute\_mse}, \hyperpage{34}
+    \subitem {RidgeRegression\_default\_loss}, \hyperpage{34}
+    \subitem {RidgeRegression\_exact\_optimum}, \hyperpage{34}
+    \subitem {Supervised\_find\_nearest\_centroid}, \hyperpage{35}
+    \subitem {Supervised\_read\_csv}, \hyperpage{35}
+  \item {Supervised\_find\_nearest\_centroid}
+    \subitem {supervised.c}, \hyperpage{35}
+  \item {Supervised\_read\_csv}
+    \subitem {supervised.c}, \hyperpage{35}
+
+  \indexspace
+
+  \item {TOLERANCE}
+    \subitem {unsupervised.c}, \hyperpage{37}
+
+  \indexspace
+
+  \item {unsupervised.c}
+    \subitem {EPOCHS}, \hyperpage{36}
+    \subitem {ERROR}, \hyperpage{36}
+    \subitem {KMeans}, \hyperpage{37}
+    \subitem {KMeans\_free}, \hyperpage{38}
+    \subitem {KMeans\_predict}, \hyperpage{38}
+    \subitem {KMeans\_train}, \hyperpage{38}
+    \subitem {LEARNING\_RATE}, \hyperpage{37}
+    \subitem {MINIBATCH\_SIZE}, \hyperpage{37}
+    \subitem {TOLERANCE}, \hyperpage{37}
+    \subitem {Unsupervised\_read\_csv}, \hyperpage{39}
+  \item {Unsupervised\_read\_csv}
+    \subitem {unsupervised.c}, \hyperpage{39}
+
+  \indexspace
+
+  \item {Vector\_max}
+    \subitem {matrix.c}, \hyperpage{17}
+  \item {Vector\_max\_index}
+    \subitem {matrix.c}, \hyperpage{18}
+  \item {Vector\_norm}
+    \subitem {matrix.c}, \hyperpage{18}
+
+\end{theindex}

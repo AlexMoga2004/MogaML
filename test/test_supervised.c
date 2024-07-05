@@ -155,7 +155,6 @@ void test_linear_regression_loss_surface() {
     printf("LinearRegressionModel Loss Surface test completed!\n");
 }
 
-
 void test_ridge_regression() {
     printf("Testing RidgeRegressionModel...\n");
     
