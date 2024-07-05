@@ -28,3 +28,5 @@ Extensive tests available with `make test`, ensure gnuplot is installed
 [pca.pdf](https://github.com/user-attachments/files/16113918/pca.pdf)
 
 [naive.pdf](https://github.com/user-attachments/files/16113926/naive.pdf)
+
+[knn.pdf](https://github.com/user-attachments/files/16113960/knn.pdf)
