@@ -18,15 +18,15 @@
 \begin{DoxyCompactItemize}
 \item 
 Matrix \mbox{\hyperlink{unsupervised_8c_aef6c1050daecdc425e0cfd20ae8942ed}{Unsupervised\+\_\+read\+\_\+csv}} (const char $\ast$filename)
-\item 
+\begin{DoxyCompactList}\small\item\em Reads a Matrix from a Comma Separated Value (CSV) file. \end{DoxyCompactList}\item 
 KMeans\+Model \mbox{\hyperlink{unsupervised_8c_a86a20d404f4532895b9062e3f638f39b}{KMeans}} (unsigned int k, const Matrix $\ast$X)
-\item 
+\begin{DoxyCompactList}\small\item\em Construct a KMeans\+Model with a set of data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{unsupervised_8c_a1dd7baa0fb404e6378152c48be2d03c2}{KMeans\+\_\+train}} (KMeans\+Model $\ast$model)
-\item 
+\begin{DoxyCompactList}\small\item\em Train the model using lloyd\textquotesingle{}s algorithm. \end{DoxyCompactList}\item 
 Matrix \mbox{\hyperlink{unsupervised_8c_a7c4e20d389e3c3dca00a037f4044a114}{KMeans\+\_\+predict}} (const KMeans\+Model $\ast$model, const Matrix $\ast$X\+\_\+new)
-\item 
+\begin{DoxyCompactList}\small\item\em Predict the cluster of unseen data using a KMeans\+Model. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{unsupervised_8c_ae929fe4e7c064da30d7be3fb6b7ba676}{KMeans\+\_\+free}} (KMeans\+Model $\ast$model)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Free memory allocated to KMeans Model. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -76,27 +76,88 @@ void \mbox{\hyperlink{unsupervised_8c_ae929fe4e7c064da30d7be3fb6b7ba676}{KMeans\
 \doxysubsubsection{\texorpdfstring{KMeans()}{KMeans()}}
 {\footnotesize\ttfamily KMeans\+Model KMeans (\begin{DoxyParamCaption}\item[{unsigned int}]{k,  }\item[{const Matrix $\ast$}]{X }\end{DoxyParamCaption})}
 
+
+
+Construct a KMeans\+Model with a set of data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & Number of clusters \\
+\hline
+{\em X} & Data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+KMeans\+Model 
+\end{DoxyReturn}
 \mbox{\Hypertarget{unsupervised_8c_ae929fe4e7c064da30d7be3fb6b7ba676}\label{unsupervised_8c_ae929fe4e7c064da30d7be3fb6b7ba676}} 
 \index{unsupervised.c@{unsupervised.c}!KMeans\_free@{KMeans\_free}}
 \index{KMeans\_free@{KMeans\_free}!unsupervised.c@{unsupervised.c}}
 \doxysubsubsection{\texorpdfstring{KMeans\_free()}{KMeans\_free()}}
 {\footnotesize\ttfamily void KMeans\+\_\+free (\begin{DoxyParamCaption}\item[{KMeans\+Model $\ast$}]{model }\end{DoxyParamCaption})}
 
+
+
+Free memory allocated to KMeans Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Model to be freed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Subsequent accesses to the model may segfault 
+\end{DoxyNote}
 \mbox{\Hypertarget{unsupervised_8c_a7c4e20d389e3c3dca00a037f4044a114}\label{unsupervised_8c_a7c4e20d389e3c3dca00a037f4044a114}} 
 \index{unsupervised.c@{unsupervised.c}!KMeans\_predict@{KMeans\_predict}}
 \index{KMeans\_predict@{KMeans\_predict}!unsupervised.c@{unsupervised.c}}
 \doxysubsubsection{\texorpdfstring{KMeans\_predict()}{KMeans\_predict()}}
 {\footnotesize\ttfamily Matrix KMeans\+\_\+predict (\begin{DoxyParamCaption}\item[{const KMeans\+Model $\ast$}]{model,  }\item[{const Matrix $\ast$}]{X\+\_\+new }\end{DoxyParamCaption})}
 
+
+
+Predict the cluster of unseen data using a KMeans\+Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & \\
+\hline
+{\em X\+\_\+new} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix Predicted clusters 
+\end{DoxyReturn}
 \mbox{\Hypertarget{unsupervised_8c_a1dd7baa0fb404e6378152c48be2d03c2}\label{unsupervised_8c_a1dd7baa0fb404e6378152c48be2d03c2}} 
 \index{unsupervised.c@{unsupervised.c}!KMeans\_train@{KMeans\_train}}
 \index{KMeans\_train@{KMeans\_train}!unsupervised.c@{unsupervised.c}}
 \doxysubsubsection{\texorpdfstring{KMeans\_train()}{KMeans\_train()}}
 {\footnotesize\ttfamily void KMeans\+\_\+train (\begin{DoxyParamCaption}\item[{KMeans\+Model $\ast$}]{model }\end{DoxyParamCaption})}
 
+
+
+Train the model using lloyd\textquotesingle{}s algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Model to be trained \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{unsupervised_8c_aef6c1050daecdc425e0cfd20ae8942ed}\label{unsupervised_8c_aef6c1050daecdc425e0cfd20ae8942ed}} 
 \index{unsupervised.c@{unsupervised.c}!Unsupervised\_read\_csv@{Unsupervised\_read\_csv}}
 \index{Unsupervised\_read\_csv@{Unsupervised\_read\_csv}!unsupervised.c@{unsupervised.c}}
 \doxysubsubsection{\texorpdfstring{Unsupervised\_read\_csv()}{Unsupervised\_read\_csv()}}
 {\footnotesize\ttfamily Matrix Unsupervised\+\_\+read\+\_\+csv (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
 
+
+
+Reads a Matrix from a Comma Separated Value (CSV) file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix read data 
+\end{DoxyReturn}

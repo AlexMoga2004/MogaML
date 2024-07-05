@@ -104,14 +104,19 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aef6c1050daecdc425e0cfd20ae8942ed"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsupervised_8c.html#aef6c1050daecdc425e0cfd20ae8942ed">Unsupervised_read_csv</a> (const char *filename)</td></tr>
+<tr class="memdesc:aef6c1050daecdc425e0cfd20ae8942ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a Matrix from a Comma Separated Value (CSV) file.  <br /></td></tr>
 <tr class="separator:aef6c1050daecdc425e0cfd20ae8942ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a20d404f4532895b9062e3f638f39b"><td class="memItemLeft" align="right" valign="top">KMeansModel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsupervised_8c.html#a86a20d404f4532895b9062e3f638f39b">KMeans</a> (unsigned int k, const Matrix *X)</td></tr>
+<tr class="memdesc:a86a20d404f4532895b9062e3f638f39b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a KMeansModel with a set of data.  <br /></td></tr>
 <tr class="separator:a86a20d404f4532895b9062e3f638f39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dd7baa0fb404e6378152c48be2d03c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsupervised_8c.html#a1dd7baa0fb404e6378152c48be2d03c2">KMeans_train</a> (KMeansModel *model)</td></tr>
+<tr class="memdesc:a1dd7baa0fb404e6378152c48be2d03c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Train the model using lloyd's algorithm.  <br /></td></tr>
 <tr class="separator:a1dd7baa0fb404e6378152c48be2d03c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c4e20d389e3c3dca00a037f4044a114"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsupervised_8c.html#a7c4e20d389e3c3dca00a037f4044a114">KMeans_predict</a> (const KMeansModel *model, const Matrix *X_new)</td></tr>
+<tr class="memdesc:a7c4e20d389e3c3dca00a037f4044a114"><td class="mdescLeft">&#160;</td><td class="mdescRight">Predict the cluster of unseen data using a KMeansModel.  <br /></td></tr>
 <tr class="separator:a7c4e20d389e3c3dca00a037f4044a114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae929fe4e7c064da30d7be3fb6b7ba676"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unsupervised_8c.html#ae929fe4e7c064da30d7be3fb6b7ba676">KMeans_free</a> (KMeansModel *model)</td></tr>
+<tr class="memdesc:ae929fe4e7c064da30d7be3fb6b7ba676"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free memory allocated to KMeans Model.  <br /></td></tr>
 <tr class="separator:ae929fe4e7c064da30d7be3fb6b7ba676"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -229,6 +234,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct a KMeansModel with a set of data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">k</td><td>Number of clusters </td></tr>
+    <tr><td class="paramname">X</td><td>Data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>KMeansModel </dd></dl>
+
 </div>
 </div>
 <a id="ae929fe4e7c064da30d7be3fb6b7ba676" name="ae929fe4e7c064da30d7be3fb6b7ba676"></a>
@@ -246,6 +261,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Free memory allocated to KMeans Model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Model to be freed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Subsequent accesses to the model may segfault </dd></dl>
 
 </div>
 </div>
@@ -275,6 +299,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Predict the cluster of unseen data using a KMeansModel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td></td></tr>
+    <tr><td class="paramname">X_new</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix Predicted clusters </dd></dl>
+
 </div>
 </div>
 <a id="a1dd7baa0fb404e6378152c48be2d03c2" name="a1dd7baa0fb404e6378152c48be2d03c2"></a>
@@ -293,6 +327,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Train the model using lloyd's algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Model to be trained </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="aef6c1050daecdc425e0cfd20ae8942ed" name="aef6c1050daecdc425e0cfd20ae8942ed"></a>
@@ -310,6 +352,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reads a Matrix from a Comma Separated Value (CSV) file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix read data </dd></dl>
 
 </div>
 </div>

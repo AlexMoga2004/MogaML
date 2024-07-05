@@ -10,7 +10,14 @@
             fprintf(stderr, fmt, ##__VA_ARGS__); \
         } while (0)
 
-// Helper functions
+/**
+ * @brief Calculate the euclidean distance between two double arrays
+ * 
+ * @param a First array
+ * @param b Second array
+ * @param length Length of arrays
+ * @return double Euclidean distance
+ */
 static double euclidean_distance(const double *a, const double *b, int length) {
     double sum = 0.0;
     for (int i = 0; i < length; ++i) {
@@ -19,6 +26,13 @@ static double euclidean_distance(const double *a, const double *b, int length) {
     return sqrt(sum);
 }
 
+/**
+ * @brief Find the index of the nearest centroids given a point and a set of centroids
+ * 
+ * @param point Point in euclid space 
+ * @param centroids Matrix, each row is a centroid
+ * @return int Index of nearest centroid
+ */
 static int find_nearest_centroid(const double *point, const Matrix *centroids) {
     int nearest = 0;
     double min_dist = DBL_MAX;
@@ -32,6 +46,12 @@ static int find_nearest_centroid(const double *point, const Matrix *centroids) {
     return nearest;
 }
 
+/**
+ * @brief Count the number of columns in a CSV file (assuming they are the same on each row)
+ * 
+ * @param filename 
+ * @return int Number of columns
+ */
 static int count_columns(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -53,6 +73,12 @@ static int count_columns(const char *filename) {
     return count;
 }
 
+/**
+ * @brief Reads a Matrix from a Comma Separated Value (CSV) file
+ * 
+ * @param filename
+ * @return Matrix read data
+ */
 Matrix Unsupervised_read_csv(const char *filename) {
 
     FILE *file = fopen(filename, "r");
@@ -91,6 +117,13 @@ Matrix Unsupervised_read_csv(const char *filename) {
     return X;
 }
 
+/**
+ * @brief Construct a KMeansModel with a set of data
+ * 
+ * @param k Number of clusters
+ * @param X Data
+ * @return KMeansModel 
+ */
 KMeansModel KMeans(unsigned int k, const Matrix *X) {
     KMeansModel model;
     model.data = Matrix_clone(X);
@@ -137,6 +170,11 @@ KMeansModel KMeans(unsigned int k, const Matrix *X) {
     return model;
 }
 
+/**
+ * @brief Train the model using lloyd's algorithm
+ * 
+ * @param model Model to be trained
+ */
 void KMeans_train(KMeansModel *model) {
     int num_samples = model->data.rows;
     int num_features = model->data.cols;
@@ -209,6 +247,13 @@ void KMeans_train(KMeansModel *model) {
     model->trained = true;
 }
 
+/**
+ * @brief Predict the cluster of unseen data using a KMeansModel
+ * 
+ * @param model 
+ * @param X_new 
+ * @return Matrix Predicted clusters
+ */
 Matrix KMeans_predict(const KMeansModel *model, const Matrix *X_new) {
     if (!model->trained) {
         ERROR("Error in X");
@@ -223,6 +268,12 @@ Matrix KMeans_predict(const KMeansModel *model, const Matrix *X_new) {
     return predictions;
 }
 
+/**
+ * @brief Free memory allocated to KMeans Model
+ * 
+ * @param model Model to be freed
+ * @note Subsequent accesses to the model may segfault
+ */
 void KMeans_free(KMeansModel *model) {
     Matrix_free(model->data);
     Matrix_free(model->cluster_means);
