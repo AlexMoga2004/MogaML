@@ -261,8 +261,8 @@ Variables</h2></td></tr>
 <p>Sums the entries in two Matrices element-wise. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat1</td><td>Pointer to first Matrix </td></tr>
-    <tr><td class="paramname">mat2</td><td>Pointer to second Matrix </td></tr>
+    <tr><td class="paramname">mat1</td><td>first Matrix </td></tr>
+    <tr><td class="paramname">mat2</td><td>second Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -311,8 +311,8 @@ Variables</h2></td></tr>
 <p>Checks if two Matrices are pairwise equal within a given tolerance. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat1</td><td>Pointer to first Matrix </td></tr>
-    <tr><td class="paramname">mat2</td><td>Pointer to second Matrix </td></tr>
+    <tr><td class="paramname">mat1</td><td>first Matrix </td></tr>
+    <tr><td class="paramname">mat2</td><td>second Matrix </td></tr>
     <tr><td class="paramname">tolerance</td><td>Maximum difference between each element </td></tr>
   </table>
   </dd>
@@ -342,7 +342,7 @@ false otherwise </dd></dl>
 <p>Create a new matrix with identical entries. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to originial Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>originial Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -379,7 +379,7 @@ false otherwise </dd></dl>
 <p>Get a single column from a matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>original Matrix </td></tr>
     <tr><td class="paramname">col</td><td>Index of column to fetch </td></tr>
   </table>
   </dd>
@@ -387,7 +387,7 @@ false otherwise </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Column vector (in Matrix form) containing the desired column </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= col &lt; Matrix.cols </td></tr>
+    <tr><td class="paramname">Exception</td><td>requires 0 &lt;= col &lt; Matrix.cols </td></tr>
   </table>
   </dd>
 </dl>
@@ -413,7 +413,7 @@ false otherwise </dd></dl>
 <p>Computes the determinant of a square Matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to the Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>the Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -446,7 +446,7 @@ false otherwise </dd></dl>
 <p>Prints the contents of the mAtrix to stdout, formatted with newlines. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to Matrix to be displayed </td></tr>
+    <tr><td class="paramname">mat</td><td>Matrix to be displayed </td></tr>
   </table>
   </dd>
 </dl>
@@ -482,8 +482,8 @@ false otherwise </dd></dl>
 <p>Checks if two Matrices are pairwise (exactly) equal. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat1</td><td>Pointer to first Matrix </td></tr>
-    <tr><td class="paramname">mat2</td><td>Pointer to second Matrix </td></tr>
+    <tr><td class="paramname">mat1</td><td>first Matrix </td></tr>
+    <tr><td class="paramname">mat2</td><td>second Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -539,7 +539,7 @@ false otherwise </dd></dl>
 <p>Computes the frobenius norm of a Matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to the Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>the Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -638,7 +638,7 @@ false otherwise </dd></dl>
 <p>Compute the inverse of a square Matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>original Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -687,7 +687,7 @@ false otherwise </dd></dl>
 <p>Computes the minor of a Matrix by removing a row and a column. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>original Matrix </td></tr>
     <tr><td class="paramname">row</td><td>Index of row to remove </td></tr>
     <tr><td class="paramname">col</td><td>Index of column to remove </td></tr>
   </table>
@@ -696,7 +696,7 @@ false otherwise </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Remaining Matrix minor </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= row &lt; Matrix.rows &amp;&amp; 0 &lt;= col &lt; Matrix.cols </td></tr>
+    <tr><td class="paramname">Exception</td><td>requires 0 &lt;= row &lt; Matrix.rows &amp;&amp; 0 &lt;= col &lt; Matrix.cols </td></tr>
   </table>
   </dd>
 </dl>
@@ -732,15 +732,15 @@ false otherwise </dd></dl>
 <p>Multiplies two Matrices. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat1</td><td>Pointer to first Matrix </td></tr>
-    <tr><td class="paramname">mat2</td><td>Pointer to second Matrix </td></tr>
+    <tr><td class="paramname">mat1</td><td>first Matrix </td></tr>
+    <tr><td class="paramname">mat2</td><td>second Matrix </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result of Matrix multiplication </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">Exception,requires</td><td>mat1-&gt;cols == mat2-&gt;rows </td></tr>
+    <tr><td class="paramname">Exception</td><td>requires mat1-&gt;cols == mat2-&gt;rows </td></tr>
   </table>
   </dd>
 </dl>
@@ -766,7 +766,7 @@ false otherwise </dd></dl>
 <p>Computes the l2-norm of a Matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to the Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>the Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -793,7 +793,7 @@ false otherwise </dd></dl>
 <p>Sets all entries of the Matrix to 0. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to Matrix to be reset </td></tr>
+    <tr><td class="paramname">mat</td><td>Matrix to be reset </td></tr>
   </table>
   </dd>
 </dl>
@@ -829,7 +829,7 @@ false otherwise </dd></dl>
 <p>Get a single row from a matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>original Matrix </td></tr>
     <tr><td class="paramname">row</td><td>Index of row to fetch </td></tr>
   </table>
   </dd>
@@ -837,7 +837,7 @@ false otherwise </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Row vector (in Matrix form) containing the desired row </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= row &lt; Matrix.rows </td></tr>
+    <tr><td class="paramname">Exception</td><td>requires 0 &lt;= row &lt; Matrix.rows </td></tr>
   </table>
   </dd>
 </dl>
@@ -874,7 +874,7 @@ false otherwise </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">c</td><td>Factor </td></tr>
-    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>original Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -926,7 +926,7 @@ false otherwise </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Sub-matrix containing specified rows </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= start &lt; end &lt;= matrix.rows </td></tr>
+    <tr><td class="paramname">Exception</td><td>requires 0 &lt;= start &lt; end &lt;= matrix.rows </td></tr>
   </table>
   </dd>
 </dl>
@@ -962,15 +962,15 @@ false otherwise </dd></dl>
 <p>Return the solution to the equation Ax=b. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">A</td><td>Pointer to Matrix A </td></tr>
-    <tr><td class="paramname">b</td><td>Pointer to column Vector b (embedded as a Matrix) </td></tr>
+    <tr><td class="paramname">A</td><td>Matrix A </td></tr>
+    <tr><td class="paramname">b</td><td>column Vector b (embedded as a Matrix) </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Column vector x as a Matrix, the solution to the equation </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">Exception,for</td><td>incompatible dimensions, or singular Matrices A </td></tr>
+    <tr><td class="paramname">Exception</td><td>for incompatible dimensions, or singular Matrices A </td></tr>
   </table>
   </dd>
 </dl>
@@ -1006,8 +1006,8 @@ false otherwise </dd></dl>
 <p>Subtracts the entries in two Matrices element-wise. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat1</td><td>Pointer to first Matrix </td></tr>
-    <tr><td class="paramname">mat2</td><td>Pointer to second Matrix </td></tr>
+    <tr><td class="paramname">mat1</td><td>first Matrix </td></tr>
+    <tr><td class="paramname">mat2</td><td>second Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -1068,7 +1068,7 @@ false otherwise </dd></dl>
 <p>Get a Matrix that contains a subset of the rows and columns. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to original Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>original Matrix </td></tr>
     <tr><td class="paramname">start_row</td><td>Index to start fetching rows from (inclusive) </td></tr>
     <tr><td class="paramname">end_row</td><td>Index to stop fetching rows from (exclusive) </td></tr>
     <tr><td class="paramname">start_col</td><td>Index to start fetching cols from (inclusive) </td></tr>
@@ -1079,7 +1079,7 @@ false otherwise </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Matrix containing the specified rows and columns </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">Exception,requires</td><td>0 &lt;= start_row &lt; end_row &lt;= mat-&gt;rows </td></tr>
+    <tr><td class="paramname">Exception</td><td>requires 0 &lt;= start_row &lt; end_row &lt;= mat-&gt;rows &amp;&amp; 0 &lt;= start_col &lt; end_col &lt;= mat-&gt;cols </td></tr>
   </table>
   </dd>
 </dl>
@@ -1105,7 +1105,7 @@ false otherwise </dd></dl>
 <p>Compute the Singular Value Decomposition (SVD) of a Matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -1132,7 +1132,7 @@ false otherwise </dd></dl>
 <p>Computes the sum of the diagonal entries of a square Matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to the Matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>the Matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -1165,7 +1165,7 @@ false otherwise </dd></dl>
 <p>Flip the rows and columns of a Matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to original matrix </td></tr>
+    <tr><td class="paramname">mat</td><td>original matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -1230,7 +1230,7 @@ false otherwise </dd></dl>
 <p>Computes the largest value in a row vector. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to the Vector (embedded in a Matrix) </td></tr>
+    <tr><td class="paramname">mat</td><td>the Vector (embedded in a Matrix) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1263,7 +1263,7 @@ false otherwise </dd></dl>
 <p>Computes the index of the largest value in a row vector. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to the Vector (embedded in a Matrix) </td></tr>
+    <tr><td class="paramname">mat</td><td>the Vector (embedded in a Matrix) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1306,7 +1306,7 @@ false otherwise </dd></dl>
 <p>Computes the l-k norm of a Vector. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mat</td><td>Pointer to the Vector (embedded in a Matrix) </td></tr>
+    <tr><td class="paramname">mat</td><td>the Vector (embedded in a Matrix) </td></tr>
     <tr><td class="paramname">k</td><td>Non-negative integer to adjust norm type </td></tr>
   </table>
   </dd>

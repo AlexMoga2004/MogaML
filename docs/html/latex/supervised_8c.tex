@@ -5,74 +5,74 @@
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{supervised_8c_a15378cd15bafb3a79061424b452497aa}{ERROR}}(fmt, ...)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Macro to output error message to stdout. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{supervised_8c_aa127a892813ccc0e97d691458451764c}{Supervised\+\_\+find\+\_\+nearest\+\_\+centroid}} (const double $\ast$point, const Matrix $\ast$centroids)
-\item 
-Linear\+Regression\+Model \mbox{\hyperlink{supervised_8c_ac010c236594f34eec858d56129c90598}{Linear\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y)
-\item 
-Linear\+Regression\+Model \mbox{\hyperlink{supervised_8c_a494c1f52b29734bf3c26527f14471199}{Ridge\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y, double lambda)
-\item 
-Linear\+Regression\+Model \mbox{\hyperlink{supervised_8c_ada92614f6bb9b5485e4848ca78b7ec5f}{Lasso\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y, double lambda)
-\item 
-Loss\+Function \mbox{\hyperlink{supervised_8c_ab940090e3cc4ce97d8f33093c4fef34c}{Linear\+Regression\+\_\+default\+\_\+loss}} ()
-\item 
-Loss\+Function \mbox{\hyperlink{supervised_8c_ab52dbcf7b69725ca95e4cab15e30edca}{Ridge\+Regression\+\_\+default\+\_\+loss}} ()
-\item 
-Loss\+Function \mbox{\hyperlink{supervised_8c_a1a14c0628471a3d4d7b0796b67621671}{Lasso\+Regression\+\_\+default\+\_\+loss}} ()
-\item 
-void \mbox{\hyperlink{supervised_8c_aa76664efc74e09516a30e62d88e4f4bd}{Linear\+Regression\+\_\+set\+\_\+loss}} (Linear\+Regression\+Model $\ast$model, Loss\+Function loss\+\_\+function)
-\item 
-void \mbox{\hyperlink{supervised_8c_a775d600b7b79920fddae84a00a70e73f}{Linear\+Regression\+\_\+train}} (Linear\+Regression\+Model $\ast$model)
-\item 
-void \mbox{\hyperlink{supervised_8c_ad2579d63c38b43bd3c8d312886a3c09b}{Linear\+Regression\+\_\+set\+\_\+mode}} (Linear\+Regression\+Model $\ast$model, enum Computation\+Mode mode)
-\item 
-void \mbox{\hyperlink{supervised_8c_a294ebe78ea4cf4efc94d78e876a8ad59}{Linear\+Regression\+\_\+free}} (Linear\+Regression\+Model model)
-\item 
-Matrix \mbox{\hyperlink{supervised_8c_acfaa3c2f34733c263cea22c0307ccc86}{Linear\+Regression\+\_\+exact\+\_\+optimum}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$hyper\+\_\+params)
-\item 
-Matrix \mbox{\hyperlink{supervised_8c_a5a27dcfd4a3058ac540a1dda98c3f014}{Ridge\+Regression\+\_\+exact\+\_\+optimum}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$hyper\+\_\+params)
-\item 
-Matrix \mbox{\hyperlink{supervised_8c_a2953b6fe071ac2ae528194f75f7a2262}{Lasso\+Regression\+\_\+exact\+\_\+optimum}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$hyper\+\_\+params)
-\item 
-double \mbox{\hyperlink{supervised_8c_a607a8b1aad07b768eec253d04e3e48f2}{Linear\+Regression\+\_\+compute\+\_\+mse}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
-\item 
-double \mbox{\hyperlink{supervised_8c_a15ce02dd066b7b96c3007af6fd6b41aa}{Ridge\+Regression\+\_\+compute\+\_\+mse}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
-\item 
-double \mbox{\hyperlink{supervised_8c_a4c7df091d3f37eec716c1154f5c94b46}{Lasso\+Regression\+\_\+compute\+\_\+mse}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
-\item 
+\begin{DoxyCompactList}\small\item\em Find the nearest centroid to a given point (embedded as a double array) \end{DoxyCompactList}\item 
 Labelled\+Data \mbox{\hyperlink{supervised_8c_a77ba20a314ffc525b7ecd0fe59346f1d}{Supervised\+\_\+read\+\_\+csv}} (const char $\ast$filename)
-\item 
+\begin{DoxyCompactList}\small\item\em Load Comma Separated Values (CSV) into a Labelled\+Data structure, assuming the last element is the label. \end{DoxyCompactList}\item 
+Linear\+Regression\+Model \mbox{\hyperlink{supervised_8c_ac010c236594f34eec858d56129c90598}{Linear\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y)
+\begin{DoxyCompactList}\small\item\em Construct a Linear Regression model with no regularisation. \end{DoxyCompactList}\item 
+Linear\+Regression\+Model \mbox{\hyperlink{supervised_8c_a494c1f52b29734bf3c26527f14471199}{Ridge\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y, double lambda)
+\begin{DoxyCompactList}\small\item\em Construct a Linear Regression model with Ridge Regularisation. \end{DoxyCompactList}\item 
+Linear\+Regression\+Model \mbox{\hyperlink{supervised_8c_ada92614f6bb9b5485e4848ca78b7ec5f}{Lasso\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y, double lambda)
+\begin{DoxyCompactList}\small\item\em Construct a Linear Regression model with Lasso Regularisation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{supervised_8c_a775d600b7b79920fddae84a00a70e73f}{Linear\+Regression\+\_\+train}} (Linear\+Regression\+Model $\ast$model)
+\begin{DoxyCompactList}\small\item\em Train a linear regression model. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{supervised_8c_ad2579d63c38b43bd3c8d312886a3c09b}{Linear\+Regression\+\_\+set\+\_\+mode}} (Linear\+Regression\+Model $\ast$model, enum Computation\+Mode mode)
+\begin{DoxyCompactList}\small\item\em Set the computation mode of a Linear Regression Model. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{supervised_8c_a294ebe78ea4cf4efc94d78e876a8ad59}{Linear\+Regression\+\_\+free}} (Linear\+Regression\+Model model)
+\begin{DoxyCompactList}\small\item\em Free allocated memory for a Linear\+Regression\+Model. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{supervised_8c_aa76664efc74e09516a30e62d88e4f4bd}{Linear\+Regression\+\_\+set\+\_\+loss}} (Linear\+Regression\+Model $\ast$model, Loss\+Function loss\+\_\+function)
+\begin{DoxyCompactList}\small\item\em Change the loss function. \end{DoxyCompactList}\item 
+Loss\+Function \mbox{\hyperlink{supervised_8c_ab940090e3cc4ce97d8f33093c4fef34c}{Linear\+Regression\+\_\+default\+\_\+loss}} ()
+\begin{DoxyCompactList}\small\item\em Mean Squared Error (MSE) Loss\+Function with no regularisation. \end{DoxyCompactList}\item 
+Loss\+Function \mbox{\hyperlink{supervised_8c_ab52dbcf7b69725ca95e4cab15e30edca}{Ridge\+Regression\+\_\+default\+\_\+loss}} ()
+\begin{DoxyCompactList}\small\item\em Mean Squared Error (MSE) Loss\+Function with Ridge regularisation (hyper-\/parameter lambda = model-\/\texorpdfstring{$>$}{>}hyper\+\_\+params\mbox{[}0\mbox{]}\mbox{[}0\mbox{]}) \end{DoxyCompactList}\item 
+Loss\+Function \mbox{\hyperlink{supervised_8c_a1a14c0628471a3d4d7b0796b67621671}{Lasso\+Regression\+\_\+default\+\_\+loss}} ()
+\begin{DoxyCompactList}\small\item\em Mean Squared Error (MSE) Loss\+Function with Lasso regularisation (hyper-\/parameter lambda = model-\/\texorpdfstring{$>$}{>}hyper\+\_\+params\mbox{[}0\mbox{]}\mbox{[}0\mbox{]}) \end{DoxyCompactList}\item 
 Matrix \mbox{\hyperlink{supervised_8c_a6053843927a90b4f99000efe62a8fb97}{Linear\+Regression\+\_\+predict}} (const Linear\+Regression\+Model $\ast$model, const Matrix $\ast$x\+\_\+new)
-\item 
+\begin{DoxyCompactList}\small\item\em Calculate the Linear Regression Estimate for new data. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{supervised_8c_a607a8b1aad07b768eec253d04e3e48f2}{Linear\+Regression\+\_\+compute\+\_\+mse}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
+\begin{DoxyCompactList}\small\item\em Compute Mean Squared Estimate (MSE) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{supervised_8c_a15ce02dd066b7b96c3007af6fd6b41aa}{Ridge\+Regression\+\_\+compute\+\_\+mse}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
+\begin{DoxyCompactList}\small\item\em Compute Mean Squared Estimate (MSE) with Ridge Regularisation. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{supervised_8c_a4c7df091d3f37eec716c1154f5c94b46}{Lasso\+Regression\+\_\+compute\+\_\+mse}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
+\begin{DoxyCompactList}\small\item\em Compute Mean Squared Estimate (MSE) with Lasso Regularisation. \end{DoxyCompactList}\item 
+Matrix \mbox{\hyperlink{supervised_8c_acfaa3c2f34733c263cea22c0307ccc86}{Linear\+Regression\+\_\+exact\+\_\+optimum}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$hyper\+\_\+params)
+\begin{DoxyCompactList}\small\item\em Computes the global optimum algebraically for Linear Regression with no regularisation. \end{DoxyCompactList}\item 
+Matrix \mbox{\hyperlink{supervised_8c_a5a27dcfd4a3058ac540a1dda98c3f014}{Ridge\+Regression\+\_\+exact\+\_\+optimum}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$hyper\+\_\+params)
+\begin{DoxyCompactList}\small\item\em Computes the global optimum algebraically for Linear Regression with Ridge regularisation. \end{DoxyCompactList}\item 
+Matrix \mbox{\hyperlink{supervised_8c_a2953b6fe071ac2ae528194f75f7a2262}{Lasso\+Regression\+\_\+exact\+\_\+optimum}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$hyper\+\_\+params)
+\begin{DoxyCompactList}\small\item\em Placeholder function, throws exception since exact optimum can\textquotesingle{}t be computed for Lasso Regression. \end{DoxyCompactList}\item 
 Matrix \mbox{\hyperlink{supervised_8c_acb7456e6a7176158d8e22fce435a8bdd}{Linear\+Regression\+\_\+compute\+\_\+gradient}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
-\item 
+\begin{DoxyCompactList}\small\item\em Computes the gradient of the MSE Loss Function. \end{DoxyCompactList}\item 
 Matrix \mbox{\hyperlink{supervised_8c_a867008d90b95e5461b7eda382d9d7d65}{Ridge\+Regression\+\_\+compute\+\_\+gradient}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
-\item 
+\begin{DoxyCompactList}\small\item\em Compute a sub-\/gradient of the MSE Loss Function with Ridge regularisation. \end{DoxyCompactList}\item 
 Matrix \mbox{\hyperlink{supervised_8c_a79c3fbe41cba464f0373d8ab6b1fbdea}{Lasso\+Regression\+\_\+compute\+\_\+gradient}} (const Matrix $\ast$X, const Matrix $\ast$y, const Matrix $\ast$params, const Matrix $\ast$hyper\+\_\+params)
-\item 
+\begin{DoxyCompactList}\small\item\em Computes a sub-\/gradient of the MSE Loss Function with Lasso regularisation. \end{DoxyCompactList}\item 
 KNNModel \mbox{\hyperlink{supervised_8c_ac9ed3dd691efd68c4f25a2f7d3afbd5e}{KNNClassifier}} (unsigned int k, const Matrix $\ast$X, const Matrix $\ast$y)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs a KNN model using the majority-\/vote prediction. \end{DoxyCompactList}\item 
 KNNModel \mbox{\hyperlink{supervised_8c_a4a2e38bdf8cbbc53376ae4552e62c11a}{KNNRegressor}} (unsigned int k, const Matrix $\ast$X, const Matrix $\ast$y)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs a KNN model using the majority-\/vote prediction. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{supervised_8c_a3776959a50f51e4bc8b576ea3437fcda}{KNN\+\_\+free}} (KNNModel model)
-\item 
+\begin{DoxyCompactList}\small\item\em Free memory allocated by KNN Model. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{supervised_8c_a316e5d6e0bc2e41113efcdce20b6d1ae}{KNN\+\_\+append\+\_\+data}} (KNNModel $\ast$model, const Matrix $\ast$X\+\_\+new, const Matrix $\ast$y\+\_\+new)
-\item 
+\begin{DoxyCompactList}\small\item\em Add data to existing KNN model. \end{DoxyCompactList}\item 
 Matrix \mbox{\hyperlink{supervised_8c_a8825870bd962004f547bb30c8104c626}{KNN\+\_\+predict}} (const KNNModel $\ast$model, const Matrix $\ast$x\+\_\+new)
-\item 
+\begin{DoxyCompactList}\small\item\em Predict the labels of unseen data using the KNN algorithm. \end{DoxyCompactList}\item 
 Logistic\+Regression\+Model \mbox{\hyperlink{supervised_8c_a85948da0aa56844e8b06bdeeeb33def2}{Logistic\+Regression}} (const Matrix $\ast$X, const Matrix $\ast$y)
-\item 
+\begin{DoxyCompactList}\small\item\em Construct a Logistic Regression Model. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{supervised_8c_a2adc34eb19c5b6aa555de1379fd9f77f}{Logistic\+Regression\+\_\+train}} (Logistic\+Regression\+Model $\ast$model)
-\item 
+\begin{DoxyCompactList}\small\item\em Train a Logistic Regression model. \end{DoxyCompactList}\item 
 Matrix \mbox{\hyperlink{supervised_8c_aee9e0a96e668ac1c6ed4ad4850e052b7}{Logistic\+Regression\+\_\+predict}} (const Logistic\+Regression\+Model $\ast$model, const Matrix $\ast$X\+\_\+new)
-\item 
+\begin{DoxyCompactList}\small\item\em Predict the labels of unseen data. \end{DoxyCompactList}\item 
 Gaussian\+NBCModel \mbox{\hyperlink{supervised_8c_a1dd4c95c33c07ccf88c1ad0f30a192d1}{Gaussian\+NBC}} (const Matrix $\ast$X, const Matrix $\ast$y)
-\item 
+\begin{DoxyCompactList}\small\item\em Create a Naive Bayes Classifier (NBC) model. \end{DoxyCompactList}\item 
 Matrix \mbox{\hyperlink{supervised_8c_ac4813e6a41c81d0d597460aee8de74b9}{Gaussian\+NBC\+\_\+predict}} (const Gaussian\+NBCModel $\ast$model, const Matrix $\ast$X\+\_\+new)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Use the classifier to predict the labels of unseen data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -91,6 +91,10 @@ Matrix \mbox{\hyperlink{supervised_8c_ac4813e6a41c81d0d597460aee8de74b9}{Gaussia
 \end{DoxyCode}
 
 
+Macro to output error message to stdout. 
+
+
+
 \doxysubsection{Function Documentation}
 \mbox{\Hypertarget{supervised_8c_a1dd4c95c33c07ccf88c1ad0f30a192d1}\label{supervised_8c_a1dd4c95c33c07ccf88c1ad0f30a192d1}} 
 \index{supervised.c@{supervised.c}!GaussianNBC@{GaussianNBC}}
@@ -98,189 +102,678 @@ Matrix \mbox{\hyperlink{supervised_8c_ac4813e6a41c81d0d597460aee8de74b9}{Gaussia
 \doxysubsubsection{\texorpdfstring{GaussianNBC()}{GaussianNBC()}}
 {\footnotesize\ttfamily Gaussian\+NBCModel Gaussian\+NBC (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
 
+
+
+Create a Naive Bayes Classifier (NBC) model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Gaussian\+NBCModel 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_ac4813e6a41c81d0d597460aee8de74b9}\label{supervised_8c_ac4813e6a41c81d0d597460aee8de74b9}} 
 \index{supervised.c@{supervised.c}!GaussianNBC\_predict@{GaussianNBC\_predict}}
 \index{GaussianNBC\_predict@{GaussianNBC\_predict}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{GaussianNBC\_predict()}{GaussianNBC\_predict()}}
 {\footnotesize\ttfamily Matrix Gaussian\+NBC\+\_\+predict (\begin{DoxyParamCaption}\item[{const Gaussian\+NBCModel $\ast$}]{model,  }\item[{const Matrix $\ast$}]{X\+\_\+new }\end{DoxyParamCaption})}
 
+
+
+Use the classifier to predict the labels of unseen data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Model to be used \\
+\hline
+{\em X\+\_\+new} & Unseen data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix Predicted labels in Vector form 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_a316e5d6e0bc2e41113efcdce20b6d1ae}\label{supervised_8c_a316e5d6e0bc2e41113efcdce20b6d1ae}} 
 \index{supervised.c@{supervised.c}!KNN\_append\_data@{KNN\_append\_data}}
 \index{KNN\_append\_data@{KNN\_append\_data}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{KNN\_append\_data()}{KNN\_append\_data()}}
 {\footnotesize\ttfamily void KNN\+\_\+append\+\_\+data (\begin{DoxyParamCaption}\item[{KNNModel $\ast$}]{model,  }\item[{const Matrix $\ast$}]{X\+\_\+new,  }\item[{const Matrix $\ast$}]{y\+\_\+new }\end{DoxyParamCaption})}
 
+
+
+Add data to existing KNN model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Existing model \\
+\hline
+{\em X} & New input features \\
+\hline
+{\em y} & New input labels \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{supervised_8c_a3776959a50f51e4bc8b576ea3437fcda}\label{supervised_8c_a3776959a50f51e4bc8b576ea3437fcda}} 
 \index{supervised.c@{supervised.c}!KNN\_free@{KNN\_free}}
 \index{KNN\_free@{KNN\_free}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{KNN\_free()}{KNN\_free()}}
 {\footnotesize\ttfamily void KNN\+\_\+free (\begin{DoxyParamCaption}\item[{KNNModel}]{model }\end{DoxyParamCaption})}
 
+
+
+Free memory allocated by KNN Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{supervised_8c_a8825870bd962004f547bb30c8104c626}\label{supervised_8c_a8825870bd962004f547bb30c8104c626}} 
 \index{supervised.c@{supervised.c}!KNN\_predict@{KNN\_predict}}
 \index{KNN\_predict@{KNN\_predict}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{KNN\_predict()}{KNN\_predict()}}
 {\footnotesize\ttfamily Matrix KNN\+\_\+predict (\begin{DoxyParamCaption}\item[{const KNNModel $\ast$}]{model,  }\item[{const Matrix $\ast$}]{x\+\_\+new }\end{DoxyParamCaption})}
 
+
+
+Predict the labels of unseen data using the KNN algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & \\
+\hline
+{\em x\+\_\+new} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_ac9ed3dd691efd68c4f25a2f7d3afbd5e}\label{supervised_8c_ac9ed3dd691efd68c4f25a2f7d3afbd5e}} 
 \index{supervised.c@{supervised.c}!KNNClassifier@{KNNClassifier}}
 \index{KNNClassifier@{KNNClassifier}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{KNNClassifier()}{KNNClassifier()}}
 {\footnotesize\ttfamily KNNModel KNNClassifier (\begin{DoxyParamCaption}\item[{unsigned int}]{k,  }\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
 
+
+
+Constructs a KNN model using the majority-\/vote prediction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & Number of neighbours used by the model \\
+\hline
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+KNNModel 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_a4a2e38bdf8cbbc53376ae4552e62c11a}\label{supervised_8c_a4a2e38bdf8cbbc53376ae4552e62c11a}} 
 \index{supervised.c@{supervised.c}!KNNRegressor@{KNNRegressor}}
 \index{KNNRegressor@{KNNRegressor}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{KNNRegressor()}{KNNRegressor()}}
 {\footnotesize\ttfamily KNNModel KNNRegressor (\begin{DoxyParamCaption}\item[{unsigned int}]{k,  }\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
 
+
+
+Constructs a KNN model using the majority-\/vote prediction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & Number of neighbours used by the model \\
+\hline
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+KNNModel 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_ada92614f6bb9b5485e4848ca78b7ec5f}\label{supervised_8c_ada92614f6bb9b5485e4848ca78b7ec5f}} 
 \index{supervised.c@{supervised.c}!LassoRegression@{LassoRegression}}
 \index{LassoRegression@{LassoRegression}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LassoRegression()}{LassoRegression()}}
 {\footnotesize\ttfamily Linear\+Regression\+Model Lasso\+Regression (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{double}]{lambda }\end{DoxyParamCaption})}
 
+
+
+Construct a Linear Regression model with Lasso Regularisation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & input data in a Matrix \\
+\hline
+{\em y} & output labels in a Vector (embedded as a Matrix) \\
+\hline
+{\em lambda} & Hyper-\/parameter for Ridge loss \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Linear\+Regression\+Model with default computation mode set to BATCH 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & when X-\/\texorpdfstring{$>$}{>}rows != y-\/\texorpdfstring{$>$}{>}rows \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+No algebraic solution exists for lasso regression 
+
+Input Matrix is padded with a 1-\/column for the bias term 
+\end{DoxyNote}
 \mbox{\Hypertarget{supervised_8c_a79c3fbe41cba464f0373d8ab6b1fbdea}\label{supervised_8c_a79c3fbe41cba464f0373d8ab6b1fbdea}} 
 \index{supervised.c@{supervised.c}!LassoRegression\_compute\_gradient@{LassoRegression\_compute\_gradient}}
 \index{LassoRegression\_compute\_gradient@{LassoRegression\_compute\_gradient}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LassoRegression\_compute\_gradient()}{LassoRegression\_compute\_gradient()}}
 {\footnotesize\ttfamily Matrix Lasso\+Regression\+\_\+compute\+\_\+gradient (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
 
+
+
+Computes a sub-\/gradient of the MSE Loss Function with Lasso regularisation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+{\em params} & Current parameters \\
+\hline
+{\em hyper\+\_\+params} & Contains lambda in data\mbox{[}0\mbox{]}\mbox{[}0\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix derivative of the loss function wrt the parameters 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_a4c7df091d3f37eec716c1154f5c94b46}\label{supervised_8c_a4c7df091d3f37eec716c1154f5c94b46}} 
 \index{supervised.c@{supervised.c}!LassoRegression\_compute\_mse@{LassoRegression\_compute\_mse}}
 \index{LassoRegression\_compute\_mse@{LassoRegression\_compute\_mse}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LassoRegression\_compute\_mse()}{LassoRegression\_compute\_mse()}}
 {\footnotesize\ttfamily double Lasso\+Regression\+\_\+compute\+\_\+mse (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
 
+
+
+Compute Mean Squared Estimate (MSE) with Lasso Regularisation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Matrix with input data \\
+\hline
+{\em y} & Vector (embedded in a Matrix) with correct labels \\
+\hline
+{\em params} & Weights and bias used to make prediction \\
+\hline
+{\em hyper\+\_\+params} & Contains lambda in data\mbox{[}0\mbox{]}\mbox{[}0\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double Mean Squared Error 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_a1a14c0628471a3d4d7b0796b67621671}\label{supervised_8c_a1a14c0628471a3d4d7b0796b67621671}} 
 \index{supervised.c@{supervised.c}!LassoRegression\_default\_loss@{LassoRegression\_default\_loss}}
 \index{LassoRegression\_default\_loss@{LassoRegression\_default\_loss}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LassoRegression\_default\_loss()}{LassoRegression\_default\_loss()}}
 {\footnotesize\ttfamily Loss\+Function Lasso\+Regression\+\_\+default\+\_\+loss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Mean Squared Error (MSE) Loss\+Function with Lasso regularisation (hyper-\/parameter lambda = model-\/\texorpdfstring{$>$}{>}hyper\+\_\+params\mbox{[}0\mbox{]}\mbox{[}0\mbox{]}) 
+
+\begin{DoxyReturn}{Returns}
+Loss\+Function 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Cannot be trained with computation mode set to ALGEBRAIC 
+\end{DoxyNote}
 \mbox{\Hypertarget{supervised_8c_a2953b6fe071ac2ae528194f75f7a2262}\label{supervised_8c_a2953b6fe071ac2ae528194f75f7a2262}} 
 \index{supervised.c@{supervised.c}!LassoRegression\_exact\_optimum@{LassoRegression\_exact\_optimum}}
 \index{LassoRegression\_exact\_optimum@{LassoRegression\_exact\_optimum}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LassoRegression\_exact\_optimum()}{LassoRegression\_exact\_optimum()}}
 {\footnotesize\ttfamily Matrix Lasso\+Regression\+\_\+exact\+\_\+optimum (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
 
+
+
+Placeholder function, throws exception since exact optimum can\textquotesingle{}t be computed for Lasso Regression. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+{\em hyper\+\_\+params} & Contains lambda in data\mbox{[}0\mbox{]}\mbox{[}0\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix Global optimum value of params 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
 \mbox{\Hypertarget{supervised_8c_ac010c236594f34eec858d56129c90598}\label{supervised_8c_ac010c236594f34eec858d56129c90598}} 
 \index{supervised.c@{supervised.c}!LinearRegression@{LinearRegression}}
 \index{LinearRegression@{LinearRegression}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression()}{LinearRegression()}}
 {\footnotesize\ttfamily Linear\+Regression\+Model Linear\+Regression (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
 
+
+
+Construct a Linear Regression model with no regularisation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & input data in a Matrix \\
+\hline
+{\em y} & output labels in a Vector (embedded as a Matrix) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Linear\+Regression\+Model with default computation mode set to ALGEBRAIC 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & when X-\/\texorpdfstring{$>$}{>}rows != y-\/\texorpdfstring{$>$}{>}rows \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+Input Matrix is padded with a 1-\/column for the bias term 
+\end{DoxyNote}
 \mbox{\Hypertarget{supervised_8c_acb7456e6a7176158d8e22fce435a8bdd}\label{supervised_8c_acb7456e6a7176158d8e22fce435a8bdd}} 
 \index{supervised.c@{supervised.c}!LinearRegression\_compute\_gradient@{LinearRegression\_compute\_gradient}}
 \index{LinearRegression\_compute\_gradient@{LinearRegression\_compute\_gradient}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression\_compute\_gradient()}{LinearRegression\_compute\_gradient()}}
 {\footnotesize\ttfamily Matrix Linear\+Regression\+\_\+compute\+\_\+gradient (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
 
+
+
+Computes the gradient of the MSE Loss Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+{\em params} & Current parameters \\
+\hline
+{\em hyper\+\_\+params} & Unneeded \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix derivative of the loss function wrt the parameters 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_a607a8b1aad07b768eec253d04e3e48f2}\label{supervised_8c_a607a8b1aad07b768eec253d04e3e48f2}} 
 \index{supervised.c@{supervised.c}!LinearRegression\_compute\_mse@{LinearRegression\_compute\_mse}}
 \index{LinearRegression\_compute\_mse@{LinearRegression\_compute\_mse}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression\_compute\_mse()}{LinearRegression\_compute\_mse()}}
 {\footnotesize\ttfamily double Linear\+Regression\+\_\+compute\+\_\+mse (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
 
+
+
+Compute Mean Squared Estimate (MSE) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Matrix with input data \\
+\hline
+{\em y} & Vector (embedded in a Matrix) with correct labels \\
+\hline
+{\em params} & Weights and bias used to make prediction \\
+\hline
+{\em hyper\+\_\+params} & Unneeded \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double Mean Squared Error 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_ab940090e3cc4ce97d8f33093c4fef34c}\label{supervised_8c_ab940090e3cc4ce97d8f33093c4fef34c}} 
 \index{supervised.c@{supervised.c}!LinearRegression\_default\_loss@{LinearRegression\_default\_loss}}
 \index{LinearRegression\_default\_loss@{LinearRegression\_default\_loss}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression\_default\_loss()}{LinearRegression\_default\_loss()}}
 {\footnotesize\ttfamily Loss\+Function Linear\+Regression\+\_\+default\+\_\+loss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Mean Squared Error (MSE) Loss\+Function with no regularisation. 
+
+\begin{DoxyReturn}{Returns}
+Loss\+Function 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_acfaa3c2f34733c263cea22c0307ccc86}\label{supervised_8c_acfaa3c2f34733c263cea22c0307ccc86}} 
 \index{supervised.c@{supervised.c}!LinearRegression\_exact\_optimum@{LinearRegression\_exact\_optimum}}
 \index{LinearRegression\_exact\_optimum@{LinearRegression\_exact\_optimum}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression\_exact\_optimum()}{LinearRegression\_exact\_optimum()}}
 {\footnotesize\ttfamily Matrix Linear\+Regression\+\_\+exact\+\_\+optimum (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
 
+
+
+Computes the global optimum algebraically for Linear Regression with no regularisation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+{\em hyper\+\_\+params} & Unneeded \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix Global optimum value of params 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_a294ebe78ea4cf4efc94d78e876a8ad59}\label{supervised_8c_a294ebe78ea4cf4efc94d78e876a8ad59}} 
 \index{supervised.c@{supervised.c}!LinearRegression\_free@{LinearRegression\_free}}
 \index{LinearRegression\_free@{LinearRegression\_free}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression\_free()}{LinearRegression\_free()}}
 {\footnotesize\ttfamily void Linear\+Regression\+\_\+free (\begin{DoxyParamCaption}\item[{Linear\+Regression\+Model}]{model }\end{DoxyParamCaption})}
 
+
+
+Free allocated memory for a Linear\+Regression\+Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Model to be freed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Further calls to model may segfault 
+\end{DoxyNote}
 \mbox{\Hypertarget{supervised_8c_a6053843927a90b4f99000efe62a8fb97}\label{supervised_8c_a6053843927a90b4f99000efe62a8fb97}} 
 \index{supervised.c@{supervised.c}!LinearRegression\_predict@{LinearRegression\_predict}}
 \index{LinearRegression\_predict@{LinearRegression\_predict}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression\_predict()}{LinearRegression\_predict()}}
 {\footnotesize\ttfamily Matrix Linear\+Regression\+\_\+predict (\begin{DoxyParamCaption}\item[{const Linear\+Regression\+Model $\ast$}]{model,  }\item[{const Matrix $\ast$}]{x\+\_\+new }\end{DoxyParamCaption})}
 
+
+
+Calculate the Linear Regression Estimate for new data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Linear Regression Model to predict with \\
+\hline
+{\em x\+\_\+new} & Matrix containing the new (unpadded) data as rows \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector (embedded as Matrix) containing the predicted labels 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_aa76664efc74e09516a30e62d88e4f4bd}\label{supervised_8c_aa76664efc74e09516a30e62d88e4f4bd}} 
 \index{supervised.c@{supervised.c}!LinearRegression\_set\_loss@{LinearRegression\_set\_loss}}
 \index{LinearRegression\_set\_loss@{LinearRegression\_set\_loss}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression\_set\_loss()}{LinearRegression\_set\_loss()}}
 {\footnotesize\ttfamily void Linear\+Regression\+\_\+set\+\_\+loss (\begin{DoxyParamCaption}\item[{Linear\+Regression\+Model $\ast$}]{model,  }\item[{Loss\+Function}]{loss\+\_\+function }\end{DoxyParamCaption})}
 
+
+
+Change the loss function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & model to be changed \\
+\hline
+{\em loss\+\_\+function} & New loss function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+model needs to be retrained before predictions are made 
+\end{DoxyNote}
 \mbox{\Hypertarget{supervised_8c_ad2579d63c38b43bd3c8d312886a3c09b}\label{supervised_8c_ad2579d63c38b43bd3c8d312886a3c09b}} 
 \index{supervised.c@{supervised.c}!LinearRegression\_set\_mode@{LinearRegression\_set\_mode}}
 \index{LinearRegression\_set\_mode@{LinearRegression\_set\_mode}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression\_set\_mode()}{LinearRegression\_set\_mode()}}
 {\footnotesize\ttfamily void Linear\+Regression\+\_\+set\+\_\+mode (\begin{DoxyParamCaption}\item[{Linear\+Regression\+Model $\ast$}]{model,  }\item[{enum Computation\+Mode}]{mode }\end{DoxyParamCaption})}
 
+
+
+Set the computation mode of a Linear Regression Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & The model to be changed \\
+\hline
+{\em mode} & Desired computation mode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Some Loss\+Functions do not have an algebraic solution, and may throw exceptions when trained with computation mode ALGEBRAIC 
+\end{DoxyNote}
 \mbox{\Hypertarget{supervised_8c_a775d600b7b79920fddae84a00a70e73f}\label{supervised_8c_a775d600b7b79920fddae84a00a70e73f}} 
 \index{supervised.c@{supervised.c}!LinearRegression\_train@{LinearRegression\_train}}
 \index{LinearRegression\_train@{LinearRegression\_train}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LinearRegression\_train()}{LinearRegression\_train()}}
 {\footnotesize\ttfamily void Linear\+Regression\+\_\+train (\begin{DoxyParamCaption}\item[{Linear\+Regression\+Model $\ast$}]{model }\end{DoxyParamCaption})}
 
+
+
+Train a linear regression model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Model to be trained \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{supervised_8c_a85948da0aa56844e8b06bdeeeb33def2}\label{supervised_8c_a85948da0aa56844e8b06bdeeeb33def2}} 
 \index{supervised.c@{supervised.c}!LogisticRegression@{LogisticRegression}}
 \index{LogisticRegression@{LogisticRegression}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LogisticRegression()}{LogisticRegression()}}
 {\footnotesize\ttfamily Logistic\+Regression\+Model Logistic\+Regression (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y }\end{DoxyParamCaption})}
 
+
+
+Construct a Logistic Regression Model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Logistic\+Regression\+Model 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_aee9e0a96e668ac1c6ed4ad4850e052b7}\label{supervised_8c_aee9e0a96e668ac1c6ed4ad4850e052b7}} 
 \index{supervised.c@{supervised.c}!LogisticRegression\_predict@{LogisticRegression\_predict}}
 \index{LogisticRegression\_predict@{LogisticRegression\_predict}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LogisticRegression\_predict()}{LogisticRegression\_predict()}}
 {\footnotesize\ttfamily Matrix Logistic\+Regression\+\_\+predict (\begin{DoxyParamCaption}\item[{const Logistic\+Regression\+Model $\ast$}]{model,  }\item[{const Matrix $\ast$}]{X\+\_\+new }\end{DoxyParamCaption})}
 
+
+
+Predict the labels of unseen data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Model to be used \\
+\hline
+{\em X\+\_\+new} & Data to be predicted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector (embedded in a Matrix) containing the predicted labels 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & requires model to be trained \\
+\hline
+\end{DoxyExceptions}
 \mbox{\Hypertarget{supervised_8c_a2adc34eb19c5b6aa555de1379fd9f77f}\label{supervised_8c_a2adc34eb19c5b6aa555de1379fd9f77f}} 
 \index{supervised.c@{supervised.c}!LogisticRegression\_train@{LogisticRegression\_train}}
 \index{LogisticRegression\_train@{LogisticRegression\_train}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{LogisticRegression\_train()}{LogisticRegression\_train()}}
 {\footnotesize\ttfamily void Logistic\+Regression\+\_\+train (\begin{DoxyParamCaption}\item[{Logistic\+Regression\+Model $\ast$}]{model }\end{DoxyParamCaption})}
 
+
+
+Train a Logistic Regression model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & to be trained \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{supervised_8c_a494c1f52b29734bf3c26527f14471199}\label{supervised_8c_a494c1f52b29734bf3c26527f14471199}} 
 \index{supervised.c@{supervised.c}!RidgeRegression@{RidgeRegression}}
 \index{RidgeRegression@{RidgeRegression}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{RidgeRegression()}{RidgeRegression()}}
 {\footnotesize\ttfamily Linear\+Regression\+Model Ridge\+Regression (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{double}]{lambda }\end{DoxyParamCaption})}
 
+
+
+Construct a Linear Regression model with Ridge Regularisation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & input data in a Matrix \\
+\hline
+{\em y} & output labels in a Vector (embedded as a Matrix) \\
+\hline
+{\em lambda} & Hyper-\/parameter for Ridge loss \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Linear\+Regression\+Model with default computation mode set to ALGEBRAIC 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & when X-\/\texorpdfstring{$>$}{>}rows != y-\/\texorpdfstring{$>$}{>}rows \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+Input Matrix is padded with a 1-\/column for the bias term 
+\end{DoxyNote}
 \mbox{\Hypertarget{supervised_8c_a867008d90b95e5461b7eda382d9d7d65}\label{supervised_8c_a867008d90b95e5461b7eda382d9d7d65}} 
 \index{supervised.c@{supervised.c}!RidgeRegression\_compute\_gradient@{RidgeRegression\_compute\_gradient}}
 \index{RidgeRegression\_compute\_gradient@{RidgeRegression\_compute\_gradient}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{RidgeRegression\_compute\_gradient()}{RidgeRegression\_compute\_gradient()}}
 {\footnotesize\ttfamily Matrix Ridge\+Regression\+\_\+compute\+\_\+gradient (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
 
+
+
+Compute a sub-\/gradient of the MSE Loss Function with Ridge regularisation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+{\em params} & Current parameters \\
+\hline
+{\em hyper\+\_\+params} & Contains lambda in data\mbox{[}0\mbox{]}\mbox{[}0\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix derivative of the loss function wrt the parameters 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_a15ce02dd066b7b96c3007af6fd6b41aa}\label{supervised_8c_a15ce02dd066b7b96c3007af6fd6b41aa}} 
 \index{supervised.c@{supervised.c}!RidgeRegression\_compute\_mse@{RidgeRegression\_compute\_mse}}
 \index{RidgeRegression\_compute\_mse@{RidgeRegression\_compute\_mse}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{RidgeRegression\_compute\_mse()}{RidgeRegression\_compute\_mse()}}
 {\footnotesize\ttfamily double Ridge\+Regression\+\_\+compute\+\_\+mse (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{params,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
 
+
+
+Compute Mean Squared Estimate (MSE) with Ridge Regularisation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Matrix with input data \\
+\hline
+{\em y} & Vector (embedded in a Matrix) with correct labels \\
+\hline
+{\em params} & Weights and bias used to make prediction \\
+\hline
+{\em hyper\+\_\+params} & Contains lambda in data\mbox{[}0\mbox{]}\mbox{[}0\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double Mean Squared Error 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_ab52dbcf7b69725ca95e4cab15e30edca}\label{supervised_8c_ab52dbcf7b69725ca95e4cab15e30edca}} 
 \index{supervised.c@{supervised.c}!RidgeRegression\_default\_loss@{RidgeRegression\_default\_loss}}
 \index{RidgeRegression\_default\_loss@{RidgeRegression\_default\_loss}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{RidgeRegression\_default\_loss()}{RidgeRegression\_default\_loss()}}
 {\footnotesize\ttfamily Loss\+Function Ridge\+Regression\+\_\+default\+\_\+loss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Mean Squared Error (MSE) Loss\+Function with Ridge regularisation (hyper-\/parameter lambda = model-\/\texorpdfstring{$>$}{>}hyper\+\_\+params\mbox{[}0\mbox{]}\mbox{[}0\mbox{]}) 
+
+\begin{DoxyReturn}{Returns}
+Loss\+Function 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_a5a27dcfd4a3058ac540a1dda98c3f014}\label{supervised_8c_a5a27dcfd4a3058ac540a1dda98c3f014}} 
 \index{supervised.c@{supervised.c}!RidgeRegression\_exact\_optimum@{RidgeRegression\_exact\_optimum}}
 \index{RidgeRegression\_exact\_optimum@{RidgeRegression\_exact\_optimum}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{RidgeRegression\_exact\_optimum()}{RidgeRegression\_exact\_optimum()}}
 {\footnotesize\ttfamily Matrix Ridge\+Regression\+\_\+exact\+\_\+optimum (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{const Matrix $\ast$}]{hyper\+\_\+params }\end{DoxyParamCaption})}
 
+
+
+Computes the global optimum algebraically for Linear Regression with Ridge regularisation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & Input features \\
+\hline
+{\em y} & Input labels \\
+\hline
+{\em hyper\+\_\+params} & Contains lambda in data\mbox{[}0\mbox{]}\mbox{[}0\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix Global optimum value of params 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_aa127a892813ccc0e97d691458451764c}\label{supervised_8c_aa127a892813ccc0e97d691458451764c}} 
 \index{supervised.c@{supervised.c}!Supervised\_find\_nearest\_centroid@{Supervised\_find\_nearest\_centroid}}
 \index{Supervised\_find\_nearest\_centroid@{Supervised\_find\_nearest\_centroid}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{Supervised\_find\_nearest\_centroid()}{Supervised\_find\_nearest\_centroid()}}
 {\footnotesize\ttfamily int Supervised\+\_\+find\+\_\+nearest\+\_\+centroid (\begin{DoxyParamCaption}\item[{const double $\ast$}]{point,  }\item[{const Matrix $\ast$}]{centroids }\end{DoxyParamCaption})}
 
+
+
+Find the nearest centroid to a given point (embedded as a double array) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Array of values representing point in euclidean space \\
+\hline
+{\em centroids} & matrix containing centroid coordinates as rows \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+index of closes centroid 
+\end{DoxyReturn}
 \mbox{\Hypertarget{supervised_8c_a77ba20a314ffc525b7ecd0fe59346f1d}\label{supervised_8c_a77ba20a314ffc525b7ecd0fe59346f1d}} 
 \index{supervised.c@{supervised.c}!Supervised\_read\_csv@{Supervised\_read\_csv}}
 \index{Supervised\_read\_csv@{Supervised\_read\_csv}!supervised.c@{supervised.c}}
 \doxysubsubsection{\texorpdfstring{Supervised\_read\_csv()}{Supervised\_read\_csv()}}
 {\footnotesize\ttfamily Labelled\+Data Supervised\+\_\+read\+\_\+csv (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
 
+
+
+Load Comma Separated Values (CSV) into a Labelled\+Data structure, assuming the last element is the label. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Labelled\+Data parsed data 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & file must exist, and be structured appropriately \\
+\hline
+\end{DoxyExceptions}

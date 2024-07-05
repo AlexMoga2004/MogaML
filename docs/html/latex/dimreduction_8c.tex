@@ -5,9 +5,9 @@
 \begin{DoxyCompactItemize}
 \item 
 Matrix \mbox{\hyperlink{dimreduction_8c_a4001e354c88e6fc79264135501eb9bb7}{PCA\+\_\+\+Reduce}} (const Matrix $\ast$X, unsigned int target\+\_\+rank)
-\item 
+\begin{DoxyCompactList}\small\item\em Computes a low-\/rank approximation of a matrix using Principle Component Analysis. \end{DoxyCompactList}\item 
 Matrix \mbox{\hyperlink{dimreduction_8c_a67373165def7c86474fb974479dea755}{Chi\+Squared\+\_\+\+Reduce}} (const Matrix $\ast$X, const Matrix $\ast$y, unsigned int target\+\_\+features)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Selects the most relevant input features using the chi-\/squared statistical test. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -17,9 +17,39 @@ Matrix \mbox{\hyperlink{dimreduction_8c_a67373165def7c86474fb974479dea755}{Chi\+
 \doxysubsubsection{\texorpdfstring{ChiSquared\_Reduce()}{ChiSquared\_Reduce()}}
 {\footnotesize\ttfamily Matrix Chi\+Squared\+\_\+\+Reduce (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{const Matrix $\ast$}]{y,  }\item[{unsigned int}]{target\+\_\+features }\end{DoxyParamCaption})}
 
+
+
+Selects the most relevant input features using the chi-\/squared statistical test. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & original input data \\
+\hline
+{\em y} & output labels \\
+\hline
+{\em target\+\_\+features} & Number of features to select \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix with target\+\_\+features input features 
+\end{DoxyReturn}
 \mbox{\Hypertarget{dimreduction_8c_a4001e354c88e6fc79264135501eb9bb7}\label{dimreduction_8c_a4001e354c88e6fc79264135501eb9bb7}} 
 \index{dimreduction.c@{dimreduction.c}!PCA\_Reduce@{PCA\_Reduce}}
 \index{PCA\_Reduce@{PCA\_Reduce}!dimreduction.c@{dimreduction.c}}
 \doxysubsubsection{\texorpdfstring{PCA\_Reduce()}{PCA\_Reduce()}}
 {\footnotesize\ttfamily Matrix PCA\+\_\+\+Reduce (\begin{DoxyParamCaption}\item[{const Matrix $\ast$}]{X,  }\item[{unsigned int}]{target\+\_\+rank }\end{DoxyParamCaption})}
 
+
+
+Computes a low-\/rank approximation of a matrix using Principle Component Analysis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & the Matrix \\
+\hline
+{\em target\+\_\+rank} & rank of the output Matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix of rank target\+\_\+rank 
+\end{DoxyReturn}

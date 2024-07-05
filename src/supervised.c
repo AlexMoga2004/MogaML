@@ -1,11 +1,21 @@
 #include "supervised.h"
 
+/**
+ * @brief Macro to output error message to stdout
+ */
 #define ERROR(fmt, ...) \
         do { \
             fprintf(stderr, fmt, ##__VA_ARGS__); \
         } while (0)
 
-// Helper functions
+/**
+ * @brief Calculate the euclidean distance between two vector arrays
+ * 
+ * @param vec1 First vector array
+ * @param vec2 Second vector array
+ * @param length Length of arrays
+ * @return double Euclidean distance
+ */
 static double euclidean_distance(const double *vec1, const double *vec2, int length) {
     double sum = 0.0;
     for (int i = 0; i < length; ++i) {
@@ -15,6 +25,104 @@ static double euclidean_distance(const double *vec1, const double *vec2, int len
     return sqrt(sum);
 }
 
+/**
+ * @brief Compare distances
+ * 
+ * @param a First Value
+ * @param b Second Value
+ * @return  1 if a > b
+ * @return -1 if a < b
+ * @return  0 if a = b
+ */
+static int compare_distances(const void *a, const void *b) {
+    double diff = ((double *)a)[0] - ((double *)b)[0];
+    return (diff > 0) - (diff < 0);
+}
+
+/**
+ * @brief Find the mode of a double array
+ * 
+ * @param array 
+ * @param size 
+ * @return double Mode
+ */
+static double find_mode(const double *array, int size) {
+    int *counts = calloc(size, sizeof(int));
+    if (counts == NULL) {
+        ERROR("Memory allocation error in find_mode.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    double mode = array[0];
+    int max_count = 1;
+
+    for (int i = 0; i < size; ++i) {
+        counts[i] = 1;
+        for (int j = i + 1; j < size; ++j) {
+            if (array[i] == array[j]) {
+                counts[i]++;
+            }
+        }
+        if (counts[i] > max_count) {
+            max_count = counts[i];
+            mode = array[i];
+        }
+    }
+
+    free(counts);
+    return mode;
+}
+
+/**
+ * @brief Calculate the mean of a double array
+ * 
+ * @param array 
+ * @param size 
+ * @return double Mean
+ */
+static double calculate_mean(const double *array, int size) {
+    double sum = 0.0;
+    for (int i = 0; i < size; ++i) {
+        sum += array[i];
+    }
+    return sum / size;
+}
+
+/**
+ * @brief Count the number of values per line in a CSV file (assuming same on each line)
+ * 
+ * @param filename 
+ * @return int count
+ */
+static int count_columns(const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        ERROR("Error opening file: %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+
+    char buffer[1024];
+    fgets(buffer, sizeof(buffer), file);
+    fclose(file);
+
+    int count = 0;
+    char *token = strtok(buffer, ",");
+    while (token) {
+        count++;
+        token = strtok(NULL, ",");
+    }
+
+    return count;
+}
+
+
+/**
+ * @brief Find the nearest centroid to a given point (embedded as a double array)
+ * 
+ * @param point Array of values representing point in euclidean space
+ * @param centroids matrix containing centroid coordinates as rows
+ * @return index of closes centroid
+ */
 int Supervised_find_nearest_centroid(const double *point, const Matrix *centroids) {
     int nearest = 0;
     double min_dist = DBL_MAX;
@@ -28,6 +136,66 @@ int Supervised_find_nearest_centroid(const double *point, const Matrix *centroid
     return nearest;
 }
 
+/**
+ * @brief Load Comma Separated Values (CSV) into a LabelledData structure, assuming the last element is the label
+ * 
+ * @param filename
+ * @return LabelledData parsed data
+ * @throw Exception file must exist, and be structured appropriately
+ */
+LabelledData Supervised_read_csv(const char *filename) {
+    LabelledData data;
+
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        ERROR("Error opening file: %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+
+    int num_lines = 0;
+    char ch;
+    while ((ch = fgetc(file)) != EOF) {
+        if (ch == '\n') {
+            num_lines++;
+        }
+    }
+    rewind(file);
+
+    int num_columns = count_columns(filename);
+    int num_features = num_columns - 1;
+
+    data.X = Matrix_zeros(num_lines, num_features);
+    data.y = Matrix_zeros(num_lines, 1);
+
+    int i = 0;
+    char buffer[1024];
+    while (fgets(buffer, sizeof(buffer), file)) {
+        char *token = strtok(buffer, ",");
+        int j = 0;
+        while (token != NULL && j < num_features) {
+            (data.X).data[i][j] = atof(token);
+            token = strtok(NULL, ",");
+            j++;
+        }
+        if (token != NULL) {
+            (data.y).data[i][0] = atof(token);
+        }
+        i++;
+    }
+
+    fclose(file);
+    return data;
+}
+
+/**
+ * @brief Construct a Linear Regression model with no regularisation
+ * 
+ * @param X input data in a Matrix
+ * @param y output labels in a Vector (embedded as a Matrix)
+ * @return LinearRegressionModel with default computation mode set to ALGEBRAIC
+ * @throw Exception when X->rows != y->rows
+ * @note Input Matrix is padded with a 1-column for the bias term
+ */
 LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows || y->cols != 1) {
         ERROR("Error in LinearRegression, dimension mismatch!");
@@ -57,6 +225,16 @@ LinearRegressionModel LinearRegression(const Matrix *X, const Matrix *y) {
     return model;
 }
 
+/**
+ * @brief Construct a Linear Regression model with Ridge Regularisation
+ * 
+ * @param X input data in a Matrix
+ * @param y output labels in a Vector (embedded as a Matrix)
+ * @param lambda Hyper-parameter for Ridge loss
+ * @return LinearRegressionModel with default computation mode set to ALGEBRAIC
+ * @throw Exception when X->rows != y->rows
+ * @note Input Matrix is padded with a 1-column for the bias term
+ */
 LinearRegressionModel RidgeRegression(const Matrix *X, const Matrix *y, double lambda) {
     if (lambda <= 0) {
         ERROR("Error in RidgeRegression, λ ≤ 0!");
@@ -72,6 +250,17 @@ LinearRegressionModel RidgeRegression(const Matrix *X, const Matrix *y, double l
     return model;
 }
 
+/**
+ * @brief Construct a Linear Regression model with Lasso Regularisation
+ * 
+ * @param X input data in a Matrix
+ * @param y output labels in a Vector (embedded as a Matrix)
+ * @param lambda Hyper-parameter for Ridge loss
+ * @return LinearRegressionModel with default computation mode set to BATCH 
+ * @throw Exception when X->rows != y->rows
+ * @note No algebraic solution exists for lasso regression
+ * @note Input Matrix is padded with a 1-column for the bias term
+ */
 LinearRegressionModel LassoRegression(const Matrix *X, const Matrix *y, double lambda) {
     if (lambda <= 0) {
         ERROR("Error in LassoRegression, λ ≤ 0!");
@@ -87,37 +276,11 @@ LinearRegressionModel LassoRegression(const Matrix *X, const Matrix *y, double l
     return model;
 }
 
-LossFunction LinearRegression_default_loss() {
-    LossFunction loss_function; 
-    loss_function.exact_optimum = LinearRegression_exact_optimum;
-    loss_function.loss = LinearRegression_compute_mse;
-    loss_function.grad = LinearRegression_compute_gradient;
-
-    return loss_function;
-}
-
-LossFunction RidgeRegression_default_loss() {
-    LossFunction loss_function; 
-    loss_function.exact_optimum = RidgeRegression_exact_optimum;
-    loss_function.loss = RidgeRegression_compute_mse;
-    loss_function.grad = RidgeRegression_compute_gradient;
-
-    return loss_function;
-}
-
-LossFunction LassoRegression_default_loss() {
-    LossFunction loss_function;
-    loss_function.exact_optimum = LassoRegression_exact_optimum;
-    loss_function.loss = LassoRegression_compute_mse;
-    loss_function.grad = LassoRegression_compute_gradient;
-
-    return loss_function;
-}
-
-void LinearRegression_set_loss(LinearRegressionModel *model, LossFunction loss_function) {
-    model->loss_function = loss_function;
-}
-
+/**
+ * @brief Train a linear regression model
+ * 
+ * @param model Model to be trained
+ */
 void LinearRegression_train(LinearRegressionModel *model) {
     if (model->mode == ALGEBRAIC) {
         // May throw exception if loss_function has no closed form exact solution
@@ -202,38 +365,199 @@ void LinearRegression_train(LinearRegressionModel *model) {
     model->trained = true;
 }
 
+/**
+ * @brief Set the computation mode of a Linear Regression Model
+ * 
+ * @param model The model to be changed
+ * @param mode Desired computation mode
+ * @note Some LossFunctions do not have an algebraic solution, and may throw exceptions when trained with computation mode ALGEBRAIC
+ */
 void LinearRegression_set_mode(LinearRegressionModel *model, enum ComputationMode mode){
     model->mode = mode;
+    model->trained = false;
 }
 
+/**
+ * @brief Free allocated memory for a LinearRegressionModel
+ * 
+ * @param model Model to be freed
+ * @note Further calls to model may segfault
+ */
 void LinearRegression_free(LinearRegressionModel model) {
     Matrix_free(model.data.X);
     Matrix_free(model.data.y);
     Matrix_free(model.params);
 }
 
-// Function to count the number of columns in the CSV file
-static int count_columns(const char *filename) {
-    FILE *file = fopen(filename, "r");
-    if (!file) {
-        ERROR("Error opening file: %s\n", filename);
+/**
+ * @brief Change the loss function
+ * 
+ * @param model model to be changed
+ * @param loss_function New loss function
+ * @note model needs to be retrained before predictions are made
+ */
+void LinearRegression_set_loss(LinearRegressionModel *model, LossFunction loss_function) {
+    model->loss_function = loss_function;
+    model->trained = false;
+}
+
+/**
+ * @brief Mean Squared Error (MSE) LossFunction with no regularisation
+ * 
+ * @return LossFunction 
+ */
+LossFunction LinearRegression_default_loss() {
+    LossFunction loss_function; 
+    loss_function.exact_optimum = LinearRegression_exact_optimum;
+    loss_function.loss = LinearRegression_compute_mse;
+    loss_function.grad = LinearRegression_compute_gradient;
+
+    return loss_function;
+}
+
+/**
+ * @brief Mean Squared Error (MSE) LossFunction with Ridge regularisation (hyper-parameter lambda = model->hyper_params[0][0])
+ * 
+ * @return LossFunction 
+ */
+LossFunction RidgeRegression_default_loss() {
+    LossFunction loss_function; 
+    loss_function.exact_optimum = RidgeRegression_exact_optimum;
+    loss_function.loss = RidgeRegression_compute_mse;
+    loss_function.grad = RidgeRegression_compute_gradient;
+
+    return loss_function;
+}
+
+/**
+ * @brief Mean Squared Error (MSE) LossFunction with Lasso regularisation (hyper-parameter lambda = model->hyper_params[0][0])
+ * 
+ * @return LossFunction 
+ * @note Cannot be trained with computation mode set to ALGEBRAIC
+ */
+LossFunction LassoRegression_default_loss() {
+    LossFunction loss_function;
+    loss_function.exact_optimum = LassoRegression_exact_optimum;
+    loss_function.loss = LassoRegression_compute_mse;
+    loss_function.grad = LassoRegression_compute_gradient;
+
+    return loss_function;
+}
+
+/**
+ * @brief Calculate the Linear Regression Estimate for new data 
+ * 
+ * @param model Linear Regression Model to predict with
+ * @param x_new Matrix containing the new (unpadded) data as rows
+ * @return Vector (embedded as Matrix) containing the predicted labels
+ */
+Matrix LinearRegression_predict(const LinearRegressionModel *model, const Matrix *x_new) {
+    if (!model->trained) {
+        ERROR("Error in Supervised_predict, model not trained!");
         exit(EXIT_FAILURE);
     }
 
-    char buffer[1024];
-    fgets(buffer, sizeof(buffer), file);
-    fclose(file);
-
-    int count = 0;
-    char *token = strtok(buffer, ",");
-    while (token) {
-        count++;
-        token = strtok(NULL, ",");
+    Matrix XPadded = Matrix_zeros(x_new->rows, x_new->cols+1);
+    for (int i = 0; i < x_new->rows; ++i) {
+        XPadded.data[i][0] = 1;
     }
 
-    return count;
+    for (int i = 0; i < x_new->rows; ++i) {
+        for (int j = 0; j < x_new->cols; ++j) {
+            XPadded.data[i][j+1] = x_new->data[i][j];
+        }
+    }
+
+    return Matrix_multiply(&XPadded, &model->params);
 }
 
+/**
+ * @brief Compute Mean Squared Estimate (MSE) 
+ * 
+ * @param X Matrix with input data
+ * @param y Vector (embedded in a Matrix) with correct labels
+ * @param params Weights and bias used to make prediction
+ * @param hyper_params Unneeded
+ * @return double Mean Squared Error
+ */
+double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
+    Matrix predictions = Matrix_multiply(X, params);
+    if (predictions.rows != y->rows || predictions.cols != y->cols) {
+        ERROR("Error in Supervised_compute_mse, dimension mismatch!");
+        exit(EXIT_FAILURE);
+    }
+    double mse = 0.0;
+
+    for (int i = 0; i < predictions.rows; ++i) {
+        mse += pow((predictions.data[i][0] - y->data[i][0]), 2);
+    }
+
+    Matrix_free(predictions);
+    return mse / (double) y->rows;
+}
+
+/**
+ * @brief Compute Mean Squared Estimate (MSE) with Ridge Regularisation
+ * 
+ * @param X Matrix with input data
+ * @param y Vector (embedded in a Matrix) with correct labels
+ * @param params Weights and bias used to make prediction
+ * @param hyper_params Contains lambda in data[0][0]
+ * @return double Mean Squared Error
+ */
+double RidgeRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
+    if (hyper_params->rows != 1 && hyper_params->cols != 1) {
+        ERROR("Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
+        exit(EXIT_FAILURE);
+    }
+
+    if (hyper_params->data[0][0] <= 0) {
+        ERROR("Error in RidgeRegression_compute_gradient, lambda must be positive");
+        exit(EXIT_FAILURE);
+    }
+
+    double mse = LinearRegression_compute_mse(X, y, params, hyper_params);
+    mse += (hyper_params->data[0][0] * Vector_norm(params, 2)) / (double) y->rows;
+
+    return mse;
+}
+
+
+/**
+ * @brief Compute Mean Squared Estimate (MSE) with Lasso Regularisation
+ * 
+ * @param X Matrix with input data
+ * @param y Vector (embedded in a Matrix) with correct labels
+ * @param params Weights and bias used to make prediction
+ * @param hyper_params Contains lambda in data[0][0]
+ * @return double Mean Squared Error
+ */
+double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
+    if (hyper_params->rows != 1 && hyper_params->cols != 1) {
+        ERROR("Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
+        exit(EXIT_FAILURE);
+    }
+
+    if (hyper_params->data[0][0] <= 0) {
+        ERROR("Error in RidgeRegression_compute_gradient, lambda must be positive");
+        exit(EXIT_FAILURE);
+    }
+
+    double mse = LinearRegression_compute_mse(X, y, params, hyper_params);
+    mse += (hyper_params->data[0][0] * Vector_norm(params, 1)) / (double) y->rows;
+
+    return mse;
+}
+
+
+/**
+ * @brief Computes the global optimum algebraically for Linear Regression with no regularisation
+ * 
+ * @param X Input features
+ * @param y Input labels
+ * @param hyper_params Unneeded
+ * @return Matrix Global optimum value of params
+ */
 Matrix LinearRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params) {
     Matrix XT = Matrix_transpose(X);
     Matrix XTX = Matrix_multiply(&XT, X);
@@ -248,6 +572,14 @@ Matrix LinearRegression_exact_optimum(const Matrix *X, const Matrix *y, const Ma
     return result;
 }
 
+/**
+ * @brief Computes the global optimum algebraically for Linear Regression with Ridge regularisation
+ * 
+ * @param X Input features
+ * @param y Input labels
+ * @param hyper_params Contains lambda in data[0][0]
+ * @return Matrix Global optimum value of params
+ */
 Matrix RidgeRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params) {
     if (hyper_params->rows != 1 && hyper_params->cols != 1) {
         ERROR("Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
@@ -278,125 +610,29 @@ Matrix RidgeRegression_exact_optimum(const Matrix *X, const Matrix *y, const Mat
     return result;
 }
 
+/**
+ * @brief Placeholder function, throws exception since exact optimum can't be computed for Lasso Regression
+ * 
+ * @param X Input features
+ * @param y Input labels
+ * @param hyper_params Contains lambda in data[0][0]
+ * @return Matrix Global optimum value of params
+ * @throw Exception
+ */
 Matrix LassoRegression_exact_optimum(const Matrix *X, const Matrix *y, const Matrix *hyper_params) {
     ERROR("Error in LassoRegression_exact_optimum, closed form solution does not exist! (HINT: don't use ALGEBRAIC computation mode with Lasso)");
     exit(EXIT_FAILURE);
 }
 
-double LinearRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
-    Matrix predictions = Matrix_multiply(X, params);
-    if (predictions.rows != y->rows || predictions.cols != y->cols) {
-        ERROR("Error in Supervised_compute_mse, dimension mismatch!");
-        exit(EXIT_FAILURE);
-    }
-    double mse = 0.0;
-
-    for (int i = 0; i < predictions.rows; ++i) {
-        mse += pow((predictions.data[i][0] - y->data[i][0]), 2);
-    }
-
-    Matrix_free(predictions);
-    return mse / (double) y->rows;
-}
-
-double RidgeRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
-    if (hyper_params->rows != 1 && hyper_params->cols != 1) {
-        ERROR("Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
-        exit(EXIT_FAILURE);
-    }
-
-    if (hyper_params->data[0][0] <= 0) {
-        ERROR("Error in RidgeRegression_compute_gradient, lambda must be positive");
-        exit(EXIT_FAILURE);
-    }
-
-    double mse = LinearRegression_compute_mse(X, y, params, hyper_params);
-    mse += (hyper_params->data[0][0] * Vector_norm(params, 2)) / (double) y->rows;
-
-    return mse;
-}
-
-double LassoRegression_compute_mse(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
-    if (hyper_params->rows != 1 && hyper_params->cols != 1) {
-        ERROR("Error in RidgeRegression_compute_gradient, hyper_param must contain single value!");
-        exit(EXIT_FAILURE);
-    }
-
-    if (hyper_params->data[0][0] <= 0) {
-        ERROR("Error in RidgeRegression_compute_gradient, lambda must be positive");
-        exit(EXIT_FAILURE);
-    }
-
-    double mse = LinearRegression_compute_mse(X, y, params, hyper_params);
-    mse += (hyper_params->data[0][0] * Vector_norm(params, 1)) / (double) y->rows;
-
-    return mse;
-}
-
-LabelledData Supervised_read_csv(const char *filename) {
-    LabelledData data;
-
-    FILE *file = fopen(filename, "r");
-    if (!file) {
-        ERROR("Error opening file: %s\n", filename);
-        exit(EXIT_FAILURE);
-    }
-
-    int num_lines = 0;
-    char ch;
-    while ((ch = fgetc(file)) != EOF) {
-        if (ch == '\n') {
-            num_lines++;
-        }
-    }
-    rewind(file);
-
-    int num_columns = count_columns(filename);
-    int num_features = num_columns - 1;
-
-    data.X = Matrix_zeros(num_lines, num_features);
-    data.y = Matrix_zeros(num_lines, 1);
-
-    int i = 0;
-    char buffer[1024];
-    while (fgets(buffer, sizeof(buffer), file)) {
-        char *token = strtok(buffer, ",");
-        int j = 0;
-        while (token != NULL && j < num_features) {
-            (data.X).data[i][j] = atof(token);
-            token = strtok(NULL, ",");
-            j++;
-        }
-        if (token != NULL) {
-            (data.y).data[i][0] = atof(token);
-        }
-        i++;
-    }
-
-    fclose(file);
-    return data;
-}
-
-Matrix LinearRegression_predict(const LinearRegressionModel *model, const Matrix *x_new) {
-    if (!model->trained) {
-        ERROR("Error in Supervised_predict, model not trained!");
-        exit(EXIT_FAILURE);
-    }
-
-    Matrix XPadded = Matrix_zeros(x_new->rows, x_new->cols+1);
-    for (int i = 0; i < x_new->rows; ++i) {
-        XPadded.data[i][0] = 1;
-    }
-
-    for (int i = 0; i < x_new->rows; ++i) {
-        for (int j = 0; j < x_new->cols; ++j) {
-            XPadded.data[i][j+1] = x_new->data[i][j];
-        }
-    }
-
-    return Matrix_multiply(&XPadded, &model->params);
-}
-
+/**
+ * @brief Computes the gradient of the MSE Loss Function
+ * 
+ * @param X Input features
+ * @param y Input labels
+ * @param params Current parameters
+ * @param hyper_params Unneeded
+ * @return Matrix derivative of the loss function wrt the parameters
+ */
 Matrix LinearRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
     Matrix predictions = Matrix_multiply(X, params);
     Matrix errors = Matrix_sub(&predictions, y);
@@ -411,6 +647,15 @@ Matrix LinearRegression_compute_gradient(const Matrix *X, const Matrix *y, const
     return gradient;
 }
 
+/**
+ * @brief Compute a sub-gradient of the MSE Loss Function with Ridge regularisation
+ * 
+ * @param X Input features
+ * @param y Input labels
+ * @param params Current parameters
+ * @param hyper_params Contains lambda in data[0][0]
+ * @return Matrix derivative of the loss function wrt the parameters
+ */
 Matrix RidgeRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
     if (hyper_params->rows != 1 || hyper_params->cols != 1) {
         ERROR("Error in RidgeRegression_compute_gradient: hyper_params must contain a single value (lambda)!");
@@ -438,6 +683,15 @@ Matrix RidgeRegression_compute_gradient(const Matrix *X, const Matrix *y, const 
     return gradient;
 }
 
+/**
+ * @brief Computes a sub-gradient of the MSE Loss Function with Lasso regularisation
+ * 
+ * @param X Input features
+ * @param y Input labels
+ * @param params Current parameters
+ * @param hyper_params Contains lambda in data[0][0]
+ * @return Matrix derivative of the loss function wrt the parameters
+ */
 Matrix LassoRegression_compute_gradient(const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params) {
     if (hyper_params->rows != 1 || hyper_params->cols != 1) {
         ERROR("Error in LassoRegression_compute_gradient: hyper_params must contain a single value (lambda)!");
@@ -466,46 +720,14 @@ Matrix LassoRegression_compute_gradient(const Matrix *X, const Matrix *y, const 
     return gradient;
 }
 
-static int compare_distances(const void *a, const void *b) {
-    double diff = ((double *)a)[0] - ((double *)b)[0];
-    return (diff > 0) - (diff < 0);
-}
-
-static double find_mode(const double *array, int size) {
-    int *counts = calloc(size, sizeof(int));
-    if (counts == NULL) {
-        ERROR("Memory allocation error in find_mode.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    double mode = array[0];
-    int max_count = 1;
-
-    for (int i = 0; i < size; ++i) {
-        counts[i] = 1;
-        for (int j = i + 1; j < size; ++j) {
-            if (array[i] == array[j]) {
-                counts[i]++;
-            }
-        }
-        if (counts[i] > max_count) {
-            max_count = counts[i];
-            mode = array[i];
-        }
-    }
-
-    free(counts);
-    return mode;
-}
-
-static double calculate_mean(const double *array, int size) {
-    double sum = 0.0;
-    for (int i = 0; i < size; ++i) {
-        sum += array[i];
-    }
-    return sum / size;
-}
-
+/**
+ * @brief Constructs a KNN model using the majority-vote prediction
+ * 
+ * @param k Number of neighbours used by the model
+ * @param X Input features
+ * @param y Input labels
+ * @return KNNModel 
+ */
 KNNModel KNNClassifier(unsigned int k, const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows) {
         ERROR("Error in KNN, dimension mismatch!");
@@ -528,6 +750,14 @@ KNNModel KNNClassifier(unsigned int k, const Matrix *X, const Matrix *y) {
     return model;
 }
 
+/**
+ * @brief Constructs a KNN model using the majority-vote prediction
+ * 
+ * @param k Number of neighbours used by the model
+ * @param X Input features
+ * @param y Input labels
+ * @return KNNModel 
+ */
 KNNModel KNNRegressor(unsigned int k, const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows) {
         ERROR("Error in KNN, dimension mismatch!");
@@ -550,11 +780,23 @@ KNNModel KNNRegressor(unsigned int k, const Matrix *X, const Matrix *y) {
     return model;
 }
 
+/**
+ * @brief Free memory allocated by KNN Model
+ * 
+ * @param model 
+ */
 void KNN_free(KNNModel model) {
     Matrix_free(model.data.X);
     Matrix_free(model.data.y);
 }
 
+/**
+ * @brief Add data to existing KNN model
+ * 
+ * @param model Existing model
+ * @param X New input features
+ * @param y New input labels
+ */
 void KNN_append_data(KNNModel *model, const Matrix *X_new, const Matrix *y_new) {
     if (X_new->rows != y_new->rows) {
         ERROR("Error: Mismatched rows in X_new and y_new.\n");
@@ -591,6 +833,13 @@ void KNN_append_data(KNNModel *model, const Matrix *X_new, const Matrix *y_new) 
     model->data.y = new_y;
 }
 
+/**
+ * @brief Predict the labels of unseen data using the KNN algorithm
+ * 
+ * @param model 
+ * @param x_new 
+ * @return Matrix 
+ */
 Matrix KNN_predict(const KNNModel *model, const Matrix *x_new) {
     int num_new_samples = x_new->rows;
     int num_features = x_new->cols;
@@ -642,6 +891,13 @@ static double sigmoid(double z) {
     return 1 / (1 + pow(EULER_NUMBER, -z));
 }
 
+/**
+ * @brief Construct a Logistic Regression Model
+ * 
+ * @param X Input features
+ * @param y Input labels
+ * @return LogisticRegressionModel 
+ */
 LogisticRegressionModel LogisticRegression(const Matrix *X, const Matrix *y) {
     if (X->rows != y->rows || y->cols != 1) {
         ERROR("Error in LinearRegression, dimension mismatch!");
@@ -670,6 +926,11 @@ LogisticRegressionModel LogisticRegression(const Matrix *X, const Matrix *y) {
     return model;
 }
 
+/**
+ * @brief Train a Logistic Regression model
+ * 
+ * @param model to be trained
+ */
 void LogisticRegression_train(LogisticRegressionModel *model) {
     int m = model->data.X.rows;
     int n = model->data.X.cols;
@@ -708,6 +969,14 @@ void LogisticRegression_train(LogisticRegressionModel *model) {
     model->trained = true;
 }
 
+/**
+ * @brief Predict the labels of unseen data
+ * 
+ * @param model Model to be used
+ * @param X_new Data to be predicted
+ * @return Vector (embedded in a Matrix) containing the predicted labels
+ * @throw Exception requires model to be trained
+ */
 Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Matrix *X_new) {
     if (!model->trained) {
         ERROR("Error in LogisticRegression_predict: model not trained!\n");
@@ -737,6 +1006,13 @@ Matrix LogisticRegression_predict(const LogisticRegressionModel *model, const Ma
     return probabilities;
 }
 
+/**
+ * @brief Create a Naive Bayes Classifier (NBC) model
+ * 
+ * @param X Input features
+ * @param y Input labels
+ * @return GaussianNBCModel 
+ */
 GaussianNBCModel GaussianNBC(const Matrix *X, const Matrix *y) {
     int num_samples = X->rows;
     int num_features = X->cols;
@@ -794,6 +1070,13 @@ GaussianNBCModel GaussianNBC(const Matrix *X, const Matrix *y) {
     return model;
 }
 
+/**
+ * @brief Use the classifier to predict the labels of unseen data
+ * 
+ * @param model Model to be used
+ * @param X_new Unseen data
+ * @return Matrix Predicted labels in Vector form
+ */
 Matrix GaussianNBC_predict(const GaussianNBCModel *model, const Matrix *X_new) {
     if (!model->trained) {
         ERROR("Error in GaussianNaiveBayes_predict: model not trained!\n");

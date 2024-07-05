@@ -91,73 +91,106 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a15378cd15bafb3a79061424b452497aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a15378cd15bafb3a79061424b452497aa">ERROR</a>(fmt, ...)</td></tr>
+<tr class="memdesc:a15378cd15bafb3a79061424b452497aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to output error message to stdout.  <br /></td></tr>
 <tr class="separator:a15378cd15bafb3a79061424b452497aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aa127a892813ccc0e97d691458451764c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#aa127a892813ccc0e97d691458451764c">Supervised_find_nearest_centroid</a> (const double *point, const Matrix *centroids)</td></tr>
+<tr class="memdesc:aa127a892813ccc0e97d691458451764c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the nearest centroid to a given point (embedded as a double array)  <br /></td></tr>
 <tr class="separator:aa127a892813ccc0e97d691458451764c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77ba20a314ffc525b7ecd0fe59346f1d"><td class="memItemLeft" align="right" valign="top">LabelledData&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a77ba20a314ffc525b7ecd0fe59346f1d">Supervised_read_csv</a> (const char *filename)</td></tr>
+<tr class="memdesc:a77ba20a314ffc525b7ecd0fe59346f1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load Comma Separated Values (CSV) into a LabelledData structure, assuming the last element is the label.  <br /></td></tr>
+<tr class="separator:a77ba20a314ffc525b7ecd0fe59346f1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac010c236594f34eec858d56129c90598"><td class="memItemLeft" align="right" valign="top">LinearRegressionModel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#ac010c236594f34eec858d56129c90598">LinearRegression</a> (const Matrix *X, const Matrix *y)</td></tr>
+<tr class="memdesc:ac010c236594f34eec858d56129c90598"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Linear Regression model with no regularisation.  <br /></td></tr>
 <tr class="separator:ac010c236594f34eec858d56129c90598"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a494c1f52b29734bf3c26527f14471199"><td class="memItemLeft" align="right" valign="top">LinearRegressionModel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a494c1f52b29734bf3c26527f14471199">RidgeRegression</a> (const Matrix *X, const Matrix *y, double lambda)</td></tr>
+<tr class="memdesc:a494c1f52b29734bf3c26527f14471199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Linear Regression model with Ridge Regularisation.  <br /></td></tr>
 <tr class="separator:a494c1f52b29734bf3c26527f14471199"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada92614f6bb9b5485e4848ca78b7ec5f"><td class="memItemLeft" align="right" valign="top">LinearRegressionModel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#ada92614f6bb9b5485e4848ca78b7ec5f">LassoRegression</a> (const Matrix *X, const Matrix *y, double lambda)</td></tr>
+<tr class="memdesc:ada92614f6bb9b5485e4848ca78b7ec5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Linear Regression model with Lasso Regularisation.  <br /></td></tr>
 <tr class="separator:ada92614f6bb9b5485e4848ca78b7ec5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab940090e3cc4ce97d8f33093c4fef34c"><td class="memItemLeft" align="right" valign="top">LossFunction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#ab940090e3cc4ce97d8f33093c4fef34c">LinearRegression_default_loss</a> ()</td></tr>
-<tr class="separator:ab940090e3cc4ce97d8f33093c4fef34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab52dbcf7b69725ca95e4cab15e30edca"><td class="memItemLeft" align="right" valign="top">LossFunction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#ab52dbcf7b69725ca95e4cab15e30edca">RidgeRegression_default_loss</a> ()</td></tr>
-<tr class="separator:ab52dbcf7b69725ca95e4cab15e30edca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a14c0628471a3d4d7b0796b67621671"><td class="memItemLeft" align="right" valign="top">LossFunction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a1a14c0628471a3d4d7b0796b67621671">LassoRegression_default_loss</a> ()</td></tr>
-<tr class="separator:a1a14c0628471a3d4d7b0796b67621671"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa76664efc74e09516a30e62d88e4f4bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#aa76664efc74e09516a30e62d88e4f4bd">LinearRegression_set_loss</a> (LinearRegressionModel *model, LossFunction loss_function)</td></tr>
-<tr class="separator:aa76664efc74e09516a30e62d88e4f4bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a775d600b7b79920fddae84a00a70e73f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a775d600b7b79920fddae84a00a70e73f">LinearRegression_train</a> (LinearRegressionModel *model)</td></tr>
+<tr class="memdesc:a775d600b7b79920fddae84a00a70e73f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Train a linear regression model.  <br /></td></tr>
 <tr class="separator:a775d600b7b79920fddae84a00a70e73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2579d63c38b43bd3c8d312886a3c09b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#ad2579d63c38b43bd3c8d312886a3c09b">LinearRegression_set_mode</a> (LinearRegressionModel *model, enum ComputationMode mode)</td></tr>
+<tr class="memdesc:ad2579d63c38b43bd3c8d312886a3c09b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the computation mode of a Linear Regression Model.  <br /></td></tr>
 <tr class="separator:ad2579d63c38b43bd3c8d312886a3c09b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a294ebe78ea4cf4efc94d78e876a8ad59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a294ebe78ea4cf4efc94d78e876a8ad59">LinearRegression_free</a> (LinearRegressionModel model)</td></tr>
+<tr class="memdesc:a294ebe78ea4cf4efc94d78e876a8ad59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free allocated memory for a LinearRegressionModel.  <br /></td></tr>
 <tr class="separator:a294ebe78ea4cf4efc94d78e876a8ad59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfaa3c2f34733c263cea22c0307ccc86"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#acfaa3c2f34733c263cea22c0307ccc86">LinearRegression_exact_optimum</a> (const Matrix *X, const Matrix *y, const Matrix *hyper_params)</td></tr>
-<tr class="separator:acfaa3c2f34733c263cea22c0307ccc86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a27dcfd4a3058ac540a1dda98c3f014"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a5a27dcfd4a3058ac540a1dda98c3f014">RidgeRegression_exact_optimum</a> (const Matrix *X, const Matrix *y, const Matrix *hyper_params)</td></tr>
-<tr class="separator:a5a27dcfd4a3058ac540a1dda98c3f014"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2953b6fe071ac2ae528194f75f7a2262"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a2953b6fe071ac2ae528194f75f7a2262">LassoRegression_exact_optimum</a> (const Matrix *X, const Matrix *y, const Matrix *hyper_params)</td></tr>
-<tr class="separator:a2953b6fe071ac2ae528194f75f7a2262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76664efc74e09516a30e62d88e4f4bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#aa76664efc74e09516a30e62d88e4f4bd">LinearRegression_set_loss</a> (LinearRegressionModel *model, LossFunction loss_function)</td></tr>
+<tr class="memdesc:aa76664efc74e09516a30e62d88e4f4bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the loss function.  <br /></td></tr>
+<tr class="separator:aa76664efc74e09516a30e62d88e4f4bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab940090e3cc4ce97d8f33093c4fef34c"><td class="memItemLeft" align="right" valign="top">LossFunction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#ab940090e3cc4ce97d8f33093c4fef34c">LinearRegression_default_loss</a> ()</td></tr>
+<tr class="memdesc:ab940090e3cc4ce97d8f33093c4fef34c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mean Squared Error (MSE) LossFunction with no regularisation.  <br /></td></tr>
+<tr class="separator:ab940090e3cc4ce97d8f33093c4fef34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab52dbcf7b69725ca95e4cab15e30edca"><td class="memItemLeft" align="right" valign="top">LossFunction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#ab52dbcf7b69725ca95e4cab15e30edca">RidgeRegression_default_loss</a> ()</td></tr>
+<tr class="memdesc:ab52dbcf7b69725ca95e4cab15e30edca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mean Squared Error (MSE) LossFunction with Ridge regularisation (hyper-parameter lambda = model-&gt;hyper_params[0][0])  <br /></td></tr>
+<tr class="separator:ab52dbcf7b69725ca95e4cab15e30edca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a14c0628471a3d4d7b0796b67621671"><td class="memItemLeft" align="right" valign="top">LossFunction&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a1a14c0628471a3d4d7b0796b67621671">LassoRegression_default_loss</a> ()</td></tr>
+<tr class="memdesc:a1a14c0628471a3d4d7b0796b67621671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mean Squared Error (MSE) LossFunction with Lasso regularisation (hyper-parameter lambda = model-&gt;hyper_params[0][0])  <br /></td></tr>
+<tr class="separator:a1a14c0628471a3d4d7b0796b67621671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6053843927a90b4f99000efe62a8fb97"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a6053843927a90b4f99000efe62a8fb97">LinearRegression_predict</a> (const LinearRegressionModel *model, const Matrix *x_new)</td></tr>
+<tr class="memdesc:a6053843927a90b4f99000efe62a8fb97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the Linear Regression Estimate for new data.  <br /></td></tr>
+<tr class="separator:a6053843927a90b4f99000efe62a8fb97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a607a8b1aad07b768eec253d04e3e48f2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a607a8b1aad07b768eec253d04e3e48f2">LinearRegression_compute_mse</a> (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params)</td></tr>
+<tr class="memdesc:a607a8b1aad07b768eec253d04e3e48f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute Mean Squared Estimate (MSE)  <br /></td></tr>
 <tr class="separator:a607a8b1aad07b768eec253d04e3e48f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15ce02dd066b7b96c3007af6fd6b41aa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a15ce02dd066b7b96c3007af6fd6b41aa">RidgeRegression_compute_mse</a> (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params)</td></tr>
+<tr class="memdesc:a15ce02dd066b7b96c3007af6fd6b41aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute Mean Squared Estimate (MSE) with Ridge Regularisation.  <br /></td></tr>
 <tr class="separator:a15ce02dd066b7b96c3007af6fd6b41aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c7df091d3f37eec716c1154f5c94b46"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a4c7df091d3f37eec716c1154f5c94b46">LassoRegression_compute_mse</a> (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params)</td></tr>
+<tr class="memdesc:a4c7df091d3f37eec716c1154f5c94b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute Mean Squared Estimate (MSE) with Lasso Regularisation.  <br /></td></tr>
 <tr class="separator:a4c7df091d3f37eec716c1154f5c94b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77ba20a314ffc525b7ecd0fe59346f1d"><td class="memItemLeft" align="right" valign="top">LabelledData&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a77ba20a314ffc525b7ecd0fe59346f1d">Supervised_read_csv</a> (const char *filename)</td></tr>
-<tr class="separator:a77ba20a314ffc525b7ecd0fe59346f1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6053843927a90b4f99000efe62a8fb97"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a6053843927a90b4f99000efe62a8fb97">LinearRegression_predict</a> (const LinearRegressionModel *model, const Matrix *x_new)</td></tr>
-<tr class="separator:a6053843927a90b4f99000efe62a8fb97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfaa3c2f34733c263cea22c0307ccc86"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#acfaa3c2f34733c263cea22c0307ccc86">LinearRegression_exact_optimum</a> (const Matrix *X, const Matrix *y, const Matrix *hyper_params)</td></tr>
+<tr class="memdesc:acfaa3c2f34733c263cea22c0307ccc86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the global optimum algebraically for Linear Regression with no regularisation.  <br /></td></tr>
+<tr class="separator:acfaa3c2f34733c263cea22c0307ccc86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a27dcfd4a3058ac540a1dda98c3f014"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a5a27dcfd4a3058ac540a1dda98c3f014">RidgeRegression_exact_optimum</a> (const Matrix *X, const Matrix *y, const Matrix *hyper_params)</td></tr>
+<tr class="memdesc:a5a27dcfd4a3058ac540a1dda98c3f014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the global optimum algebraically for Linear Regression with Ridge regularisation.  <br /></td></tr>
+<tr class="separator:a5a27dcfd4a3058ac540a1dda98c3f014"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2953b6fe071ac2ae528194f75f7a2262"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a2953b6fe071ac2ae528194f75f7a2262">LassoRegression_exact_optimum</a> (const Matrix *X, const Matrix *y, const Matrix *hyper_params)</td></tr>
+<tr class="memdesc:a2953b6fe071ac2ae528194f75f7a2262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Placeholder function, throws exception since exact optimum can't be computed for Lasso Regression.  <br /></td></tr>
+<tr class="separator:a2953b6fe071ac2ae528194f75f7a2262"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb7456e6a7176158d8e22fce435a8bdd"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#acb7456e6a7176158d8e22fce435a8bdd">LinearRegression_compute_gradient</a> (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params)</td></tr>
+<tr class="memdesc:acb7456e6a7176158d8e22fce435a8bdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the gradient of the MSE Loss Function.  <br /></td></tr>
 <tr class="separator:acb7456e6a7176158d8e22fce435a8bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a867008d90b95e5461b7eda382d9d7d65"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a867008d90b95e5461b7eda382d9d7d65">RidgeRegression_compute_gradient</a> (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params)</td></tr>
+<tr class="memdesc:a867008d90b95e5461b7eda382d9d7d65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a sub-gradient of the MSE Loss Function with Ridge regularisation.  <br /></td></tr>
 <tr class="separator:a867008d90b95e5461b7eda382d9d7d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79c3fbe41cba464f0373d8ab6b1fbdea"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a79c3fbe41cba464f0373d8ab6b1fbdea">LassoRegression_compute_gradient</a> (const Matrix *X, const Matrix *y, const Matrix *params, const Matrix *hyper_params)</td></tr>
+<tr class="memdesc:a79c3fbe41cba464f0373d8ab6b1fbdea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a sub-gradient of the MSE Loss Function with Lasso regularisation.  <br /></td></tr>
 <tr class="separator:a79c3fbe41cba464f0373d8ab6b1fbdea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9ed3dd691efd68c4f25a2f7d3afbd5e"><td class="memItemLeft" align="right" valign="top">KNNModel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#ac9ed3dd691efd68c4f25a2f7d3afbd5e">KNNClassifier</a> (unsigned int k, const Matrix *X, const Matrix *y)</td></tr>
+<tr class="memdesc:ac9ed3dd691efd68c4f25a2f7d3afbd5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a KNN model using the majority-vote prediction.  <br /></td></tr>
 <tr class="separator:ac9ed3dd691efd68c4f25a2f7d3afbd5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a2e38bdf8cbbc53376ae4552e62c11a"><td class="memItemLeft" align="right" valign="top">KNNModel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a4a2e38bdf8cbbc53376ae4552e62c11a">KNNRegressor</a> (unsigned int k, const Matrix *X, const Matrix *y)</td></tr>
+<tr class="memdesc:a4a2e38bdf8cbbc53376ae4552e62c11a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a KNN model using the majority-vote prediction.  <br /></td></tr>
 <tr class="separator:a4a2e38bdf8cbbc53376ae4552e62c11a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3776959a50f51e4bc8b576ea3437fcda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a3776959a50f51e4bc8b576ea3437fcda">KNN_free</a> (KNNModel model)</td></tr>
+<tr class="memdesc:a3776959a50f51e4bc8b576ea3437fcda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free memory allocated by KNN Model.  <br /></td></tr>
 <tr class="separator:a3776959a50f51e4bc8b576ea3437fcda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a316e5d6e0bc2e41113efcdce20b6d1ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a316e5d6e0bc2e41113efcdce20b6d1ae">KNN_append_data</a> (KNNModel *model, const Matrix *X_new, const Matrix *y_new)</td></tr>
+<tr class="memdesc:a316e5d6e0bc2e41113efcdce20b6d1ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add data to existing KNN model.  <br /></td></tr>
 <tr class="separator:a316e5d6e0bc2e41113efcdce20b6d1ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8825870bd962004f547bb30c8104c626"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a8825870bd962004f547bb30c8104c626">KNN_predict</a> (const KNNModel *model, const Matrix *x_new)</td></tr>
+<tr class="memdesc:a8825870bd962004f547bb30c8104c626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Predict the labels of unseen data using the KNN algorithm.  <br /></td></tr>
 <tr class="separator:a8825870bd962004f547bb30c8104c626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85948da0aa56844e8b06bdeeeb33def2"><td class="memItemLeft" align="right" valign="top">LogisticRegressionModel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a85948da0aa56844e8b06bdeeeb33def2">LogisticRegression</a> (const Matrix *X, const Matrix *y)</td></tr>
+<tr class="memdesc:a85948da0aa56844e8b06bdeeeb33def2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Logistic Regression Model.  <br /></td></tr>
 <tr class="separator:a85948da0aa56844e8b06bdeeeb33def2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2adc34eb19c5b6aa555de1379fd9f77f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a2adc34eb19c5b6aa555de1379fd9f77f">LogisticRegression_train</a> (LogisticRegressionModel *model)</td></tr>
+<tr class="memdesc:a2adc34eb19c5b6aa555de1379fd9f77f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Train a Logistic Regression model.  <br /></td></tr>
 <tr class="separator:a2adc34eb19c5b6aa555de1379fd9f77f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee9e0a96e668ac1c6ed4ad4850e052b7"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#aee9e0a96e668ac1c6ed4ad4850e052b7">LogisticRegression_predict</a> (const LogisticRegressionModel *model, const Matrix *X_new)</td></tr>
+<tr class="memdesc:aee9e0a96e668ac1c6ed4ad4850e052b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Predict the labels of unseen data.  <br /></td></tr>
 <tr class="separator:aee9e0a96e668ac1c6ed4ad4850e052b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dd4c95c33c07ccf88c1ad0f30a192d1"><td class="memItemLeft" align="right" valign="top">GaussianNBCModel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#a1dd4c95c33c07ccf88c1ad0f30a192d1">GaussianNBC</a> (const Matrix *X, const Matrix *y)</td></tr>
+<tr class="memdesc:a1dd4c95c33c07ccf88c1ad0f30a192d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Naive Bayes Classifier (NBC) model.  <br /></td></tr>
 <tr class="separator:a1dd4c95c33c07ccf88c1ad0f30a192d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4813e6a41c81d0d597460aee8de74b9"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="supervised_8c.html#ac4813e6a41c81d0d597460aee8de74b9">GaussianNBC_predict</a> (const GaussianNBCModel *model, const Matrix *X_new)</td></tr>
+<tr class="memdesc:ac4813e6a41c81d0d597460aee8de74b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the classifier to predict the labels of unseen data.  <br /></td></tr>
 <tr class="separator:ac4813e6a41c81d0d597460aee8de74b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -190,6 +223,8 @@ Functions</h2></td></tr>
 <div class="line">            fprintf(stderr, fmt, ##__VA_ARGS__); \</div>
 <div class="line">        } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
+<p>Macro to output error message to stdout. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
@@ -219,6 +254,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Create a Naive Bayes Classifier (NBC) model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>GaussianNBCModel </dd></dl>
+
 </div>
 </div>
 <a id="ac4813e6a41c81d0d597460aee8de74b9" name="ac4813e6a41c81d0d597460aee8de74b9"></a>
@@ -246,6 +291,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Use the classifier to predict the labels of unseen data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Model to be used </td></tr>
+    <tr><td class="paramname">X_new</td><td>Unseen data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix Predicted labels in Vector form </dd></dl>
 
 </div>
 </div>
@@ -281,6 +336,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add data to existing KNN model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Existing model </td></tr>
+    <tr><td class="paramname">X</td><td>New input features </td></tr>
+    <tr><td class="paramname">y</td><td>New input labels </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a3776959a50f51e4bc8b576ea3437fcda" name="a3776959a50f51e4bc8b576ea3437fcda"></a>
@@ -298,6 +363,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Free memory allocated by KNN Model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -326,6 +399,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Predict the labels of unseen data using the KNN algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td></td></tr>
+    <tr><td class="paramname">x_new</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix </dd></dl>
 
 </div>
 </div>
@@ -361,6 +444,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Constructs a KNN model using the majority-vote prediction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">k</td><td>Number of neighbours used by the model </td></tr>
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>KNNModel </dd></dl>
+
 </div>
 </div>
 <a id="a4a2e38bdf8cbbc53376ae4552e62c11a" name="a4a2e38bdf8cbbc53376ae4552e62c11a"></a>
@@ -395,6 +489,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Constructs a KNN model using the majority-vote prediction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">k</td><td>Number of neighbours used by the model </td></tr>
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>KNNModel </dd></dl>
+
 </div>
 </div>
 <a id="ada92614f6bb9b5485e4848ca78b7ec5f" name="ada92614f6bb9b5485e4848ca78b7ec5f"></a>
@@ -428,6 +533,26 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a Linear Regression model with Lasso Regularisation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>input data in a Matrix </td></tr>
+    <tr><td class="paramname">y</td><td>output labels in a Vector (embedded as a Matrix) </td></tr>
+    <tr><td class="paramname">lambda</td><td>Hyper-parameter for Ridge loss </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>LinearRegressionModel with default computation mode set to BATCH </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td>when X-&gt;rows != y-&gt;rows </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>No algebraic solution exists for lasso regression </dd>
+<dd>
+Input Matrix is padded with a 1-column for the bias term </dd></dl>
 
 </div>
 </div>
@@ -469,6 +594,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Computes a sub-gradient of the MSE Loss Function with Lasso regularisation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+    <tr><td class="paramname">params</td><td>Current parameters </td></tr>
+    <tr><td class="paramname">hyper_params</td><td>Contains lambda in data[0][0] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix derivative of the loss function wrt the parameters </dd></dl>
+
 </div>
 </div>
 <a id="a4c7df091d3f37eec716c1154f5c94b46" name="a4c7df091d3f37eec716c1154f5c94b46"></a>
@@ -509,6 +646,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Compute Mean Squared Estimate (MSE) with Lasso Regularisation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Matrix with input data </td></tr>
+    <tr><td class="paramname">y</td><td>Vector (embedded in a Matrix) with correct labels </td></tr>
+    <tr><td class="paramname">params</td><td>Weights and bias used to make prediction </td></tr>
+    <tr><td class="paramname">hyper_params</td><td>Contains lambda in data[0][0] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double Mean Squared Error </dd></dl>
+
 </div>
 </div>
 <a id="a1a14c0628471a3d4d7b0796b67621671" name="a1a14c0628471a3d4d7b0796b67621671"></a>
@@ -525,6 +674,10 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Mean Squared Error (MSE) LossFunction with Lasso regularisation (hyper-parameter lambda = model-&gt;hyper_params[0][0]) </p>
+<dl class="section return"><dt>Returns</dt><dd>LossFunction </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Cannot be trained with computation mode set to ALGEBRAIC </dd></dl>
 
 </div>
 </div>
@@ -560,6 +713,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Placeholder function, throws exception since exact optimum can't be computed for Lasso Regression. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+    <tr><td class="paramname">hyper_params</td><td>Contains lambda in data[0][0] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix Global optimum value of params </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ac010c236594f34eec858d56129c90598" name="ac010c236594f34eec858d56129c90598"></a>
@@ -587,6 +757,23 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a Linear Regression model with no regularisation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>input data in a Matrix </td></tr>
+    <tr><td class="paramname">y</td><td>output labels in a Vector (embedded as a Matrix) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>LinearRegressionModel with default computation mode set to ALGEBRAIC </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td>when X-&gt;rows != y-&gt;rows </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Input Matrix is padded with a 1-column for the bias term </dd></dl>
 
 </div>
 </div>
@@ -628,6 +815,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Computes the gradient of the MSE Loss Function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+    <tr><td class="paramname">params</td><td>Current parameters </td></tr>
+    <tr><td class="paramname">hyper_params</td><td>Unneeded </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix derivative of the loss function wrt the parameters </dd></dl>
+
 </div>
 </div>
 <a id="a607a8b1aad07b768eec253d04e3e48f2" name="a607a8b1aad07b768eec253d04e3e48f2"></a>
@@ -668,6 +867,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Compute Mean Squared Estimate (MSE) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Matrix with input data </td></tr>
+    <tr><td class="paramname">y</td><td>Vector (embedded in a Matrix) with correct labels </td></tr>
+    <tr><td class="paramname">params</td><td>Weights and bias used to make prediction </td></tr>
+    <tr><td class="paramname">hyper_params</td><td>Unneeded </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double Mean Squared Error </dd></dl>
+
 </div>
 </div>
 <a id="ab940090e3cc4ce97d8f33093c4fef34c" name="ab940090e3cc4ce97d8f33093c4fef34c"></a>
@@ -684,6 +895,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Mean Squared Error (MSE) LossFunction with no regularisation. </p>
+<dl class="section return"><dt>Returns</dt><dd>LossFunction </dd></dl>
 
 </div>
 </div>
@@ -719,6 +933,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Computes the global optimum algebraically for Linear Regression with no regularisation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+    <tr><td class="paramname">hyper_params</td><td>Unneeded </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix Global optimum value of params </dd></dl>
+
 </div>
 </div>
 <a id="a294ebe78ea4cf4efc94d78e876a8ad59" name="a294ebe78ea4cf4efc94d78e876a8ad59"></a>
@@ -736,6 +961,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Free allocated memory for a LinearRegressionModel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Model to be freed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Further calls to model may segfault </dd></dl>
 
 </div>
 </div>
@@ -765,6 +999,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Calculate the Linear Regression Estimate for new data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Linear Regression Model to predict with </td></tr>
+    <tr><td class="paramname">x_new</td><td>Matrix containing the new (unpadded) data as rows </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector (embedded as Matrix) containing the predicted labels </dd></dl>
+
 </div>
 </div>
 <a id="aa76664efc74e09516a30e62d88e4f4bd" name="aa76664efc74e09516a30e62d88e4f4bd"></a>
@@ -792,6 +1036,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Change the loss function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>model to be changed </td></tr>
+    <tr><td class="paramname">loss_function</td><td>New loss function </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>model needs to be retrained before predictions are made </dd></dl>
 
 </div>
 </div>
@@ -821,6 +1075,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the computation mode of a Linear Regression Model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>The model to be changed </td></tr>
+    <tr><td class="paramname">mode</td><td>Desired computation mode </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Some LossFunctions do not have an algebraic solution, and may throw exceptions when trained with computation mode ALGEBRAIC </dd></dl>
+
 </div>
 </div>
 <a id="a775d600b7b79920fddae84a00a70e73f" name="a775d600b7b79920fddae84a00a70e73f"></a>
@@ -838,6 +1102,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Train a linear regression model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Model to be trained </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -867,6 +1139,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct a Logistic Regression Model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>LogisticRegressionModel </dd></dl>
+
 </div>
 </div>
 <a id="aee9e0a96e668ac1c6ed4ad4850e052b7" name="aee9e0a96e668ac1c6ed4ad4850e052b7"></a>
@@ -895,6 +1177,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Predict the labels of unseen data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Model to be used </td></tr>
+    <tr><td class="paramname">X_new</td><td>Data to be predicted </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector (embedded in a Matrix) containing the predicted labels </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td>requires model to be trained </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a2adc34eb19c5b6aa555de1379fd9f77f" name="a2adc34eb19c5b6aa555de1379fd9f77f"></a>
@@ -912,6 +1210,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Train a Logistic Regression model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>to be trained </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -946,6 +1252,24 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a Linear Regression model with Ridge Regularisation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>input data in a Matrix </td></tr>
+    <tr><td class="paramname">y</td><td>output labels in a Vector (embedded as a Matrix) </td></tr>
+    <tr><td class="paramname">lambda</td><td>Hyper-parameter for Ridge loss </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>LinearRegressionModel with default computation mode set to ALGEBRAIC </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td>when X-&gt;rows != y-&gt;rows </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Input Matrix is padded with a 1-column for the bias term </dd></dl>
 
 </div>
 </div>
@@ -987,6 +1311,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Compute a sub-gradient of the MSE Loss Function with Ridge regularisation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+    <tr><td class="paramname">params</td><td>Current parameters </td></tr>
+    <tr><td class="paramname">hyper_params</td><td>Contains lambda in data[0][0] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix derivative of the loss function wrt the parameters </dd></dl>
+
 </div>
 </div>
 <a id="a15ce02dd066b7b96c3007af6fd6b41aa" name="a15ce02dd066b7b96c3007af6fd6b41aa"></a>
@@ -1027,6 +1363,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Compute Mean Squared Estimate (MSE) with Ridge Regularisation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Matrix with input data </td></tr>
+    <tr><td class="paramname">y</td><td>Vector (embedded in a Matrix) with correct labels </td></tr>
+    <tr><td class="paramname">params</td><td>Weights and bias used to make prediction </td></tr>
+    <tr><td class="paramname">hyper_params</td><td>Contains lambda in data[0][0] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double Mean Squared Error </dd></dl>
+
 </div>
 </div>
 <a id="ab52dbcf7b69725ca95e4cab15e30edca" name="ab52dbcf7b69725ca95e4cab15e30edca"></a>
@@ -1043,6 +1391,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Mean Squared Error (MSE) LossFunction with Ridge regularisation (hyper-parameter lambda = model-&gt;hyper_params[0][0]) </p>
+<dl class="section return"><dt>Returns</dt><dd>LossFunction </dd></dl>
 
 </div>
 </div>
@@ -1078,6 +1429,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Computes the global optimum algebraically for Linear Regression with Ridge regularisation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Input features </td></tr>
+    <tr><td class="paramname">y</td><td>Input labels </td></tr>
+    <tr><td class="paramname">hyper_params</td><td>Contains lambda in data[0][0] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix Global optimum value of params </dd></dl>
+
 </div>
 </div>
 <a id="aa127a892813ccc0e97d691458451764c" name="aa127a892813ccc0e97d691458451764c"></a>
@@ -1106,6 +1468,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Find the nearest centroid to a given point (embedded as a double array) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>Array of values representing point in euclidean space </td></tr>
+    <tr><td class="paramname">centroids</td><td>matrix containing centroid coordinates as rows </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>index of closes centroid </dd></dl>
+
 </div>
 </div>
 <a id="a77ba20a314ffc525b7ecd0fe59346f1d" name="a77ba20a314ffc525b7ecd0fe59346f1d"></a>
@@ -1123,6 +1495,21 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Load Comma Separated Values (CSV) into a LabelledData structure, assuming the last element is the label. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>LabelledData parsed data </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td>file must exist, and be structured appropriately </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

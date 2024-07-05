@@ -90,8 +90,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a4001e354c88e6fc79264135501eb9bb7"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dimreduction_8c.html#a4001e354c88e6fc79264135501eb9bb7">PCA_Reduce</a> (const Matrix *X, unsigned int target_rank)</td></tr>
+<tr class="memdesc:a4001e354c88e6fc79264135501eb9bb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a low-rank approximation of a matrix using Principle Component Analysis.  <br /></td></tr>
 <tr class="separator:a4001e354c88e6fc79264135501eb9bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67373165def7c86474fb974479dea755"><td class="memItemLeft" align="right" valign="top">Matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dimreduction_8c.html#a67373165def7c86474fb974479dea755">ChiSquared_Reduce</a> (const Matrix *X, const Matrix *y, unsigned int target_features)</td></tr>
+<tr class="memdesc:a67373165def7c86474fb974479dea755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the most relevant input features using the chi-squared statistical test.  <br /></td></tr>
 <tr class="separator:a67373165def7c86474fb974479dea755"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -127,6 +129,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Selects the most relevant input features using the chi-squared statistical test. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>original input data </td></tr>
+    <tr><td class="paramname">y</td><td>output labels </td></tr>
+    <tr><td class="paramname">target_features</td><td>Number of features to select </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix with target_features input features </dd></dl>
+
 </div>
 </div>
 <a id="a4001e354c88e6fc79264135501eb9bb7" name="a4001e354c88e6fc79264135501eb9bb7"></a>
@@ -154,6 +167,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Computes a low-rank approximation of a matrix using Principle Component Analysis. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>the Matrix </td></tr>
+    <tr><td class="paramname">target_rank</td><td>rank of the output Matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Matrix of rank target_rank </dd></dl>
 
 </div>
 </div>

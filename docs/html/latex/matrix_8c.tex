@@ -112,9 +112,9 @@ Sums the entries in two Matrices element-\/wise.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat1} & Pointer to first Matrix \\
+{\em mat1} & first Matrix \\
 \hline
-{\em mat2} & Pointer to second Matrix \\
+{\em mat2} & second Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -137,9 +137,9 @@ Checks if two Matrices are pairwise equal within a given tolerance.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat1} & Pointer to first Matrix \\
+{\em mat1} & first Matrix \\
 \hline
-{\em mat2} & Pointer to second Matrix \\
+{\em mat2} & second Matrix \\
 \hline
 {\em tolerance} & Maximum difference between each element \\
 \hline
@@ -161,7 +161,7 @@ Create a new matrix with identical entries.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to originial Matrix \\
+{\em mat} & originial Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -179,7 +179,7 @@ Get a single column from a matrix.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to original Matrix \\
+{\em mat} & original Matrix \\
 \hline
 {\em col} & Index of column to fetch \\
 \hline
@@ -189,7 +189,7 @@ Column vector (in Matrix form) containing the desired column
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em Exception,requires} & 0 \texorpdfstring{$<$}{<}= col \texorpdfstring{$<$}{<} Matrix.\+cols \\
+{\em Exception} & requires 0 \texorpdfstring{$<$}{<}= col \texorpdfstring{$<$}{<} Matrix.\+cols \\
 \hline
 \end{DoxyExceptions}
 \mbox{\Hypertarget{matrix_8c_a212ad4a6e2d8696c7eacff7d98bdd09b}\label{matrix_8c_a212ad4a6e2d8696c7eacff7d98bdd09b}} 
@@ -204,7 +204,7 @@ Computes the determinant of a square Matrix.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to the Matrix \\
+{\em mat} & the Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -227,7 +227,7 @@ Prints the contents of the m\+Atrix to stdout, formatted with newlines.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to Matrix to be displayed \\
+{\em mat} & Matrix to be displayed \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{matrix_8c_a1b1f80874edb42bff89a6d0c6b76d78e}\label{matrix_8c_a1b1f80874edb42bff89a6d0c6b76d78e}} 
@@ -242,9 +242,9 @@ Checks if two Matrices are pairwise (exactly) equal.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat1} & Pointer to first Matrix \\
+{\em mat1} & first Matrix \\
 \hline
-{\em mat2} & Pointer to second Matrix \\
+{\em mat2} & second Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -282,7 +282,7 @@ Computes the frobenius norm of a Matrix.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to the Matrix \\
+{\em mat} & the Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -340,7 +340,7 @@ Compute the inverse of a square Matrix.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to original Matrix \\
+{\em mat} & original Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -363,7 +363,7 @@ Computes the minor of a Matrix by removing a row and a column.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to original Matrix \\
+{\em mat} & original Matrix \\
 \hline
 {\em row} & Index of row to remove \\
 \hline
@@ -375,7 +375,7 @@ Remaining Matrix minor
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em Exception,requires} & 0 \texorpdfstring{$<$}{<}= row \texorpdfstring{$<$}{<} Matrix.\+rows \&\& 0 \texorpdfstring{$<$}{<}= col \texorpdfstring{$<$}{<} Matrix.\+cols \\
+{\em Exception} & requires 0 \texorpdfstring{$<$}{<}= row \texorpdfstring{$<$}{<} Matrix.\+rows \&\& 0 \texorpdfstring{$<$}{<}= col \texorpdfstring{$<$}{<} Matrix.\+cols \\
 \hline
 \end{DoxyExceptions}
 \mbox{\Hypertarget{matrix_8c_ae2f9d8786dd36019e6c8d185185a22cf}\label{matrix_8c_ae2f9d8786dd36019e6c8d185185a22cf}} 
@@ -390,9 +390,9 @@ Multiplies two Matrices.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat1} & Pointer to first Matrix \\
+{\em mat1} & first Matrix \\
 \hline
-{\em mat2} & Pointer to second Matrix \\
+{\em mat2} & second Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -400,7 +400,7 @@ Result of Matrix multiplication
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em Exception,requires} & mat1-\/\texorpdfstring{$>$}{>}cols == mat2-\/\texorpdfstring{$>$}{>}rows \\
+{\em Exception} & requires mat1-\/\texorpdfstring{$>$}{>}cols == mat2-\/\texorpdfstring{$>$}{>}rows \\
 \hline
 \end{DoxyExceptions}
 \mbox{\Hypertarget{matrix_8c_a595050b8411791fb7a2fe8d6cebdf1e7}\label{matrix_8c_a595050b8411791fb7a2fe8d6cebdf1e7}} 
@@ -415,7 +415,7 @@ Computes the l2-\/norm of a Matrix.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to the Matrix \\
+{\em mat} & the Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -433,7 +433,7 @@ Sets all entries of the Matrix to 0.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to Matrix to be reset \\
+{\em mat} & Matrix to be reset \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{matrix_8c_ab34beacc26836893fcbc1b15dd4bb2f5}\label{matrix_8c_ab34beacc26836893fcbc1b15dd4bb2f5}} 
@@ -448,7 +448,7 @@ Get a single row from a matrix.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to original Matrix \\
+{\em mat} & original Matrix \\
 \hline
 {\em row} & Index of row to fetch \\
 \hline
@@ -458,7 +458,7 @@ Row vector (in Matrix form) containing the desired row
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em Exception,requires} & 0 \texorpdfstring{$<$}{<}= row \texorpdfstring{$<$}{<} Matrix.\+rows \\
+{\em Exception} & requires 0 \texorpdfstring{$<$}{<}= row \texorpdfstring{$<$}{<} Matrix.\+rows \\
 \hline
 \end{DoxyExceptions}
 \mbox{\Hypertarget{matrix_8c_ae6d9d3c9ee403387d861b5c5854cf8f5}\label{matrix_8c_ae6d9d3c9ee403387d861b5c5854cf8f5}} 
@@ -475,7 +475,7 @@ Scales a matrix by a constant factor.
 \begin{DoxyParams}{Parameters}
 {\em c} & Factor \\
 \hline
-{\em mat} & Pointer to original Matrix \\
+{\em mat} & original Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -505,7 +505,7 @@ Sub-\/matrix containing specified rows
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em Exception,requires} & 0 \texorpdfstring{$<$}{<}= start \texorpdfstring{$<$}{<} end \texorpdfstring{$<$}{<}= matrix.\+rows \\
+{\em Exception} & requires 0 \texorpdfstring{$<$}{<}= start \texorpdfstring{$<$}{<} end \texorpdfstring{$<$}{<}= matrix.\+rows \\
 \hline
 \end{DoxyExceptions}
 \mbox{\Hypertarget{matrix_8c_a086b1c20f55ff003583ce502449c04ba}\label{matrix_8c_a086b1c20f55ff003583ce502449c04ba}} 
@@ -520,9 +520,9 @@ Return the solution to the equation Ax=b.
 
 
 \begin{DoxyParams}{Parameters}
-{\em A} & Pointer to Matrix A \\
+{\em A} & Matrix A \\
 \hline
-{\em b} & Pointer to column Vector b (embedded as a Matrix) \\
+{\em b} & column Vector b (embedded as a Matrix) \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -530,7 +530,7 @@ Column vector x as a Matrix, the solution to the equation
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em Exception,for} & incompatible dimensions, or singular Matrices A \\
+{\em Exception} & for incompatible dimensions, or singular Matrices A \\
 \hline
 \end{DoxyExceptions}
 \mbox{\Hypertarget{matrix_8c_a2ba47f703d2b329550e5596217f706a5}\label{matrix_8c_a2ba47f703d2b329550e5596217f706a5}} 
@@ -545,9 +545,9 @@ Subtracts the entries in two Matrices element-\/wise.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat1} & Pointer to first Matrix \\
+{\em mat1} & first Matrix \\
 \hline
-{\em mat2} & Pointer to second Matrix \\
+{\em mat2} & second Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -570,7 +570,7 @@ Get a Matrix that contains a subset of the rows and columns.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to original Matrix \\
+{\em mat} & original Matrix \\
 \hline
 {\em start\+\_\+row} & Index to start fetching rows from (inclusive) \\
 \hline
@@ -586,7 +586,7 @@ Matrix containing the specified rows and columns
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em Exception,requires} & 0 \texorpdfstring{$<$}{<}= start\+\_\+row \texorpdfstring{$<$}{<} end\+\_\+row \texorpdfstring{$<$}{<}= mat-\/\texorpdfstring{$>$}{>}rows \\
+{\em Exception} & requires 0 \texorpdfstring{$<$}{<}= start\+\_\+row \texorpdfstring{$<$}{<} end\+\_\+row \texorpdfstring{$<$}{<}= mat-\/\texorpdfstring{$>$}{>}rows \&\& 0 \texorpdfstring{$<$}{<}= start\+\_\+col \texorpdfstring{$<$}{<} end\+\_\+col \texorpdfstring{$<$}{<}= mat-\/\texorpdfstring{$>$}{>}cols \\
 \hline
 \end{DoxyExceptions}
 \mbox{\Hypertarget{matrix_8c_a16efaa7b2063f73abe048a4c2e9b3ee7}\label{matrix_8c_a16efaa7b2063f73abe048a4c2e9b3ee7}} 
@@ -601,7 +601,7 @@ Compute the Singular Value Decomposition (SVD) of a Matrix.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to Matrix \\
+{\em mat} & Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -619,7 +619,7 @@ Computes the sum of the diagonal entries of a square Matrix.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to the Matrix \\
+{\em mat} & the Matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -642,7 +642,7 @@ Flip the rows and columns of a Matrix.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to original matrix \\
+{\em mat} & original matrix \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -680,7 +680,7 @@ Computes the largest value in a row vector.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to the Vector (embedded in a Matrix) \\
+{\em mat} & the Vector (embedded in a Matrix) \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -703,7 +703,7 @@ Computes the index of the largest value in a row vector.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to the Vector (embedded in a Matrix) \\
+{\em mat} & the Vector (embedded in a Matrix) \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -726,7 +726,7 @@ Computes the l-\/k norm of a Vector.
 
 
 \begin{DoxyParams}{Parameters}
-{\em mat} & Pointer to the Vector (embedded in a Matrix) \\
+{\em mat} & the Vector (embedded in a Matrix) \\
 \hline
 {\em k} & Non-\/negative integer to adjust norm type \\
 \hline
