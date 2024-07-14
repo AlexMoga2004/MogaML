@@ -1,6 +1,8 @@
 #pragma once
 #include <stdbool.h>
 
+#define M_PI 3.14159265358979323846
+
 /**
  * @brief Structure representing a Matrix
  */

@@ -77,10 +77,15 @@ Matrix NN_forward_pass(NeuralNetwork *network, const Matrix *input) {
     exit(EXIT_FAILURE);
 }
 
-void NN_backward_pass(NeuralNetwork *network, const Matrix *input, const Matrix *expected_output, double learning_rate) {
+void NN_backward_pass(NeuralNetwork *network, const Matrix *input, const Matrix *expected_output) {
     int num_layers = network->num_layers;
-    Matrix activations[num_layers + 1];
-    Matrix z_values[num_layers];
+    Matrix *activations = (Matrix*)malloc((num_layers + 1) * sizeof(Matrix));
+    Matrix *z_values = (Matrix*)malloc((num_layers) * sizeof(Matrix));
+
+    if (activations == NULL || z_values == NULL) {
+        fprintf(stderr, "Error in NN_backward_pass, failed to initialise activations and/or z_values");
+        exit(EXIT_FAILURE); 
+    }
     
     activations[0] = Matrix_clone(input);
     for (int layer_num = 0; layer_num < num_layers; ++layer_num) {
@@ -117,9 +122,9 @@ void NN_backward_pass(NeuralNetwork *network, const Matrix *input, const Matrix 
             layer_error.data[neuron_num][0] = delta;
 
             for (int i = 0; i < neuron->weights.rows; ++i) {
-                neuron->weights.data[i][0] -= learning_rate * delta * activations[layer_num].data[i][0];
+                neuron->weights.data[i][0] -= 0.01 * delta * activations[layer_num].data[i][0];
             }
-            neuron->bias -= learning_rate * delta;
+            neuron->bias -= 0.01 * delta;
         }
 
         if (layer_num > 0) {
@@ -143,6 +148,9 @@ void NN_backward_pass(NeuralNetwork *network, const Matrix *input, const Matrix 
         Matrix_free(activations[i]);
         Matrix_free(z_values[i]);
     }
+
+    free(activations);
+    free(z_values);
 
     Matrix_free(output_error);
 }

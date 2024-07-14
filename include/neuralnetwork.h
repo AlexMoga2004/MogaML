@@ -3,6 +3,8 @@
 #include <math.h>
 #include "matrix.h"
 
+#define NN_LEARNING_RATE = 0.01
+
 typedef struct {
     double (*apply)(double);
     double (*apply_derivative)(double);
@@ -31,4 +33,4 @@ Neuron NN_create_neuron(int input_size, ActivationFunction activation);
 Layer NN_create_layer(int num_neurons, int input_size, ActivationFunction activation);
 
 Matrix NN_forward_pass(NeuralNetwork *network, const Matrix *input);
-void NN_backward_pass(NeuralNetwork *network, const Matrix *input);
+void NN_backward_pass(NeuralNetwork *network, const Matrix *input, const Matrix *expected_output);
